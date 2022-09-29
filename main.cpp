@@ -31,10 +31,7 @@ public:
 
     bool AddToEnd(int value)
     {
-        if (length + 1 == capacity)
-        {
-            array = grow(length + 1);
-        }
+        CheckCapacity(length + 1);
         array[length++] = value;
         return true;
     }
@@ -62,10 +59,25 @@ public:
 
     bool AddToStart(int value)
     {
-        if (length + 1 == capacity)
-            array = grow(length + 1);
+        CheckCapacity(length + 1);
         ArrayCopy(array, 0, array, 1, length);
         array[0] = value;
+        length++;
+        return true;
+    }
+
+    bool AddAfter(int indexAfter, int value)
+    {
+        int index = indexAfter + 1;
+        if (indexAfter >= length)
+            throw std::invalid_argument("Incorrect value!");
+        int newLength;
+        if ((newLength = length + 1) == indexAfter)
+        {
+            array = grow(newLength);
+            ArrayCopy(array, index, array, index + 1, newLength - indexAfter);
+        }
+        array[index] = value;
         length++;
         return true;
     }
@@ -81,6 +93,13 @@ public:
     }
 
 private:
+
+    void CheckCapacity(int newLength)
+    {
+        if (newLength == capacity)
+            array = grow(newLength);
+    }
+
     static int *ArrayCopyOf(const int *srcArray, int length, int newCapacity)
     {
         int *newArray = new int[newCapacity];
@@ -118,7 +137,7 @@ private:
     }
 };
 
-void PrintArray(DynamicIntArray *ints);
+void PrintArrayInfo(DynamicIntArray *ints);
 
 int main()
 {
@@ -129,23 +148,28 @@ int main()
         ints->AddToEnd(rand() % 10 + 1);
     }
 
-    PrintArray(ints);
+    PrintArrayInfo(ints);
 
     ints->Remove(2);
 
-    PrintArray(ints);
+    PrintArrayInfo(ints);
 
     ints->AddToStart(99);
 
-    PrintArray(ints);
+    PrintArrayInfo(ints);
 
+    ints->AddAfter(9, 7);
+
+    PrintArrayInfo(ints);
 }
 
-void PrintArray(DynamicIntArray *ints)
+void PrintArrayInfo(DynamicIntArray *ints)
 {
+    std::cout << "Capacity: " << ints->getCapacity() << std::endl;
+    std::cout << "Length: " << ints->getLength() << std::endl;
     for (int i = 0; i < ints->getLength(); ++i)
     {
         std::cout << ints->Get(i) << " ";
     }
-    std::cout << std::endl;
+    std::cout << std::endl << std::endl;
 }
