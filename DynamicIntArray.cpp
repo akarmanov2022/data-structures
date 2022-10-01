@@ -136,3 +136,35 @@ int *DynamicIntArray::getArray()
     return ArrayCopyOf(array, length, capacity);
 }
 
+void DynamicIntArray::Sort()
+{
+    if (length <= 1) return;
+    for (int i = 1; i < length; ++i)
+    {
+        for (int j = 0; j < length; ++j)
+        {
+            if (array[i] < array[j])
+            {
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+    }
+}
+
+int DynamicIntArray::FindLine(int value)
+{
+    for (int i = 0; i < length; ++i)
+    {
+        if (array[i] == value)
+            return i;
+    }
+    return -1;
+}
+
+int DynamicIntArray::FindBinary(int value)
+{
+
+}
+

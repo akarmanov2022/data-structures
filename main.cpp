@@ -30,6 +30,10 @@ int main()
     ints->AddAfter(4, 8);
 
     PrintArrayInfo(ints);
+
+    ints->Sort();
+
+    PrintArrayInfo(ints);
 }
 
 void PrintArrayInfo(DynamicIntArray *ints)

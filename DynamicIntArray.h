@@ -27,6 +27,12 @@ public:
 
     bool AddAfter(int indexAfter, int value);
 
+    void Sort();
+
+    int FindLine(int value);
+
+    int FindBinary(int value);
+
     int getLength() const;
 
     int getCapacity() const;
