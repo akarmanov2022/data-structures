@@ -163,8 +163,3 @@ int DynamicIntArray::FindLine(int value)
     return -1;
 }
 
-int DynamicIntArray::FindBinary(int value)
-{
-
-}
-
