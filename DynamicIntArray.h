@@ -31,15 +31,15 @@ public:
 
     int FindLine(int value);
 
-    int FindBinary(int value);
-
     int getLength() const;
 
     int getCapacity() const;
 
     int *getArray();
 
+    int FindBinary(int value, int left, int right);
 private:
+
     void CheckCapacity(int newLength);
 
     static int *ArrayCopyOf(const int *srcArray, int length, int newCapacity);

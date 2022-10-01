@@ -163,3 +163,28 @@ int DynamicIntArray::FindLine(int value)
     return -1;
 }
 
+int DynamicIntArray::FindBinary(int value, int left, int right)
+{
+    Sort();
+    int middle;
+    while (true)
+    {
+        middle = (left + right) / 2;
+        if (value < array[middle])
+        {
+            right = middle - 1;
+        }
+        else if (value > array[middle])
+        {
+            left = middle + 1;
+        }
+        else
+        {
+            return middle;
+        }
+
+        if (left > right)
+            return -1;
+    }
+}
+
