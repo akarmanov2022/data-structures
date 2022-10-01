@@ -99,16 +99,26 @@ int *DynamicIntArray::ArrayCopyOf(const int *srcArray, int length, int newCapaci
 void DynamicIntArray::ArrayCopy(const int *srcArray, int srcPos,
                                 int *newArray, int destPos, int length)
 {
-    int *tempArray = new int[length];
-    for (int i = 0, j = srcPos; j < srcPos + length; j++, i++)
+    if (srcArray == newArray)
     {
-        tempArray[i] = srcArray[j];
+        int *tempArray = new int[length];
+        for (int i = 0, j = srcPos; j < srcPos + length; j++, i++)
+        {
+            tempArray[i] = srcArray[j];
+        }
+        for (int i = 0, j = destPos; j < destPos + length; j++, i++)
+        {
+            newArray[j] = tempArray[i];
+        }
+        delete[] tempArray;
     }
-    for (int i = 0, j = destPos; j < destPos + length; j++, i++)
+    else
     {
-        newArray[j] = tempArray[i];
+        for (int i = srcPos, j = destPos; i < srcPos + length; i++, j++)
+        {
+            newArray[j] = srcArray[i];
+        }
     }
-    delete[] tempArray;
 }
 
 int *DynamicIntArray::grow(int minCapacity)
