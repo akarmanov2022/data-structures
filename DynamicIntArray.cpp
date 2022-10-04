@@ -7,7 +7,7 @@
 
 DynamicIntArray::DynamicIntArray()
 {
-    this->array = EMPTY_ELEMENTDATA;
+    this->array = new int [DEFAULT_CAPACITY];
     this->capacity = DEFAULT_CAPACITY;
 }
 
@@ -19,7 +19,7 @@ DynamicIntArray::DynamicIntArray(int capacity)
     }
     if (capacity == 0)
     {
-        this->array = EMPTY_ELEMENTDATA;
+        this->array = new int [DEFAULT_CAPACITY];
         this->capacity = DEFAULT_CAPACITY;
     }
     else
@@ -124,7 +124,7 @@ void DynamicIntArray::ArrayCopy(const int *srcArray, int srcPos,
 int *DynamicIntArray::grow(int minCapacity)
 {
     int oldCapacity = length;
-    int newCapacity = oldCapacity + (oldCapacity << 1);
+    int newCapacity = oldCapacity + (oldCapacity >> 1);
     if (newCapacity - minCapacity < 0)
         newCapacity = minCapacity;
     this->capacity = newCapacity;
@@ -163,7 +163,7 @@ void DynamicIntArray::Sort()
     }
 }
 
-int DynamicIntArray::FindLine(int value)
+int DynamicIntArray::FindLinear(int value)
 {
     for (int i = 0; i < length; ++i)
     {
@@ -195,6 +195,16 @@ int DynamicIntArray::FindBinary(int value, int left, int right)
 
         if (left > right)
             return -1;
+    }
+}
+
+void DynamicIntArray::Clear()
+{
+    int tempLength = length;
+    for (int i = 0; i < tempLength; ++i)
+    {
+        array[i] = 0;
+        length--;
     }
 }
 

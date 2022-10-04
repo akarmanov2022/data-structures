@@ -4,16 +4,17 @@
 
 class DynamicIntArray
 {
-    static const int DEFAULT_CAPACITY = 10;
+    static const int DEFAULT_CAPACITY = 8;
 
 private:
-    int EMPTY_ELEMENTDATA[0] = {};
     int length = 0;
     int capacity = 0;
-    int *array;
+    int *array{};
 
 public:
     DynamicIntArray();
+
+    DynamicIntArray(int *array, int length);
 
     explicit DynamicIntArray(int capacity);
 
@@ -29,7 +30,7 @@ public:
 
     void Sort();
 
-    int FindLine(int value);
+    int FindLinear(int value);
 
     int getLength() const;
 
@@ -38,6 +39,9 @@ public:
     int *getArray();
 
     int FindBinary(int value, int left, int right);
+
+    void Clear();
+
 private:
 
     void CheckCapacity(int newLength);
