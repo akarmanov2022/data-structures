@@ -14,8 +14,6 @@ private:
 public:
     DynamicIntArray();
 
-    DynamicIntArray(int *array, int length);
-
     explicit DynamicIntArray(int capacity);
 
     bool AddToEnd(int value);

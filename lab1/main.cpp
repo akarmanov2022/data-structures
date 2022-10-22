@@ -1,19 +1,6 @@
 #include <iostream>
 #include "DynamicIntArray.h"
 
-
-void PrintArrayInfo(DynamicIntArray *ints);
-
-
-void CreateRandomArray(DynamicIntArray *array, int length);
-
-inline void WaitOnEnter()
-{
-    std::string dummy;
-    std::cout << "Enter to continue..." << std::endl;
-    std::getline(std::cin, dummy);
-}
-
 void PrintArrayInfo(DynamicIntArray *ints)
 {
     std::cout << "Capacity: " << ints->getCapacity() << std::endl;
@@ -23,6 +10,19 @@ void PrintArrayInfo(DynamicIntArray *ints)
         std::cout << ints->Get(i) << " ";
     }
     std::cout << std::endl << std::endl;
+}
+
+void CreateRandomArray(DynamicIntArray *array, int length)
+{
+    array->Clear();
+    if (length < 0)
+    {
+        throw std::invalid_argument("Incorrect value!");
+    }
+    for (int i = 0; i < length; ++i)
+    {
+        array->AddToEnd(rand() % 20 - 10);
+    }
 }
 
 int main()
@@ -125,19 +125,5 @@ int main()
             default:
                 throw std::invalid_argument("Incorrect number!");
         }
-        WaitOnEnter();
-    }
-}
-
-void CreateRandomArray(DynamicIntArray *array, int length)
-{
-    array->Clear();
-    if (length < 0)
-    {
-        throw std::invalid_argument("Incorrect value!");
-    }
-    for (int i = 0; i < length; ++i)
-    {
-        array->AddToEnd(rand() % 20 - 10);
     }
 }

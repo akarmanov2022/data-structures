@@ -5,6 +5,9 @@
 #include <stdexcept>
 #include "DynamicIntArray.h"
 
+/**
+ * Конструктор по умолчанию.
+ * */
 DynamicIntArray::DynamicIntArray()
 {
     this->array = new int [DEFAULT_CAPACITY];
