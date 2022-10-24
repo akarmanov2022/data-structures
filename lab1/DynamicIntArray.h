@@ -1,15 +1,16 @@
 //
 // Created by akarmanoff on 30.09.22.
 //
-
+//TODO: RSDN - doxygen
 class DynamicIntArray
 {
     static const int DEFAULT_CAPACITY = 8;
 
 private:
+    //TODO: RSDN
     int length = 0;
     int capacity = 0;
-    int *array{};
+    int *array;
 
 public:
     DynamicIntArray();
@@ -28,13 +29,12 @@ public:
 
     void Sort();
 
+    //TODO: RSDN
     int FindLinear(int value);
 
-    int getLength() const;
+    int GetLength() const;
 
-    int getCapacity() const;
-
-    int *getArray();
+    int GetCapacity() const;
 
     int FindBinary(int value, int left, int right);
 
@@ -44,10 +44,11 @@ private:
 
     void CheckCapacity(int newLength);
 
-    static int *ArrayCopyOf(const int *srcArray, int length, int newCapacity);
+    //TODO: RSDN - сокращения
+    static int *ArrayCopyOf(const int *sourceArray, int length, int newCapacity);
 
-    static void ArrayCopy(const int *srcArray, int srcPos,
-                          int *newArray, int destPos, int length);
+    static void ArrayCopy(const int *sourceArray, int sourcePosition,
+                          int *newArray, int destinationPosition, int length);
 
     int *grow(int minCapacity);
 };

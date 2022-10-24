@@ -10,8 +10,8 @@
  * */
 DynamicIntArray::DynamicIntArray()
 {
-    this->array = new int [DEFAULT_CAPACITY];
     this->capacity = DEFAULT_CAPACITY;
+    this->array = new int[DEFAULT_CAPACITY];
 }
 
 DynamicIntArray::DynamicIntArray(int capacity)
@@ -19,11 +19,6 @@ DynamicIntArray::DynamicIntArray(int capacity)
     if (capacity < 0)
     {
         throw std::invalid_argument("Incorrect value!");
-    }
-    if (capacity == 0)
-    {
-        this->array = new int [DEFAULT_CAPACITY];
-        this->capacity = DEFAULT_CAPACITY;
     }
     else
     {
@@ -42,7 +37,9 @@ bool DynamicIntArray::AddToEnd(int value)
 bool DynamicIntArray::Remove(int index)
 {
     if (index >= length)
+    {
         throw std::invalid_argument("Incorrect value!");
+    }
     int newLength;
     if ((newLength = length - 1) > index)
     {
@@ -55,8 +52,11 @@ bool DynamicIntArray::Remove(int index)
 
 int DynamicIntArray::Get(int indexOf)
 {
+    //TODO:
     if (indexOf >= length)
+    {
         throw std::invalid_argument("Incorrect value!");
+    }
     return array[indexOf];
 }
 
@@ -72,8 +72,11 @@ bool DynamicIntArray::AddToStart(int value)
 bool DynamicIntArray::AddAfter(int indexAfter, int value)
 {
     int index = indexAfter + 1;
+    //TODO: скобочки
     if (indexAfter >= length)
+    {
         throw std::invalid_argument("Incorrect value!");
+    }
     int newLength;
     CheckCapacity(newLength = length + 1);
     ArrayCopy(array, index, array, index + 1, newLength - indexAfter);
@@ -85,31 +88,34 @@ bool DynamicIntArray::AddAfter(int indexAfter, int value)
 void DynamicIntArray::CheckCapacity(int newLength)
 {
     if (newLength == capacity)
+    {
         array = grow(newLength);
+    }
 }
 
-int *DynamicIntArray::ArrayCopyOf(const int *srcArray, int length, int newCapacity)
+int *DynamicIntArray::ArrayCopyOf(const int *sourceArray, int length, int newCapacity)
 {
     int *newArray = new int[newCapacity];
     for (int i = 0; i < length; ++i)
     {
-        newArray[i] = srcArray[i];
+        newArray[i] = sourceArray[i];
     }
-    delete[] srcArray;
+    delete[] sourceArray;
     return newArray;
 }
 
-void DynamicIntArray::ArrayCopy(const int *srcArray, int srcPos,
-                                int *newArray, int destPos, int length)
+void DynamicIntArray::ArrayCopy(const int *sourceArray, int sourcePosition,
+                                int *newArray, int destinationPosition, int length)
 {
-    if (srcArray == newArray)
+    if (sourceArray == newArray)
     {
+        //TODO: сложно
         int *tempArray = new int[length];
-        for (int i = 0, j = srcPos; j < srcPos + length; j++, i++)
+        for (int i = 0, j = sourcePosition; j < sourcePosition + length; j++, i++)
         {
-            tempArray[i] = srcArray[j];
+            tempArray[i] = sourceArray[j];
         }
-        for (int i = 0, j = destPos; j < destPos + length; j++, i++)
+        for (int i = 0, j = destinationPosition; j < destinationPosition + length; j++, i++)
         {
             newArray[j] = tempArray[i];
         }
@@ -117,9 +123,9 @@ void DynamicIntArray::ArrayCopy(const int *srcArray, int srcPos,
     }
     else
     {
-        for (int i = srcPos, j = destPos; i < srcPos + length; i++, j++)
+        for (int i = sourcePosition, j = destinationPosition; i < sourcePosition + length; i++, j++)
         {
-            newArray[j] = srcArray[i];
+            newArray[j] = sourceArray[i];
         }
     }
 }
@@ -127,26 +133,25 @@ void DynamicIntArray::ArrayCopy(const int *srcArray, int srcPos,
 int *DynamicIntArray::grow(int minCapacity)
 {
     int oldCapacity = length;
+    //TODO: сложно и не нужно
     int newCapacity = oldCapacity + (oldCapacity >> 1);
+    //TODO: скобочки
     if (newCapacity - minCapacity < 0)
+    {
         newCapacity = minCapacity;
+    }
     this->capacity = newCapacity;
     return ArrayCopyOf(array, length, newCapacity);
 }
 
-int DynamicIntArray::getLength() const
+int DynamicIntArray::GetLength() const
 {
     return length;
 }
 
-int DynamicIntArray::getCapacity() const
+int DynamicIntArray::GetCapacity() const
 {
     return capacity;
-}
-
-int *DynamicIntArray::getArray()
-{
-    return ArrayCopyOf(array, length, capacity);
 }
 
 void DynamicIntArray::Sort()
@@ -196,8 +201,7 @@ int DynamicIntArray::FindBinary(int value, int left, int right)
             return middle;
         }
 
-        if (left > right)
-            return -1;
+        if (left > right) return -1;
     }
 }
 

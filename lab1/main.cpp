@@ -1,13 +1,16 @@
 #include <iostream>
 #include "DynamicIntArray.h"
 
-void PrintArrayInfo(DynamicIntArray *ints)
+void CheckIndex(int index);
+
+//TODO: naming
+void PrintArrayInfo(DynamicIntArray *dynamicIntArray)
 {
-    std::cout << "Capacity: " << ints->getCapacity() << std::endl;
-    std::cout << "Length: " << ints->getLength() << std::endl;
-    for (int i = 0; i < ints->getLength(); ++i)
+    std::cout << "Capacity: " << dynamicIntArray->GetCapacity() << std::endl;
+    std::cout << "Length: " << dynamicIntArray->GetLength() << std::endl;
+    for (int i = 0; i < dynamicIntArray->GetLength(); ++i)
     {
-        std::cout << ints->Get(i) << " ";
+        std::cout << dynamicIntArray->Get(i) << " ";
     }
     std::cout << std::endl << std::endl;
 }
@@ -27,7 +30,9 @@ void CreateRandomArray(DynamicIntArray *array, int length)
 
 int main()
 {
-    srand(time(NULL));
+    //TODO: null - nullptr
+    //TODO: разобраться
+    srand(time(nullptr));
     auto ints = new DynamicIntArray();
 
     while (true)
@@ -111,7 +116,7 @@ int main()
             case 9:
                 std::cout << "Enter the value: ";
                 std::cin >> value;
-                index = ints->FindBinary(value, 0, ints->getLength());
+                index = ints->FindBinary(value, 0, ints->GetLength());
                 PrintArrayInfo(ints);
                 if (index != -1)
                 {
