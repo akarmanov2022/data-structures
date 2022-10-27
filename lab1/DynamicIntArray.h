@@ -48,7 +48,7 @@ private:
     static int *ArrayCopyOf(const int *sourceArray, int length, int newCapacity);
 
     static void ArrayCopy(const int *sourceArray, int sourcePosition,
-                          int *newArray, int destinationPosition, int length);
+                          int *destinationArray, int destinationPosition, int length);
 
     int *grow(int minCapacity);
 };

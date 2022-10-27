@@ -77,8 +77,8 @@ bool DynamicIntArray::AddAfter(int indexAfter, int value)
     {
         throw std::invalid_argument("Incorrect value!");
     }
-    int newLength;
-    CheckCapacity(newLength = length + 1);
+    int newLength = length + 1;
+    CheckCapacity(newLength);
     ArrayCopy(array, index, array, index + 1, newLength - indexAfter);
     array[index] = value;
     length++;
@@ -104,10 +104,25 @@ int *DynamicIntArray::ArrayCopyOf(const int *sourceArray, int length, int newCap
     return newArray;
 }
 
+/**
+ * Копирует массив из указанного исходного массива, начиная с указанной позиции, в указанную позицию целевого массива.
+ * Подпоследовательность компонентов массива копируется из исходного массива, на который ссылается "sourceArray", в целевой массив, на который ссылается "destinationArray".
+ * Количество скопированных компонентов равно аргументу длины - "length".
+ * Компоненты в позициях от "sourcePosition" до "sourcePosition + length - 1" в исходном массиве копируются в позиции от "destinationPosition" до destinationPosition + length - 1", соответственно, массива назначения.
+ * Если аргументы "sourceArray" и "destinationArray" ссылаются на один и тот же объект-массив, то копирование выполняется так,
+ * как если бы компоненты в позициях от "sourcePosition" до "sourcePosition + length - 1" были сначала скопированы во временный массив с компонентами длины
+ * и затем содержимое временного массива копировалось в позиции от "destinationPosition" до destinationPosition + length - 1" целевого массива.
+ *
+ * @param sourceArray - исходный массив.
+ * @param sourcePosition - позиция в исходном массиве.
+ * @param destinationArray - целевой массив.
+ * @param destinationPosition - позиция в целевом массиве.
+ * @param length - количество копируемых элементов массива.
+ * */
 void DynamicIntArray::ArrayCopy(const int *sourceArray, int sourcePosition,
-                                int *newArray, int destinationPosition, int length)
+                                int *destinationArray, int destinationPosition, int length)
 {
-    if (sourceArray == newArray)
+    if (sourceArray == destinationArray)
     {
         //TODO: сложно
         int *tempArray = new int[length];
@@ -117,7 +132,7 @@ void DynamicIntArray::ArrayCopy(const int *sourceArray, int sourcePosition,
         }
         for (int i = 0, j = destinationPosition; j < destinationPosition + length; j++, i++)
         {
-            newArray[j] = tempArray[i];
+            destinationArray[j] = tempArray[i];
         }
         delete[] tempArray;
     }
@@ -125,16 +140,23 @@ void DynamicIntArray::ArrayCopy(const int *sourceArray, int sourcePosition,
     {
         for (int i = sourcePosition, j = destinationPosition; i < sourcePosition + length; i++, j++)
         {
-            newArray[j] = sourceArray[i];
+            destinationArray[j] = sourceArray[i];
         }
     }
 }
 
+/**
+ * Расширяет массив относительно его минимальной вместимости по формуле:
+ * @code oldCapacity + (oldCapacity / 2) @endcode
+ * где oldCapacity - текущая вместимость массива.
+ *
+ * @param minCapacity - минимальная необходимая вместимость массива.
+ * */
 int *DynamicIntArray::grow(int minCapacity)
 {
     int oldCapacity = length;
     //TODO: сложно и не нужно
-    int newCapacity = oldCapacity + (oldCapacity >> 1);
+    int newCapacity = oldCapacity + (oldCapacity / 2);
     //TODO: скобочки
     if (newCapacity - minCapacity < 0)
     {

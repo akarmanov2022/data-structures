@@ -3,6 +3,8 @@
 
 void CheckIndex(int index);
 
+void CheckIndex(int index);
+
 //TODO: naming
 void PrintArrayInfo(DynamicIntArray *dynamicIntArray)
 {
@@ -33,7 +35,7 @@ int main()
     //TODO: null - nullptr
     //TODO: разобраться
     srand(time(nullptr));
-    auto ints = new DynamicIntArray();
+    auto dynamicIntArray = new DynamicIntArray();
 
     while (true)
     {
@@ -49,9 +51,9 @@ int main()
         std::cout << "9. Binary search for an element in an array." << std::endl;
 
         int number = 0;
-        int length = 0;
-        int value = 0;
-        int index = 0;
+        int length;
+        int value;
+        int index;
         std::cout << "Enter the number: ";
         std::cin >> number;
         switch (number)
@@ -59,76 +61,84 @@ int main()
             case 0:
                 return number;
             case 1:
+                length = 0;
                 std::cout << "Enter the length of the array: ";
                 std::cin >> length;
-                CreateRandomArray(ints, length);
-                PrintArrayInfo(ints);
+                CreateRandomArray(dynamicIntArray, length);
+                PrintArrayInfo(dynamicIntArray);
                 break;
             case 2:
+                value = 0;
                 std::cout << "Enter the value: ";
                 std::cin >> value;
-                ints->AddToEnd(value);
-                PrintArrayInfo(ints);
+                dynamicIntArray->AddToEnd(value);
+                PrintArrayInfo(dynamicIntArray);
                 break;
             case 3:
+                index = 0;
                 std::cout << "Enter the index: ";
                 std::cin >> index;
-                ints->Remove(index);
-                PrintArrayInfo(ints);
+                dynamicIntArray->Remove(index);
+                PrintArrayInfo(dynamicIntArray);
                 break;
             case 4:
+                value = 0;
                 std::cout << "Enter the value: ";
                 std::cin >> value;
-                ints->AddToStart(value);
-                PrintArrayInfo(ints);
+                dynamicIntArray->AddToStart(value);
+                PrintArrayInfo(dynamicIntArray);
                 break;
             case 5:
                 std::cout << "Enter the value: ";
                 std::cin >> value;
-                ints->AddToEnd(value);
-                PrintArrayInfo(ints);
+                dynamicIntArray->AddToEnd(value);
+                PrintArrayInfo(dynamicIntArray);
                 break;
             case 6:
+                index = 0;
+                value = 0;
                 std::cout << "Enter the index: ";
                 std::cin >> index;
                 std::cout << "Enter the value: ";
                 std::cin >> value;
-                ints->AddAfter(index, value);
-                PrintArrayInfo(ints);
+                dynamicIntArray->AddAfter(index, value);
+                PrintArrayInfo(dynamicIntArray);
                 break;
             case 7:
-                ints->Sort();
-                PrintArrayInfo(ints);
+                dynamicIntArray->Sort();
+                PrintArrayInfo(dynamicIntArray);
                 break;
             case 8:
+                value = 0;
+                index = 0;
                 std::cout << "Enter the value: ";
                 std::cin >> value;
-                index = ints->FindLinear(value);
-                if (index != -1)
-                {
-                    std::cout << "Index: " << index << std::endl;
-                }
-                else
-                {
-                    std::cout << "Index not found!" << std::endl;
-                }
+                index = dynamicIntArray->FindLinear(value);
+                CheckIndex(index);
                 break;
             case 9:
+                value = 0;
+                index = 0;
                 std::cout << "Enter the value: ";
                 std::cin >> value;
-                index = ints->FindBinary(value, 0, ints->GetLength());
-                PrintArrayInfo(ints);
-                if (index != -1)
-                {
-                    std::cout << "Index: " << index << std::endl;
-                }
-                else
-                {
-                    std::cout << "Index not found!" << std::endl;
-                }
+                index = dynamicIntArray->FindBinary(value, 0, dynamicIntArray->GetLength());
+                PrintArrayInfo(dynamicIntArray);
+                CheckIndex(index);
                 break;
             default:
                 throw std::invalid_argument("Incorrect number!");
         }
+    }
+}
+
+void CheckIndex(int index)
+{
+    if (index != -1)
+    {
+        std::cout << "Index: " << index << std::endl;
+    }
+    else
+    {
+        std::cout << "Index not found!" << std::endl;
     }
 }
