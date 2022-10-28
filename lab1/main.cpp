@@ -40,15 +40,15 @@ int main()
     while (true)
     {
         std::cout << "Lab 1:" << std::endl;
-        std::cout << "1. Create an array of random values." << std::endl;
-        std::cout << "2. Adding an element to an array." << std::endl;
-        std::cout << "3. Removing an element from an array." << std::endl;
+        std::cout << "1. Create an _array of random values." << std::endl;
+        std::cout << "2. Adding an element to an _array." << std::endl;
+        std::cout << "3. Removing an element from an _array." << std::endl;
         std::cout << "4. Inserting an element at the beginning." << std::endl;
         std::cout << "5. Inserting an element at the end." << std::endl;
         std::cout << "6. Insert after a specific element." << std::endl;
         std::cout << "7. Array sort." << std::endl;
-        std::cout << "8. Linear search for an element in an array." << std::endl;
-        std::cout << "9. Binary search for an element in an array." << std::endl;
+        std::cout << "8. Linear search for an element in an _array." << std::endl;
+        std::cout << "9. Binary search for an element in an _array." << std::endl;
 
         int number = 0;
         int length;
@@ -62,7 +62,7 @@ int main()
                 return number;
             case 1:
                 length = 0;
-                std::cout << "Enter the length of the array: ";
+                std::cout << "Enter the _length of the _array: ";
                 std::cin >> length;
                 CreateRandomArray(dynamicIntArray, length);
                 PrintArrayInfo(dynamicIntArray);
