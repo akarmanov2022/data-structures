@@ -27,11 +27,10 @@ bool DynamicIntArray::Remove(int index)
     {
         throw std::invalid_argument("Incorrect value!");
     }
-    int newLength;
-    if ((newLength = _length - 1) > index)
+    int newLength = _length - 1;
+    if (newLength > index)
     {
-        ArrayCopy(_array, index + 1,
-                  _array, index, newLength - index);
+        Shift(index, false);
     }
     _array[_length = newLength] = 0;
     return true;
@@ -50,7 +49,7 @@ int DynamicIntArray::Get(int indexOf)
 bool DynamicIntArray::AddToStart(int value)
 {
     CheckCapacity(_length + 1);
-    ArrayCopy(_array, 0, _array, 1, _length);
+    Shift(0, true);
     _array[0] = value;
     _length++;
     return true;
@@ -66,7 +65,7 @@ bool DynamicIntArray::AddAfter(int indexAfter, int value)
     }
     int newLength = _length + 1;
     CheckCapacity(newLength);
-    ArrayCopy(_array, index, _array, index + 1, newLength - indexAfter);
+    Shift(index, true);
     _array[index] = value;
     _length++;
     return true;
@@ -80,7 +79,7 @@ void DynamicIntArray::CheckCapacity(int newLength)
     }
 }
 
-int *DynamicIntArray::ArrayCopyOf(const int *sourceArray, int length, int newCapacity)
+int *DynamicIntArray::ArrayCopyOf(int *sourceArray, int length, int newCapacity)
 {
     int *newArray = new int[newCapacity];
     for (int i = 0; i < length; ++i)
@@ -91,28 +90,20 @@ int *DynamicIntArray::ArrayCopyOf(const int *sourceArray, int length, int newCap
     return newArray;
 }
 
-void DynamicIntArray::ArrayCopy(const int *sourceArray, int sourcePosition,
-                                int *destinationArray, int destinationPosition, int length)
+void DynamicIntArray::Shift(int position, bool directionShift) const
 {
-    if (sourceArray == destinationArray)
+    if (directionShift)
     {
-        //TODO: сложно
-        int *tempArray = new int[length];
-        for (int i = 0, j = sourcePosition; j < sourcePosition + length; j++, i++)
+        for (int i = _length - 1; i >= position; --i)
         {
-            tempArray[i] = sourceArray[j];
+            _array[i + 1] = _array[i];
         }
-        for (int i = 0, j = destinationPosition; j < destinationPosition + length; j++, i++)
-        {
-            destinationArray[j] = tempArray[i];
-        }
-        delete[] tempArray;
     }
     else
     {
-        for (int i = sourcePosition, j = destinationPosition; i < sourcePosition + length; i++, j++)
+        for (int i = position; i < _length; ++i)
         {
-            destinationArray[j] = sourceArray[i];
+            _array[i - 1] = _array[i];
         }
     }
 }

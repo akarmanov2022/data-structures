@@ -94,11 +94,11 @@ private:
     void CheckCapacity(int newLength);
 
     //TODO: RSDN - сокращения
-    static int *ArrayCopyOf(const int *sourceArray, int length, int newCapacity);
+    static int *ArrayCopyOf(int *sourceArray, int length, int newCapacity);
 
     /**
      * Копирует массив из указанного исходного массива, начиная с указанной позиции, в указанную позицию целевого массива.
-     * Подпоследовательность компонентов массива копируется из исходного массива, на который ссылается "sourceArray", в целевой массив, на который ссылается "destinationArray".
+     * Подпоследовательность элементов массива копируется из исходного массива, на который ссылается "sourceArray", в целевой массив, на который ссылается "destinationArray".
      * Количество скопированных компонентов равно аргументу длины - "_length".
      * Компоненты в позициях от "sourcePosition" до "sourcePosition + _length - 1" в исходном массиве копируются в позиции от "destinationPosition" до destinationPosition + _length - 1", соответственно, массива назначения.
      * Если аргументы "sourceArray" и "destinationArray" ссылаются на один и тот же объект-массив, то копирование выполняется так,
@@ -111,8 +111,7 @@ private:
      * @param destinationPosition - позиция в целевом массиве.
      * @param length - количество копируемых элементов массива.
      * */
-    static void ArrayCopy(const int *sourceArray, int sourcePosition,
-                          int *destinationArray, int destinationPosition, int length);
+    void Shift(int position, bool directionShift) const;
 
     /**
      * Увеличивает массив относительно его минимальной вместимости.
