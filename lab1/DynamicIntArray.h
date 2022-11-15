@@ -1,7 +1,6 @@
 //
 // Created by akarmanoff on 30.09.22.
 //
-//TODO: RSDN - doxygen
 /**
  * Представляет объект - динамический массив целых чисел.
  * @anchor Arseniy Karmanov
@@ -11,7 +10,6 @@ class DynamicIntArray
     static const int DEFAULT_CAPACITY = 8;
 
 private:
-    //TODO: RSDN
     int _length = 0;
     int _capacity = 0;
     int *_array;
@@ -55,7 +53,6 @@ public:
      * */
     void Sort();
 
-    //TODO: RSDN
     /**
      * Линейный поиск позиции элемента в массиве.
      * @param value - значение.

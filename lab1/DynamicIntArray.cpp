@@ -38,7 +38,6 @@ bool DynamicIntArray::Remove(int index)
 
 int DynamicIntArray::Get(int indexOf)
 {
-    //TODO:
     if (indexOf >= _length)
     {
         throw std::invalid_argument("Incorrect value!");
@@ -58,7 +57,6 @@ bool DynamicIntArray::AddToStart(int value)
 bool DynamicIntArray::AddAfter(int indexAfter, int value)
 {
     int index = indexAfter + 1;
-    //TODO: скобочки
     if (indexAfter >= _length)
     {
         throw std::invalid_argument("Incorrect value!");
@@ -111,9 +109,7 @@ void DynamicIntArray::Shift(int position, bool directionShift) const
 int *DynamicIntArray::Grow(int minCapacity)
 {
     int oldCapacity = _length;
-    //TODO: сложно и не нужно
     int newCapacity = oldCapacity + (oldCapacity / 2);
-    //TODO: скобочки
     if (newCapacity - minCapacity < 0)
     {
         newCapacity = minCapacity;

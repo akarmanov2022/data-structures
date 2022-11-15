@@ -3,9 +3,6 @@
 
 void CheckIndex(int index);
 
-void CheckIndex(int index);
-
-//TODO: naming
 void PrintArrayInfo(DynamicIntArray *dynamicIntArray)
 {
     std::cout << "Capacity: " << dynamicIntArray->GetCapacity() << std::endl;
@@ -32,8 +29,6 @@ void CreateRandomArray(DynamicIntArray *array, int length)
 
 int main()
 {
-    //TODO: null - nullptr
-    //TODO: разобраться
     srand(time(nullptr));
     auto dynamicIntArray = new DynamicIntArray();
 
