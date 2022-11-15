@@ -4,6 +4,7 @@
 //TODO: RSDN - doxygen
 /**
  * Представляет объект - динамический массив целых чисел.
+ * @anchor Arseniy Karmanov
  * */
 class DynamicIntArray
 {
@@ -30,21 +31,50 @@ public:
      * */
     bool Remove(int index);
 
+    /**
+     * Вернет элемент массива по его позиции.
+     * @param indexOf - позиция элемента в массиве.
+     * */
     int Get(int indexOf);
 
+    /**
+     * Добавит элемент в начало массива.
+     * @param value - значение.
+     * */
     bool AddToStart(int value);
 
+    /**
+     * Добавит элемент в массив после указанной позиции.
+     * @param indexAfter - позиция, после которой добавить элемент.
+     * @param value - значение.
+     * */
     bool AddAfter(int indexAfter, int value);
 
+    /**
+     * Линейная сортировка массива.
+     * */
     void Sort();
 
     //TODO: RSDN
+    /**
+     * Линейный поиск позиции элемента в массиве.
+     * @param value - значение.
+     * @return - позиция элемента в массиве.
+     * */
     int FindLinear(int value);
 
     int GetLength() const;
 
     int GetCapacity() const;
 
+    /**
+     * Линейный поиск позиции элемента в массиве относительно левой и правой границы.
+     * @param value - значение.
+     * @param left - левая граница.
+     * @param right - правая граница.
+     *
+     * @return позиция элемента в массиве.
+     * */
     int FindBinary(int value, int left, int right);
 
     void Clear();
