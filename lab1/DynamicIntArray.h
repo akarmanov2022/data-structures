@@ -77,6 +77,9 @@ public:
      * */
     int FindBinary(int value, int left, int right);
 
+    /**
+     * Очистка массива.
+     * */
     void Clear();
 
 private:
@@ -111,5 +114,9 @@ private:
     static void ArrayCopy(const int *sourceArray, int sourcePosition,
                           int *destinationArray, int destinationPosition, int length);
 
-    int *grow(int minCapacity);
+    /**
+     * Увеличивает массив относительно его минимальной вместимости.
+     * @param minCapacity - значение минимальной вместимости.
+     * */
+    int *Grow(int minCapacity);
 };

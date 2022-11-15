@@ -76,7 +76,7 @@ void DynamicIntArray::CheckCapacity(int newLength)
 {
     if (newLength == _capacity)
     {
-        _array = grow(newLength);
+        _array = Grow(newLength);
     }
 }
 
@@ -117,7 +117,7 @@ void DynamicIntArray::ArrayCopy(const int *sourceArray, int sourcePosition,
     }
 }
 
-int *DynamicIntArray::grow(int minCapacity)
+int *DynamicIntArray::Grow(int minCapacity)
 {
     int oldCapacity = _length;
     //TODO: сложно и не нужно
