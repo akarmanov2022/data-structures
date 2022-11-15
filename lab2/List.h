@@ -2,32 +2,52 @@
 // Created by akarmanov on 06-11-2022.
 //
 
-#ifndef DATA_STRUCTURES_LIST_H
-#define DATA_STRUCTURES_LIST_H
-
-
 #include "ListItem.h"
+
+static const char *const NULL_POINTER_EXCEPTION = "Null Pointer Exception!";
 
 class List
 {
-    ListItem *first;
-    ListItem *last;
-    int length;
 private:
-    static ListItem *Init(int firstValue);
+    ListItem *_head{};
+    ListItem *_previous{};
+    int _length = 0;
 
-    ListItem *Add(ListItem *itemAfter, int value);
+    ListItem *InitHead(int value);
+
+    ListItem *AddAfter(ListItem *itemAfter, int value);
+
+    ListItem *AddBefore(ListItem *itemBefore, int value);
+
+    void CheckIndex(int index) const;
 
 public:
 
-    List();
-
-    ListItem *Add(int value);
+    explicit List(int length, ListItem &head, ListItem &previous);
 
     ListItem *Remove(ListItem *item);
 
-    bool HasNext();
+    ListItem *Add(int value);
+
+    ListItem *Insert(int index, int value);
+
+    ListItem *AddToBegin(int value);
+
+    ListItem *AddToEnd(int value);
+
+    ListItem *Remove(int index);
+
+    void Clear();
+
+    void Sort();
+
+    ListItem *GetHead() const;
+
+    ListItem *GetPrevious() const;
+
+    int GetLength() const;
+
+    ListItem *GetItem(int index) const;
+
+    void Swap(ListItem *first, ListItem *second);
 };
-
-
-#endif //DATA_STRUCTURES_LIST_H

@@ -9,10 +9,14 @@
 class ListItem
 {
 private:
-    ListItem* next;
-    ListItem* previous;
-    int data;
+    ListItem* _next{};
+    ListItem* _previous{};
+    int _data = 0;
 public:
+    bool HasNext();
+
+    bool HasPrevious();
+
     ListItem *GetNext();
 
     void SetNext(ListItem *item);
@@ -24,6 +28,14 @@ public:
     int GetData() const;
 
     void SetData(int value);
+
+    bool operator<(const ListItem &rhs) const;
+
+    bool operator>(const ListItem &rhs) const;
+
+    bool operator<=(const ListItem &rhs) const;
+
+    bool operator>=(const ListItem &rhs) const;
 };
 
 

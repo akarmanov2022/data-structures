@@ -6,30 +6,62 @@
 
 ListItem *ListItem::GetNext()
 {
-    return next;
+    return _next;
 }
 
 void ListItem::SetNext(ListItem *item)
 {
-    ListItem::next = item;
+    this->_next = item;
 }
 
 ListItem *ListItem::GetPrevious()
 {
-    return previous;
+    return _previous;
 }
 
 void ListItem::SetPrevious(ListItem *item)
 {
-    ListItem::previous = item;
+    this->_previous = item;
 }
 
 int ListItem::GetData() const
 {
-    return data;
+    return _data;
 }
 
 void ListItem::SetData(int value)
 {
-    ListItem::data = value;
+    this->_data = value;
 }
+
+bool ListItem::HasNext()
+{
+    return _next != nullptr;
+}
+
+bool ListItem::HasPrevious()
+{
+    return _previous != nullptr;
+}
+
+bool ListItem::operator<(const ListItem &item) const
+{
+    return _data < item._data;
+}
+
+bool ListItem::operator>(const ListItem &item) const
+{
+    return item < *this;
+}
+
+bool ListItem::operator<=(const ListItem &item) const
+{
+    return !(item < *this);
+}
+
+bool ListItem::operator>=(const ListItem &rhs) const
+{
+    return !(*this < rhs);
+}
+
+
