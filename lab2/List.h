@@ -2,52 +2,54 @@
 // Created by akarmanov on 06-11-2022.
 //
 
-#include "ListItem.h"
+#include "Node.h"
 
 static const char *const NULL_POINTER_EXCEPTION = "Null Pointer Exception!";
 
 class List
 {
 private:
-    ListItem *_head{};
-    ListItem *_previous{};
+    Node *_head{};
+    Node *_previous{};
     int _length = 0;
 
-    ListItem *InitHead(int value);
+    Node *InitHead(int value);
 
-    ListItem *AddAfter(ListItem *itemAfter, int value);
+    Node *AddAfter(Node *itemAfter, int value);
 
-    ListItem *AddBefore(ListItem *itemBefore, int value);
+    Node *AddBefore(Node *itemBefore, int value);
 
     void CheckIndex(int index) const;
 
+    static Node *MergeSort(Node *head);
+
+    static Node *Split(Node *node);
+
+    static Node *Merge(Node *a, Node *b);
+
 public:
 
-    explicit List(int length, ListItem &head, ListItem &previous);
+    Node *Remove(Node *item);
 
-    ListItem *Remove(ListItem *item);
+    Node *Add(int value);
 
-    ListItem *Add(int value);
+    Node *Insert(int index, int value);
 
-    ListItem *Insert(int index, int value);
+    Node *AddToBegin(int value);
 
-    ListItem *AddToBegin(int value);
+    Node *AddToEnd(int value);
 
-    ListItem *AddToEnd(int value);
-
-    ListItem *Remove(int index);
+    Node *Remove(int index);
 
     void Clear();
 
     void Sort();
 
-    ListItem *GetHead() const;
+    Node *GetHead() const;
 
-    ListItem *GetPrevious() const;
+    Node *GetPrevious() const;
 
     int GetLength() const;
 
-    ListItem *GetItem(int index) const;
-
-    void Swap(ListItem *first, ListItem *second);
+    Node *GetItem(int index) const;
 };

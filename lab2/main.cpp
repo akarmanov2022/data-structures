@@ -37,13 +37,12 @@ void PrintList(List *list)
 int main()
 {
     srand(time(nullptr));
-    auto list = new List(0, <#initializer#>, <#initializer#>);
+    auto list = new List();
 
-    FillListRandomValues(list, 10);
+    FillListRandomValues(list, 100000);
     PrintList(list);
     list->Sort();
     PrintList(list);
-    list->Add(100);
 
     /*while (true)
     {

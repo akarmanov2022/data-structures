@@ -3,9 +3,9 @@
 #include <stdexcept>
 #include <unordered_set>
 
-ListItem *List::AddAfter(ListItem *itemAfter, int value)
+Node *List::AddAfter(Node *itemAfter, int value)
 {
-    auto *temp = new ListItem();
+    auto *temp = new Node();
     auto next = itemAfter->GetNext();
 
     itemAfter->SetNext(temp);
@@ -25,9 +25,9 @@ ListItem *List::AddAfter(ListItem *itemAfter, int value)
     return temp;
 }
 
-ListItem *List::InitHead(int value)
+Node *List::InitHead(int value)
 {
-    auto *head = new ListItem();
+    auto *head = new Node();
     head->SetData(value);
     head->SetNext(nullptr);
     head->SetPrevious(nullptr);
@@ -35,7 +35,7 @@ ListItem *List::InitHead(int value)
     return _head = _previous = head;
 }
 
-ListItem *List::Remove(ListItem *item)
+Node *List::Remove(Node *item)
 {
     if (item == nullptr)
     {
@@ -69,7 +69,7 @@ ListItem *List::Remove(ListItem *item)
     return previous;
 }
 
-ListItem *List::Add(int value)
+Node *List::Add(int value)
 {
     if (_length == 0)
     {
@@ -90,18 +90,18 @@ void List::Clear()
     _head = nullptr;
 }
 
-ListItem *List::Remove(int index)
+Node *List::Remove(int index)
 {
-    ListItem *temp = GetItem(index);
+    Node *temp = GetItem(index);
     return this->Remove(temp);
 }
 
-ListItem *List::GetItem(int index) const
+Node *List::GetItem(int index) const
 {
     CheckIndex(index);
 
     int id = 0;
-    ListItem *item = _head;
+    Node *item = _head;
     for (; item; item = item->GetNext())
     {
         if (index == id)
@@ -118,31 +118,31 @@ int List::GetLength() const
     return _length;
 }
 
-ListItem *List::GetHead() const
+Node *List::GetHead() const
 {
     return _head;
 }
 
-ListItem *List::GetPrevious() const
+Node *List::GetPrevious() const
 {
     return _previous;
 }
 
-ListItem *List::AddToBegin(int value)
+Node *List::AddToBegin(int value)
 {
     return this->AddAfter(_previous, value);
 }
 
-ListItem *List::AddToEnd(int value)
+Node *List::AddToEnd(int value)
 {
     return this->AddBefore(_head, value);
 }
 
-ListItem *List::AddBefore(ListItem *itemBefore, int value)
+Node *List::AddBefore(Node *itemBefore, int value)
 {
     auto previous = itemBefore->GetPrevious();
 
-    auto *temp = new ListItem();
+    auto *temp = new Node();
     temp->SetData(value);
     temp->SetNext(itemBefore);
     temp->SetPrevious(previous);
@@ -160,7 +160,7 @@ ListItem *List::AddBefore(ListItem *itemBefore, int value)
     return temp;
 }
 
-ListItem *List::Insert(int index, int value)
+Node *List::Insert(int index, int value)
 {
     if (index == 0)
     {
@@ -182,26 +182,73 @@ void List::CheckIndex(int index) const
     }
 }
 
+Node *List::MergeSort(Node *head)
+{
+    if (head == nullptr || head->GetNext() == nullptr)
+    {
+        return head;
+    }
+    Node *a = head;
+    Node *b;
+
+    Node *slow = Split(head);
+    b = slow->GetNext();
+    slow->SetNext(nullptr);
+
+    a = MergeSort(a);
+    b = MergeSort(b);
+
+    head = Merge(a, b);
+    return head;
+}
+
+Node *List::Split(Node *node)
+{
+    Node *slow = node;
+    Node *fast = node->GetNext();
+    while (fast)
+    {
+        fast = fast->GetNext();
+        if (fast)
+        {
+            slow = slow->GetNext();
+            fast = fast->GetNext();
+        }
+    }
+    return slow;
+}
+
+Node *List::Merge(Node *a, Node *b)
+{
+    if (a == nullptr)
+    {
+        return b;
+    }
+    if (b == nullptr)
+    {
+        return a;
+    }
+
+    if (a->GetData() > b->GetData())
+    {
+        Node *merge = Merge(a->GetNext(), b);
+        merge->SetPrevious(a);
+        a->SetNext(merge);
+        a->SetPrevious(nullptr);
+        return a;
+    }
+    else
+    {
+        Node *merge = Merge(a, b->GetNext());
+        merge->SetPrevious(b);
+        b->SetNext(merge);
+        b->SetPrevious(nullptr);
+        return b;
+    }
+}
+
 void List::Sort()
 {
-
+    _head = MergeSort(_head);
+    _previous = GetItem(_length - 1);
 }
-
-void List::Swap(ListItem *first, ListItem *second)
-{
-    ListItem *firstNext = first->GetNext();
-    ListItem *firstPrevious = first->GetPrevious();
-
-    ListItem *secondNext = second->GetNext();
-    ListItem *secondPrevious = second->GetPrevious();
-
-    first->SetNext(secondNext);
-    first->SetPrevious(secondPrevious);
-    second->SetNext(firstNext);
-    second->SetPrevious(firstPrevious);
-
-}
-
-List::List(int length, ListItem &head, ListItem &previous) : _length(length), _head(head), _previous(previous)
-{}
-
