@@ -3,4 +3,4 @@ project(data_structures)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(data_structures lab2/main.cpp lab2/List.cpp lab2/List.h lab2/ListItem.cpp lab2/ListItem.h)
+add_executable(data_structures lab1/main.cpp lab1/DynamicIntArray.cpp lab1/DynamicIntArray.h)
