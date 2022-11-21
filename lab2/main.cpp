@@ -3,7 +3,6 @@
 #include <cstdlib>
 #include "List.h"
 
-
 void FillListRandomValues(List *list, int count)
 {
     list->Clear();
@@ -32,6 +31,30 @@ void PrintList(List *list)
     }
     std::cout << "]" << std::endl;
 
+}
+
+void PrintTestResult()
+{
+    auto list = new List();
+//    for (int step = 10000; step <= 1000000; step += 10000)
+//    {
+//        int randomValue = rand() % 20 - 10;
+//        FillListRandomValues(list, step);
+//        auto begin = std::chrono::steady_clock::now();
+//        list->Add(randomValue);
+//        auto end = std::chrono::steady_clock::now();
+//        std::cout << "Add: " << "Length: " << list->GetLength() << "; Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << ", " << step << std::endl;
+//    }
+
+    for (int step = 100; step <= 10000; step += 100)
+    {
+        FillListRandomValues(list, step);
+        int index = list->GetLength() / 2;
+        auto begin = std::chrono::steady_clock::now();
+        list->Remove(index);
+        auto end = std::chrono::steady_clock::now();
+        std::cout << "Add: " << "Length: " << list->GetLength() << "; Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << " ms., " << step << std::endl;
+    }
 }
 
 int main()
@@ -133,6 +156,8 @@ int main()
                 value = list->GetItem(index)->GetData();
                 std::cout << "Found by index: " << value << std::endl;
                 break;
+            case 10:
+                PrintTestResult();
             default:
                 std::cout << "Incorrect value!" << std::endl;
                 return 0;

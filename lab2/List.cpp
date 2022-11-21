@@ -100,17 +100,24 @@ Node *List::GetItem(int index) const
 {
     CheckIndex(index);
 
-    int id = 0;
-    Node *item = _head;
-    for (; item; item = item->GetNext())
+    if (index < _length / 2)
     {
-        if (index == id)
+        Node *node = _head;
+        for (int i = 0; i < index; ++i)
         {
-            return item;
+            node = node->GetNext();
         }
-        id++;
+        return node;
     }
-    return item;
+    else
+    {
+        Node *node = _previous;
+        for (int i = _length - 1; i > index; i--)
+        {
+            node = node->GetPrevious();
+        }
+        return node;
+    }
 }
 
 int List::GetLength() const
