@@ -192,5 +192,10 @@ void List::CheckIndex(int index) const
 void List::Sort()
 {
     _head = MergeSort::Sort(_head);
-    _previous = GetItem(_length - 1);
+    auto node = _head;
+    for (int i = 0; i < _length - 1; ++i)
+    {
+        node = node->GetNext();
+    }
+    _previous = node;
 }

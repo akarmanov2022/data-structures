@@ -46,20 +46,25 @@ void PrintTestResult()
 //        std::cout << "Add: " << "Length: " << list->GetLength() << "; Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << ", " << step << std::endl;
 //    }
 
-    for (int step = 100; step <= 10000; step += 100)
+    for (int step = 100000; step <= 1000000; step += 100000)
     {
-        FillListRandomValues(list, step);
-        int index = list->GetLength() / 2;
-        auto begin = std::chrono::steady_clock::now();
-        list->Remove(index);
-        auto end = std::chrono::steady_clock::now();
-        std::cout << "Add: " << "Length: " << list->GetLength() << "; Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << " ms., " << step << std::endl;
+        std::cout << "--- Step: " << step << " ---" << std::endl;
+        for (int i = 0; i < 100; ++i)
+        {
+            FillListRandomValues(list, step);
+            int index = list->GetLength() / 2;
+            auto begin = std::chrono::steady_clock::now();
+            list->Remove(index);
+            auto end = std::chrono::steady_clock::now();
+            std::cout << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << ", " << step
+                      << std::endl;
+        }
     }
 }
 
 int main()
 {
-    srand(time(nullptr));
+//    srand(time(nullptr));
     auto list = new List();
 
 //    FillListRandomValues(list, 100000);
