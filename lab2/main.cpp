@@ -1,12 +1,12 @@
 #include <iostream>
 #include <chrono>
-#include <stdlib.h>
+#include <cstdlib>
 #include "List.h"
 
 
 void FillListRandomValues(List *list, int count)
 {
-//    list->Clear();
+    list->Clear();
     for (int i = 0; i < count; ++i)
     {
         list->Add(rand() % 20 - 10);
@@ -39,12 +39,12 @@ int main()
     srand(time(nullptr));
     auto list = new List();
 
-    FillListRandomValues(list, 100000);
-    PrintList(list);
-    list->Sort();
-    PrintList(list);
+//    FillListRandomValues(list, 100000);
+//    PrintList(list);
+//    list->Sort();
+//    PrintList(list);
 
-    /*while (true)
+    while (true)
     {
         std::cout << "Lab 2. A doubly linked list." << std::endl;
         std::cout << "1. Fill the list with random values." << std::endl;
@@ -56,6 +56,87 @@ int main()
         std::cout << "7. Insert before element." << std::endl;
         std::cout << "8. Sorting the list." << std::endl;
         std::cout << "9. Linear search." << std::endl;
+        std::cout << "10. Output test result." << std::endl;
         std::cout << "0. Exit." << std::endl;
-    }*/
+
+        int number = 0;
+        std::cout << "Enter the task number or 0 for exit: " << std::endl;
+        std::cin >> number;
+        if (std::cin.fail())
+        {
+            std::cout << "Incorrect value!" << std::endl;
+            std::cin.clear();
+            std::cin.ignore();
+            continue;
+        }
+
+        switch (number)
+        {
+            case 0:
+                int value;
+                int index;
+                return 0;
+            case 1:
+                value = 0;
+                std::cout << "Enter index values: ";
+                std::cin >> value;
+                FillListRandomValues(list, value);
+                break;
+            case 2:
+                value = 0;
+                std::cout << "Enter the value: ";
+                std::cin >> value;
+                list->Add(value);
+                break;
+            case 3:
+                index = 0;
+                std::cout << "Enter the index: ";
+                std::cin >> index;
+                list->Remove(index);
+                break;
+            case 4:
+                std::cout << "Enter the value: ";
+                std::cin >> value;
+                list->AddToEnd(value);
+                break;
+            case 5:
+                value = 0;
+                std::cout << "Enter the value: ";
+                std::cin >> value;
+                list->AddToBegin(value);
+                break;
+            case 6:
+                value = 0;
+                index = 0;
+                std::cout << "Enter the value: ";
+                std::cin >> value;
+                std::cout << "Enter the index: ";
+                std::cin >> index;
+                list->Insert(index + 1, value);
+                break;
+            case 7:
+                value = 0;
+                std::cout << "Enter the value: ";
+                std::cin >> value;
+                std::cout << "Enter the index: ";
+                std::cin >> index;
+                list->Insert(index, value);
+                break;
+            case 8:
+                std::cout << "Sorting list..." << std::endl;
+                list->Sort();
+                break;
+            case 9:
+                index = 0;
+                std::cout << "Enter the index: ";
+                std::cin >> index;
+                value = list->GetItem(index)->GetData();
+                std::cout << "Found by index: " << value << std::endl;
+                break;
+            default:
+                std::cout << "Incorrect value!" << std::endl;
+                return 0;
+        }
+        PrintList(list);
+    }
 }

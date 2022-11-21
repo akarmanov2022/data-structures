@@ -1,11 +1,15 @@
 //
 // Created by akarmanov on 06-11-2022.
 //
+
+#ifndef DATA_STRUCTURES_NODE_H
+#define DATA_STRUCTURES_NODE_H
+
 class Node
 {
 private:
-    Node* _next{};
-    Node* _previous{};
+    Node *_next{};
+    Node *_previous{};
     int _data = 0;
 public:
     bool HasNext();
@@ -30,3 +34,5 @@ public:
 
     bool operator>=(const Node &rhs) const;
 };
+
+#endif

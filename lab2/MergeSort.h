@@ -1,3 +1,6 @@
+#ifndef DATA_STRUCTURES_MERGE_SORT_H
+#define DATA_STRUCTURES_MERGE_SORT_H
+
 #include "Node.h"
 
 //
@@ -13,3 +16,5 @@ class MergeSort
 public:
     static Node *Sort(Node *head);
 };
+
+#endif

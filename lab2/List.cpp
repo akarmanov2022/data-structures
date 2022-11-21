@@ -40,7 +40,7 @@ Node *List::Remove(Node *item)
 {
     if (item == nullptr)
     {
-        throw std::invalid_argument(NULL_POINTER_EXCEPTION);
+        throw std::invalid_argument("Incorrect value");
     }
     auto next = item->GetNext();
     auto previous = item->GetPrevious();
@@ -82,11 +82,10 @@ Node *List::Add(int value)
 void List::Clear()
 {
     auto temp = _previous;
-    do
+    while (temp != nullptr)
     {
         temp = this->Remove(temp);
     }
-    while (temp != nullptr);
     _previous = nullptr;
     _head = nullptr;
 }

@@ -2,9 +2,12 @@
 // Created by akarmanov on 06-11-2022.
 //
 
-#include "Node.h"
 
-static const char *const NULL_POINTER_EXCEPTION = "Null Pointer Exception!";
+#ifndef MERGE_SORT_H
+#define MERGE_SORT_H
+
+#include "Node.h"
+#include "MergeSort.h"
 
 class List
 {
@@ -47,3 +50,5 @@ public:
 
     Node *GetItem(int index) const;
 };
+
+#endif
