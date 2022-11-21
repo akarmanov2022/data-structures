@@ -21,12 +21,6 @@ private:
 
     void CheckIndex(int index) const;
 
-    static Node *MergeSort(Node *head);
-
-    static Node *Split(Node *node);
-
-    static Node *Merge(Node *a, Node *b);
-
 public:
 
     Node *Remove(Node *item);

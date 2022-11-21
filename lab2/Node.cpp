@@ -39,11 +39,6 @@ bool Node::HasNext()
     return _next != nullptr;
 }
 
-bool Node::HasPrevious()
-{
-    return _previous != nullptr;
-}
-
 bool Node::operator<(const Node &item) const
 {
     return _data < item._data;

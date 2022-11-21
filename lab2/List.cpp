@@ -1,5 +1,6 @@
 
 #include "List.h"
+#include "MergeSort.h"
 #include <stdexcept>
 #include <unordered_set>
 
@@ -182,73 +183,8 @@ void List::CheckIndex(int index) const
     }
 }
 
-Node *List::MergeSort(Node *head)
-{
-    if (head == nullptr || head->GetNext() == nullptr)
-    {
-        return head;
-    }
-    Node *a = head;
-    Node *b;
-
-    Node *slow = Split(head);
-    b = slow->GetNext();
-    slow->SetNext(nullptr);
-
-    a = MergeSort(a);
-    b = MergeSort(b);
-
-    head = Merge(a, b);
-    return head;
-}
-
-Node *List::Split(Node *node)
-{
-    Node *slow = node;
-    Node *fast = node->GetNext();
-    while (fast)
-    {
-        fast = fast->GetNext();
-        if (fast)
-        {
-            slow = slow->GetNext();
-            fast = fast->GetNext();
-        }
-    }
-    return slow;
-}
-
-Node *List::Merge(Node *a, Node *b)
-{
-    if (a == nullptr)
-    {
-        return b;
-    }
-    if (b == nullptr)
-    {
-        return a;
-    }
-
-    if (a->GetData() > b->GetData())
-    {
-        Node *merge = Merge(a->GetNext(), b);
-        merge->SetPrevious(a);
-        a->SetNext(merge);
-        a->SetPrevious(nullptr);
-        return a;
-    }
-    else
-    {
-        Node *merge = Merge(a, b->GetNext());
-        merge->SetPrevious(b);
-        b->SetNext(merge);
-        b->SetPrevious(nullptr);
-        return b;
-    }
-}
-
 void List::Sort()
 {
-    _head = MergeSort(_head);
+    _head = MergeSort::Sort(_head);
     _previous = GetItem(_length - 1);
 }
