@@ -3,4 +3,4 @@ project(data_structures)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(data_structures main.cpp)
+add_executable(data_structures main.cpp lab3/Stack.cpp lab3/Stack.h)
