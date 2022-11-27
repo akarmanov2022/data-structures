@@ -6,14 +6,31 @@
 //
 // Created by aka on 11/21/22.
 //
+/**
+ * Представляет сортировку слиянием.
+ */
 class MergeSort
 {
-
+    /**
+     * Разделяет список на две части относительно указанного элемента.
+     * @param node - Элемента списка.
+     */
     static Node *Split(Node *node);
 
-    static Node *Merge(Node *a, Node *b);
+    /**
+     *
+     * @param left
+     * @param right
+     * @return
+     */
+    static Node *Merge(Node *left, Node *right);
 
 public:
+    /**
+     * Сортирует список
+     * @param head
+     * @return
+     */
     static Node *Sort(Node *head);
 };
 

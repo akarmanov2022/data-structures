@@ -36,30 +36,45 @@ void PrintList(List *list)
 void PrintTestResult()
 {
     auto list = new List();
-//    for (int step = 10000; step <= 1000000; step += 10000)
-//    {
-//        int randomValue = rand() % 20 - 10;
-//        FillListRandomValues(list, step);
-//        auto begin = std::chrono::steady_clock::now();
-//        list->Add(randomValue);
-//        auto end = std::chrono::steady_clock::now();
-//        std::cout << "Add: " << "Length: " << list->GetLength() << "; Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << ", " << step << std::endl;
-//    }
-
-    for (int step = 100000; step <= 1000000; step += 100000)
+    for (int step = 100000; step <= 5000000; step += 100000)
     {
-        std::cout << "--- Step: " << step << " ---" << std::endl;
-        for (int i = 0; i < 100; ++i)
-        {
-            FillListRandomValues(list, step);
-            int index = list->GetLength() / 2;
-            auto begin = std::chrono::steady_clock::now();
-            list->Remove(index);
-            auto end = std::chrono::steady_clock::now();
-            std::cout << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << ", " << step
-                      << std::endl;
-        }
+        int randomValue = rand() % 20 - 10;
+        FillListRandomValues(list, step);
+        int index = list->GetLength() / 2;
+        auto begin = std::chrono::steady_clock::now();
+        list->Remove(index);
+        auto end = std::chrono::steady_clock::now();
+        std::cout << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << ", " << step
+                  << std::endl;
     }
+//
+//    for (int step = 100000; step <= 1000000; step += 100000)
+//    {
+//        std::cout << "--- Step: " << step << " ---" << std::endl;
+//        for (int i = 0; i < 100; ++i)
+//        {
+//            FillListRandomValues(list, step);
+//            int index = list->GetLength() / 2;
+//            auto begin = std::chrono::steady_clock::now();
+//            list->Remove(index);
+//            auto end = std::chrono::steady_clock::now();
+//            std::cout << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << ", " << step
+//                      << std::endl;
+//        }
+//    }
+}
+
+bool CheckEnter()
+{
+    if (std::cin.good())
+        return true;
+    std::cout << "Incorrect value!" << std::endl;
+    while (!std::cin.good())
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+    return false;
 }
 
 int main()
@@ -90,82 +105,122 @@ int main()
         int number = 0;
         std::cout << "Enter the task number or 0 for exit: " << std::endl;
         std::cin >> number;
-        if (std::cin.fail())
-        {
-            std::cout << "Incorrect value!" << std::endl;
-            std::cin.clear();
-            std::cin.ignore();
+        if (!CheckEnter())
             continue;
-        }
 
         switch (number)
         {
             case 0:
-                int value;
-                int index;
+            {
                 return 0;
+            }
             case 1:
-                value = 0;
+            {
+                int value = 0;
                 std::cout << "Enter index values: ";
                 std::cin >> value;
+                if (!CheckEnter())
+                    continue;
                 FillListRandomValues(list, value);
                 break;
+            }
             case 2:
-                value = 0;
+            {
+                int value = 0;
                 std::cout << "Enter the value: ";
                 std::cin >> value;
+                if (!CheckEnter())
+                    continue;
                 list->Add(value);
                 break;
+            }
             case 3:
-                index = 0;
+            {
+                int index = 0;
                 std::cout << "Enter the index: ";
                 std::cin >> index;
+                if (!CheckEnter())
+                    continue;
                 list->Remove(index);
                 break;
+            }
             case 4:
+            {
+                int value = 0;
                 std::cout << "Enter the value: ";
                 std::cin >> value;
+                if (!CheckEnter())
+                    continue;
                 list->AddToEnd(value);
                 break;
+            }
             case 5:
-                value = 0;
+            {
+                int value = 0;
                 std::cout << "Enter the value: ";
                 std::cin >> value;
+                if (!CheckEnter())
+                    continue;
                 list->AddToBegin(value);
                 break;
+            }
             case 6:
-                value = 0;
-                index = 0;
+            {
+                int value = 0;
+                int index = 0;
                 std::cout << "Enter the value: ";
                 std::cin >> value;
+                if (!CheckEnter())
+                    continue;
                 std::cout << "Enter the index: ";
                 std::cin >> index;
+                if (!CheckEnter())
+                    continue;
                 list->Insert(index + 1, value);
                 break;
+            }
             case 7:
-                value = 0;
+            {
+                int value = 0;
+                int index = 0;
                 std::cout << "Enter the value: ";
                 std::cin >> value;
+                if (!CheckEnter())
+                    continue;
                 std::cout << "Enter the index: ";
                 std::cin >> index;
+                if (!CheckEnter())
+                    continue;
                 list->Insert(index, value);
                 break;
+            }
             case 8:
+            {
                 std::cout << "Sorting list..." << std::endl;
                 list->Sort();
                 break;
+            }
             case 9:
-                index = 0;
+            {
+                int index = 0;
                 std::cout << "Enter the index: ";
                 std::cin >> index;
-                value = list->GetItem(index)->GetData();
+                if (!CheckEnter())
+                    continue;
+                int value = list->GetItem(index)->GetData();
                 std::cout << "Found by index: " << value << std::endl;
                 break;
+            }
             case 10:
+            {
                 PrintTestResult();
+                break;
+            }
             default:
+            {
                 std::cout << "Incorrect value!" << std::endl;
                 return 0;
+            }
         }
         PrintList(list);
     }

@@ -10,17 +10,17 @@ Node *MergeSort::Sort(Node *head)
     {
         return head;
     }
-    Node *a = head;
-    Node *b;
+    Node *left = head;
+    Node *right;
 
     Node *slow = Split(head);
-    b = slow->GetNext();
+    right = slow->GetNext();
     slow->SetNext(nullptr);
 
-    a = Sort(a);
-    b = Sort(b);
+    left = Sort(left);
+    right = Sort(right);
 
-    head = Merge(a, b);
+    head = Merge(left, right);
     return head;
 }
 
@@ -40,31 +40,31 @@ Node *MergeSort::Split(Node *node)
     return slow;
 }
 
-Node *MergeSort::Merge(Node *a, Node *b)
+Node *MergeSort::Merge(Node *left, Node *right)
 {
-    if (a == nullptr)
+    if (left == nullptr)
     {
-        return b;
+        return right;
     }
-    if (b == nullptr)
+    if (right == nullptr)
     {
-        return a;
+        return left;
     }
 
-    if (a->GetData() > b->GetData())
+    if (left->GetData() > right->GetData())
     {
-        Node *merge = Merge(a->GetNext(), b);
-        merge->SetPrevious(a);
-        a->SetNext(merge);
-        a->SetPrevious(nullptr);
-        return a;
+        Node *merge = Merge(left->GetNext(), right);
+        merge->SetPrevious(left);
+        left->SetNext(merge);
+        left->SetPrevious(nullptr);
+        return left;
     }
     else
     {
-        Node *merge = Merge(a, b->GetNext());
-        merge->SetPrevious(b);
-        b->SetNext(merge);
-        b->SetPrevious(nullptr);
-        return b;
+        Node *merge = Merge(left, right->GetNext());
+        merge->SetPrevious(right);
+        right->SetNext(merge);
+        right->SetPrevious(nullptr);
+        return right;
     }
 }

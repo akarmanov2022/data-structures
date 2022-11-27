@@ -18,9 +18,9 @@ Node *List::AddAfter(Node *itemAfter, int value)
     {
         next->SetPrevious(temp);
     }
-    if (itemAfter == _previous)
+    if (itemAfter == _last)
     {
-        _previous = temp;
+        _last = temp;
     }
     _length++;
     return temp;
@@ -33,7 +33,7 @@ Node *List::InitHead(int value)
     head->SetNext(nullptr);
     head->SetPrevious(nullptr);
     _length++;
-    return _head = _previous = head;
+    return _head = _last = head;
 }
 
 Node *List::Remove(Node *item)
@@ -60,9 +60,9 @@ Node *List::Remove(Node *item)
         _head = next;
     }
 
-    if (item == _previous)
+    if (item == _last)
     {
-        _previous = previous;
+        _last = previous;
     }
 
     _length--;
@@ -76,17 +76,17 @@ Node *List::Add(int value)
     {
         return InitHead(value);
     }
-    return AddAfter(_previous, value);
+    return AddAfter(_last, value);
 }
 
 void List::Clear()
 {
-    auto temp = _previous;
+    auto temp = _last;
     while (temp != nullptr)
     {
         temp = this->Remove(temp);
     }
-    _previous = nullptr;
+    _last = nullptr;
     _head = nullptr;
 }
 
@@ -111,7 +111,7 @@ Node *List::GetItem(int index) const
     }
     else
     {
-        Node *node = _previous;
+        Node *node = _last;
         for (int i = _length - 1; i > index; i--)
         {
             node = node->GetPrevious();
@@ -130,17 +130,17 @@ Node *List::GetHead() const
     return _head;
 }
 
-Node *List::GetPrevious() const
+Node *List::GetLast() const
 {
-    return _previous;
-}
-
-Node *List::AddToBegin(int value)
-{
-    return this->AddAfter(_previous, value);
+    return _last;
 }
 
 Node *List::AddToEnd(int value)
+{
+    return this->AddAfter(_last, value);
+}
+
+Node *List::AddToBegin(int value)
 {
     return this->AddBefore(_head, value);
 }
@@ -175,7 +175,7 @@ Node *List::Insert(int index, int value)
     }
     if (index == _length - 1)
     {
-        return AddAfter(_previous, value);
+        return AddAfter(_last, value);
     }
     auto temp = GetItem(index);
     return AddBefore(temp, value);
@@ -197,5 +197,5 @@ void List::Sort()
     {
         node = node->GetNext();
     }
-    _previous = node;
+    _last = node;
 }
