@@ -19,17 +19,18 @@ Node::Node(int value)
     this->_data = value;
 }
 
+int Node::GetData() const
+{
+    return _data;
+}
+
 Node *Stack::Push(int value)
 {
-    if (_size == 0)
-    {
-        _size++;
-        return _last = new Node(value);
-    }
-    Node *next = new Node(value);
-    next->SetNext(_last);
+    auto *node = new Node(value);
+    node->SetNext(_last);
+    _last = node;
     _size++;
-    return _last = next;
+    return node;
 }
 
 Node *Stack::Pop()
@@ -51,8 +52,8 @@ Node *Stack::Peek()
 
 void Stack::Clear()
 {
-    while (_last != nullptr)
+    while (_size > 0)
     {
-        _last = Pop();
+        Pop();
     }
 }

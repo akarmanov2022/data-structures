@@ -12,6 +12,8 @@ private:
     int _data;
     Node *_next{};
 public:
+    int GetData() const;
+
     Node *GetNext() const;
 
     void SetNext(Node *next);
