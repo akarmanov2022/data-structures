@@ -5,6 +5,7 @@
 #include <iostream>
 #include "lab3/stack/Stack.h"
 #include "lab3/buffer/RingBuffer.h"
+#include "lab3/queue/StackQueue.h"
 
 bool CheckInput()
 {
@@ -48,6 +49,7 @@ int main()
 {
     auto *stack = new Stack();
     auto *buffer = new RingBuffer();
+    auto *stackQueue = new StackQueue();
 
     while (true)
     {
