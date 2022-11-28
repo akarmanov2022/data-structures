@@ -4,6 +4,7 @@
 
 #include "Stack.h"
 
+
 Node *Node::GetNext() const
 {
     return _next;
@@ -56,4 +57,9 @@ void Stack::Clear()
     {
         Pop();
     }
+}
+
+int Stack::GetSize() const
+{
+    return _size;
 }

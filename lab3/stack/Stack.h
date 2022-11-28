@@ -35,6 +35,8 @@ public:
     Node *Peek();
 
     void Clear();
+
+    int GetSize() const;
 };
 
 
