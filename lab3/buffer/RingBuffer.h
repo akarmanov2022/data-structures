@@ -6,97 +6,99 @@
 #define DATA_STRUCTURES_RINGBUFFER_H
 
 /**
- * Ring buffer implementation
+ * Элемент кольцевого буфера.
  */
 class RingBufferNode
 {
 private:
     /**
-     * Data stored in the node
+     * Данные, хранимые в элементе.
      */
     int _data;
     /**
-     * Pointer to the next node
+     * Указатель на следующий элемент.
      */
     RingBufferNode *_next{};
 public:
     /**
-     * Get data stored in the node
-     * @return data stored in the node
+     * Вернуть значение элемента.
+     * @param value значение элемента.
      */
     int GetData() const;
 
     /**
-     * Get pointer to the next node
-     * @return pointer to the next node
+     * Вернуть указатель на следующий элемент.
+     * @return указатель на следующий элемент.
      */
     RingBufferNode *GetNext() const;
 
     /**
-     * Set pointer to the next node
-     * @param next pointer to the next node
+     * Установить указатель на следующий элемент.
+     * @param next указатель на следующий элемент.
      */
     void SetNext(RingBufferNode *next);
 
     /**
-     * Constructor
-     * @param value data to store in the node
+     * Конструктор.
+     * @param value значение элемента.
      */
     RingBufferNode(int value);
 };
 
 /**
- * Ring buffer implementation
+ * Реализация кольцевого буфера.
  */
 class RingBuffer
 {
 private:
     /**
-     * Pointer to the last node
+     * Указатель на последний элемент.
      */
     RingBufferNode *_first;
     /**
-     * Size of the buffer
+     * Размер буфера.
      */
     int _size;
 public:
     /**
-     * Get size of the buffer
-     * @return size of the buffer
+     * Конструктор.
+     * @param size размер буфера.
      */
     int GetSize() const;
 
     /**
-     * Put data into the buffer
-     * @param value data to put into the buffer
-     * @return pointer to the node containing the data
+     * Добавить элемент в буфер.
+     * @param value значение элемента.
+     * @return добавленный элемент.
      */
     RingBufferNode *Put(int value);
 
     /**
-     * Get data from the buffer
-     * @param index index of the data to get
-     * @return pointer to the node containing the data
+     * Вернуть указатель на элемент по индексу.
+     * @param index индекс элемента.
+     * @return указатель на элемент.
      */
     RingBufferNode *Get(int index);
 
     /**
-     * Remove data from the buffer
-     * @param index index of the data to remove
-     * @return pointer to the node containing the data
+     * Удалить элемент из буфера.
+     * @param index индекс элемента.
+     * @return удаленный элемент.
      */
     RingBufferNode *Remove(int index);
 
     /**
-     * Clear the buffer
+     * Очистить буфер.
      */
     void Clear();
 
     /**
-     * Get first node in the buffer
-     * @return pointer to the first node in the buffer
+     * Вернуть указатель на первый элемент.
+     * @return указатель на первый элемент.
      */
     RingBufferNode *GetFirst() const;
+
+    RingBuffer(int size);
 };
 
 

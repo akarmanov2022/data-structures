@@ -47,3 +47,13 @@ int StackQueue::GetSize() const
 {
     return _size;
 }
+
+Stack *StackQueue::GetStack1() const
+{
+    return _stack1;
+}
+
+Stack *StackQueue::GetStack2() const
+{
+    return _stack2;
+}

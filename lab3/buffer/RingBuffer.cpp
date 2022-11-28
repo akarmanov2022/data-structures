@@ -91,3 +91,9 @@ RingBufferNode *RingBuffer::GetFirst() const
 {
     return _first;
 }
+
+RingBuffer::RingBuffer(int size)
+{
+    _size = size;
+    _first = nullptr;
+}

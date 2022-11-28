@@ -38,12 +38,12 @@ Node *Stack::Pop()
 {
     if (_size == 0)
     {
-        return _last = nullptr;
+        return nullptr;
     }
-    Node *next = _last->GetNext();
+    Node *current = _last;
+    _last = _last->GetNext();
     _size--;
-    delete _last;
-    return _last = next;
+    return current;
 }
 
 Node *Stack::Peek()

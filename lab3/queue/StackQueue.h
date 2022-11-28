@@ -54,6 +54,18 @@ public:
      * @return размер очереди.
      */
     int GetSize() const;
+
+    /**
+     * Вернуть стек 1.
+     * @return
+     */
+    Stack *GetStack1() const;
+
+    /**
+     * Вернуть стек 2.
+     * @return
+     */
+    Stack *GetStack2() const;
 };
 
 
