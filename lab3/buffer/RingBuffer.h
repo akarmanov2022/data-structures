@@ -15,16 +15,34 @@ private:
      * Данные, хранимые в элементе.
      */
     int _data;
+
+    /**
+     * Индекс элемента в очереди.
+     */
+    int _index;
     /**
      * Указатель на следующий элемент.
      */
     RingBufferNode *_next{};
 public:
     /**
+     * Конструктор.
+     * @param value значение элемента.
+     * @param index значение индекса элемента.
+     */
+    RingBufferNode(int value, int index);
+
+    /**
      * Вернуть значение элемента.
      * @param value значение элемента.
      */
     int GetData() const;
+
+    /**
+     * Вернуть значение индекса элемента.
+     * @param value значение индекса элемента.
+     */
+    int GetIndex() const;
 
     /**
      * Вернуть указатель на следующий элемент.
@@ -37,12 +55,6 @@ public:
      * @param next указатель на следующий элемент.
      */
     void SetNext(RingBufferNode *next);
-
-    /**
-     * Конструктор.
-     * @param value значение элемента.
-     */
-    RingBufferNode(int value);
 };
 
 /**
@@ -103,6 +115,7 @@ public:
      * @param size размер буфера.
      */
     RingBuffer(int size);
+
 };
 
 

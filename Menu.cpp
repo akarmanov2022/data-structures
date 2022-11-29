@@ -51,6 +51,8 @@ void Menu::PrintStackQueue(StackQueue *queue)
 void Menu::PrintBuffer(RingBuffer *buffer)
 {
     RingBufferNode *node = buffer->GetFirst();
+
+    std::cout << "Index first node: " << node->GetIndex() << std::endl;
     std::cout << "Size: " << buffer->GetSize() << std::endl;
     do
     {
@@ -58,6 +60,7 @@ void Menu::PrintBuffer(RingBuffer *buffer)
         node = node->GetNext();
     }
     while (node != buffer->GetFirst());
+    std::cout << std::endl << "Index last node: " << buffer->GetSize() - 1 << std::endl;
     std::cout << std::endl;
 }
 
@@ -66,7 +69,6 @@ void Menu::PrintRingBufferQueue(RingBufferQueue *queue)
     std::cout << "Ring buffer queue: " << std::endl;
     std::cout << "Size: " << queue->GetSize() << std::endl;
     std::cout << "Is empty: " << queue->IsEmpty() << std::endl;
-    std::cout << "Is full: " << queue->IsFull() << std::endl;
     PrintBuffer(queue->GetBuffer());
 }
 

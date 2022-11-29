@@ -23,7 +23,7 @@ int RingBufferQueue::Dequeue()
         return -1;
     }
     _size--;
-    return _buffer->Get(0)->GetData();
+    return _buffer->Remove(0)->GetData();
 }
 
 int RingBufferQueue::GetSize() const

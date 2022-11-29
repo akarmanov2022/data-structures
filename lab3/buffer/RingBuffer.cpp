@@ -19,9 +19,15 @@ void RingBufferNode::SetNext(RingBufferNode *next)
     this->_next = next;
 }
 
-RingBufferNode::RingBufferNode(int value)
+RingBufferNode::RingBufferNode(int value, int index)
 {
     this->_data = value;
+    this->_index = index;
+}
+
+int RingBufferNode::GetIndex() const
+{
+    return _index;
 }
 
 int RingBuffer::GetSize() const
@@ -31,7 +37,7 @@ int RingBuffer::GetSize() const
 
 RingBufferNode *RingBuffer::Put(int value)
 {
-    auto *node = new RingBufferNode(value);
+    auto *node = new RingBufferNode(value, _size);
     if (_size == 0)
     {
         _first = node;
