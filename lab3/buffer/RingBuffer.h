@@ -98,6 +98,7 @@ public:
      */
     RingBufferNode *GetFirst() const;
 
+    //TODO:
     RingBuffer(int size);
 };
 

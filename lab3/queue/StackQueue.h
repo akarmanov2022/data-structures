@@ -14,6 +14,7 @@
 class StackQueue
 {
 private:
+    //TODO: naming
     /**
      * Первый стек.
      */
