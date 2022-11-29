@@ -98,7 +98,10 @@ public:
      */
     RingBufferNode *GetFirst() const;
 
-    //TODO:
+    /**
+     * Конструктор.
+     * @param size размер буфера.
+     */
     RingBuffer(int size);
 };
 

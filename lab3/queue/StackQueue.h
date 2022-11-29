@@ -14,7 +14,6 @@
 class StackQueue
 {
 private:
-    //TODO: naming
     /**
      * Стек для входных значений.
      */

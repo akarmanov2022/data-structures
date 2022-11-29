@@ -10,7 +10,6 @@
 
 int Menu::Input()
 {
-    //TODO: внести ввод в метод
     int value = 0;
     while (true)
     {
@@ -51,14 +50,14 @@ void Menu::PrintStackQueue(StackQueue *queue)
 
 void Menu::PrintBuffer(RingBuffer *buffer)
 {
-    std::cout << "Buffer: " << std::endl;
     RingBufferNode *node = buffer->GetFirst();
     std::cout << "Size: " << buffer->GetSize() << std::endl;
-    while (node != nullptr)
+    do
     {
         std::cout << node->GetData() << " ";
         node = node->GetNext();
     }
+    while (node != buffer->GetFirst());
     std::cout << std::endl;
 }
 
