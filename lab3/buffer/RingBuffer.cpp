@@ -82,7 +82,7 @@ void RingBuffer::Clear()
 {
     while (_size > 0)
     {
-        Remove(0);
+        delete Remove(0);
     }
 
 }

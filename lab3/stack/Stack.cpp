@@ -55,7 +55,7 @@ void Stack::Clear()
 {
     while (_size > 0)
     {
-        Pop();
+        delete Pop();
     }
 }
 
