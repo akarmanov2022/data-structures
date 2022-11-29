@@ -70,19 +70,16 @@ int Input()
     while (true)
     {
         std::cin >> value;
-        if (std::cin.bad())
+        if (std::cin.fail())
         {
             std::cin.clear();
             std::cin.ignore(32767, '\n');
             std::cout << "Invalid input!" << std::endl;
             std::cout << "Repeat entering:" << std::endl;
+            continue;
         }
-        else
-        {
-            break;
-        }
+        return value;
     }
-    return value;
 }
 
 int main()
@@ -183,7 +180,14 @@ int main()
                 int value = Input();
                 std::cout << "Enter the index: ";
                 int index = Input();
-                list->Insert(index, value);
+                try
+                {
+                    list->Insert(index, value);
+                } catch (const char *mes)
+                {
+                    std::cout << mes << std::endl;
+                    break;
+                }
                 break;
             }
             case 8:
@@ -215,7 +219,7 @@ int main()
             default:
             {
                 std::cout << "Incorrect value!" << std::endl;
-                return 0;
+                continue;
             }
         }
         PrintList(list);
