@@ -169,6 +169,11 @@ Node *List::AddBefore(Node *itemBefore, int value)
 
 Node *List::Insert(int index, int value)
 {
+    CheckIndex(index);
+    if (_length == 0)
+    {
+        return Add(value);
+    }
     if (index == 0)
     {
         return AddBefore(_head, value);
@@ -185,7 +190,7 @@ void List::CheckIndex(int index) const
 {
     if (0 > index || index >= _length)
     {
-        throw std::invalid_argument("Incorrect index!");
+        throw "Incorrect index!";
     }
 }
 

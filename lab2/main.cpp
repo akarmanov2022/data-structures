@@ -64,17 +64,25 @@ void PrintTestResult()
 //    }
 }
 
-bool CheckEnter()
+int Input()
 {
-    if (std::cin.good())
-        return true;
-    std::cout << "Incorrect value!" << std::endl;
-    while (!std::cin.good())
+    int value = 0;
+    while (true)
     {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cin >> value;
+        if (std::cin.bad())
+        {
+            std::cin.clear();
+            std::cin.ignore(32767, '\n');
+            std::cout << "Invalid input!" << std::endl;
+            std::cout << "Repeat entering:" << std::endl;
+        }
+        else
+        {
+            break;
+        }
     }
-    return false;
+    return value;
 }
 
 int main()
@@ -102,11 +110,8 @@ int main()
         std::cout << "10. Output test result." << std::endl;
         std::cout << "0. Exit." << std::endl;
 
-        int number = 0;
         std::cout << "Enter the task number or 0 for exit: " << std::endl;
-        std::cin >> number;
-        if (!CheckEnter())
-            continue;
+        int number = Input();
 
         switch (number)
         {
@@ -116,81 +121,68 @@ int main()
             }
             case 1:
             {
-                int value = 0;
-                std::cout << "Enter index values: ";
-                std::cin >> value;
-                if (!CheckEnter())
-                    continue;
+                std::cout << "Enter the number of elements: ";
+                int value = Input();
                 FillListRandomValues(list, value);
                 break;
             }
             case 2:
             {
-                int value = 0;
                 std::cout << "Enter the value: ";
-                std::cin >> value;
-                if (!CheckEnter())
-                    continue;
+                int value = Input();
                 list->Add(value);
                 break;
             }
             case 3:
             {
-                int index = 0;
                 std::cout << "Enter the index: ";
-                std::cin >> index;
-                if (!CheckEnter())
-                    continue;
-                list->Remove(index);
+                int index = Input();
+                try
+                {
+                    list->Remove(index);
+                } catch (const char *mes)
+                {
+                    std::cout << mes << std::endl;
+                    break;
+                }
                 break;
             }
             case 4:
             {
-                int value = 0;
                 std::cout << "Enter the value: ";
-                std::cin >> value;
-                if (!CheckEnter())
-                    continue;
+                int value = Input();
                 list->AddToEnd(value);
                 break;
             }
             case 5:
             {
-                int value = 0;
                 std::cout << "Enter the value: ";
-                std::cin >> value;
-                if (!CheckEnter())
-                    continue;
+                int value = Input();
                 list->AddToBegin(value);
                 break;
             }
             case 6:
             {
-                int value = 0;
-                int index = 0;
                 std::cout << "Enter the value: ";
-                std::cin >> value;
-                if (!CheckEnter())
-                    continue;
+                int value = Input();
                 std::cout << "Enter the index: ";
-                std::cin >> index;
-                if (!CheckEnter())
-                    continue;
-                list->Insert(index + 1, value);
+                int index = Input();
+                try
+                {
+                    list->Insert(index + 1, value);
+                } catch (const char *mes)
+                {
+                    std::cout << mes << std::endl;
+                    break;
+                }
                 break;
             }
             case 7:
             {
-                int value = 0;
-                int index = 0;
                 std::cout << "Enter the value: ";
-                std::cin >> value;
-                if (!CheckEnter())
-                    continue;
+                int value = Input();
                 std::cout << "Enter the index: ";
-                std::cin >> index;
-                if (!CheckEnter())
-                    continue;
+                int index = Input();
                 list->Insert(index, value);
                 break;
             }
@@ -202,13 +194,17 @@ int main()
             }
             case 9:
             {
-                int index = 0;
                 std::cout << "Enter the index: ";
-                std::cin >> index;
-                if (!CheckEnter())
-                    continue;
-                int value = list->GetItem(index)->GetData();
-                std::cout << "Found by index: " << value << std::endl;
+                int index = Input();
+                try
+                {
+                    int value = list->GetItem(index)->GetData();
+                    std::cout << "Found by index: " << value << std::endl;
+                } catch (const char *mes)
+                {
+                    std::cout << mes << std::endl;
+                    break;
+                }
                 break;
             }
             case 10:
