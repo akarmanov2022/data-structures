@@ -16,13 +16,13 @@ class StackQueue
 private:
     //TODO: naming
     /**
-     * Первый стек.
+     * Стек для входных значений.
      */
-    Stack *_stack1;
+    Stack *_stackIn;
     /**
-     * Второй стек.
+     * Стек для выходных значений.
      */
-    Stack *_stack2;
+    Stack *_stackOut;
     /**
      * Size of the queue.
      */
@@ -57,16 +57,16 @@ public:
     int GetSize() const;
 
     /**
-     * Вернуть стек 1.
+     * Вернуть стек входных значений.
      * @return
      */
-    Stack *GetStack1() const;
+    Stack *GetStackIn() const;
 
     /**
-     * Вернуть стек 2.
+     * Вернуть стек выходных значений.
      * @return
      */
-    Stack *GetStack2() const;
+    Stack *GetStackOut() const;
 };
 
 

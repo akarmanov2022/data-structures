@@ -54,7 +54,7 @@ int main()
             default:
             {
                 std::cout << "Invalid input!" << std::endl;
-                break;
+                continue;
             }
         }
     }

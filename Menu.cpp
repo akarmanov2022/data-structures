@@ -15,23 +15,20 @@ int Menu::Input()
     while (true)
     {
         std::cin >> value;
-        if (std::cin.fail())
+        if (!std::cin.good())
         {
             std::cin.clear();
             std::cin.ignore(32767, '\n');
             std::cout << "Invalid input!" << std::endl;
+            std::cout << "Repeat entering:" << std::endl;
+            continue;
         }
-        else
-        {
-            break;
-        }
+        return value;
     }
-    return value;
 }
 
 void Menu::PrintStack(Stack *stack)
 {
-    std::cout << "Stack: " << std::endl;
     std::cout << "Size: " << stack->GetSize() << std::endl;
     Node *node = stack->Peek();
     while (node != nullptr)
@@ -46,10 +43,10 @@ void Menu::PrintStackQueue(StackQueue *queue)
 {
     std::cout << "Stack queue: " << std::endl;
     std::cout << "Size: " << queue->GetSize() << std::endl;
-    std::cout << "Stack 1: " << std::endl;
-    PrintStack(queue->GetStack1());
-    std::cout << "Stack 2: " << std::endl;
-    PrintStack(queue->GetStack2());
+    std::cout << "Stack In: " << std::endl;
+    PrintStack(queue->GetStackIn());
+    std::cout << "Stack Out: " << std::endl;
+    PrintStack(queue->GetStackOut());
 }
 
 void Menu::PrintBuffer(RingBuffer *buffer)
@@ -71,7 +68,6 @@ void Menu::PrintRingBufferQueue(RingBufferQueue *queue)
     std::cout << "Size: " << queue->GetSize() << std::endl;
     std::cout << "Is empty: " << queue->IsEmpty() << std::endl;
     std::cout << "Is full: " << queue->IsFull() << std::endl;
-    std::cout << "Buffer: " << std::endl;
     PrintBuffer(queue->GetBuffer());
 }
 
@@ -247,7 +243,7 @@ void Menu::MenuBuffer(RingBuffer *buffer)
             default:
             {
                 std::cout << "Invalid input!" << std::endl;
-                break;
+                continue;
             }
         }
     }

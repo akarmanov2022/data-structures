@@ -7,14 +7,14 @@
 
 StackQueue::StackQueue()
 {
-    _stack1 = new Stack();
-    _stack2 = new Stack();
+    _stackIn = new Stack();
+    _stackOut = new Stack();
     _size = 0;
 }
 
 void StackQueue::Enqueue(int value)
 {
-    _stack1->Push(value);
+    _stackIn->Push(value);
     _size++;
 }
 
@@ -24,22 +24,22 @@ int StackQueue::Dequeue()
     {
         return -1;
     }
-    if (_stack2->GetSize() == 0)
+    if (_stackOut->GetSize() == 0)
     {
-        while (_stack1->GetSize() > 0)
+        while (_stackIn->GetSize() > 0)
         {
-            _stack2->Push(_stack1->Pop()->GetData());
+            _stackOut->Push(_stackIn->Pop()->GetData());
         }
     }
     _size--;
-    return _stack2->Pop()->GetData();
+    return _stackOut->Pop()->GetData();
 }
 
 
 void StackQueue::Clear()
 {
-    _stack1->Clear();
-    _stack2->Clear();
+    _stackIn->Clear();
+    _stackOut->Clear();
     _size = 0;
 }
 
@@ -48,12 +48,12 @@ int StackQueue::GetSize() const
     return _size;
 }
 
-Stack *StackQueue::GetStack1() const
+Stack *StackQueue::GetStackIn() const
 {
-    return _stack1;
+    return _stackIn;
 }
 
-Stack *StackQueue::GetStack2() const
+Stack *StackQueue::GetStackOut() const
 {
-    return _stack2;
+    return _stackOut;
 }
