@@ -42,7 +42,7 @@ void PrintTestResult()
         FillListRandomValues(list, step);
         int index = list->GetLength() / 2;
         auto begin = std::chrono::steady_clock::now();
-        list->Remove(index);
+        list->Sort();
         auto end = std::chrono::steady_clock::now();
         std::cout << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << ", " << step
                   << std::endl;
