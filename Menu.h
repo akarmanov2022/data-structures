@@ -8,7 +8,7 @@
 class Menu
 {
 public:
-    static int Input();
+    static int InputInt();
 
     static void PrintStack(Stack *stack);
 

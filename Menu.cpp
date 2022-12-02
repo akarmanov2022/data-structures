@@ -2,27 +2,41 @@
 // Created by akarmanov on 29-11-2022.
 //
 #include <iostream>
+#include <limits>
 #include "lab3/stack/Stack.h"
 #include "lab3/queue/StackQueue.h"
 #include "lab3/buffer/RingBuffer.h"
 #include "lab3/queue/RingBufferQueue.h"
 #include "Menu.h"
 
-int Menu::Input()
+int Menu::InputInt()
 {
-    int value = 0;
+    std::string value;
+    bool fail;
     while (true)
     {
         std::cin >> value;
-        if (!std::cin.good())
+        fail = false;
+        for (int i = 0; i < value.length(); ++i)
         {
-            std::cin.clear();
-            std::cin.ignore(32767, '\n');
-            std::cout << "Invalid input!" << std::endl;
-            std::cout << "Repeat entering:" << std::endl;
+            if (!isdigit(value[i]))
+            {
+                std::cout << "Invalid input!" << std::endl;
+                std::cout << "Try again: " << std::endl;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                fail = true;
+                break;
+            }
+        }
+        if (fail)
+        {
             continue;
         }
-        return value;
+        else
+        {
+            return std::stoi(value);
+        }
     }
 }
 
@@ -84,13 +98,13 @@ void Menu::MenuRingBufferQueue(RingBufferQueue *queue)
         std::cout << "5. Is full" << std::endl;
         std::cout << "6. Print" << std::endl;
         std::cout << "7. Exit" << std::endl;
-        int choice = Input();
+        int choice = InputInt();
         switch (choice)
         {
             case 1:
             {
                 std::cout << "Enter value: " << std::endl;
-                int value = Input();
+                int value = InputInt();
                 queue->Enqueue(value);
                 break;
             }
@@ -150,13 +164,13 @@ void Menu::MenuStackQueue(StackQueue *queue)
         std::cout << "3. Get size" << std::endl;
         std::cout << "4. Print" << std::endl;
         std::cout << "5. Exit" << std::endl;
-        int choice = Input();
+        int choice = InputInt();
         switch (choice)
         {
             case 1:
             {
                 std::cout << "Enter value: " << std::endl;
-                int value = Input();
+                int value = InputInt();
                 queue->Enqueue(value);
                 break;
             }
@@ -189,7 +203,6 @@ void Menu::MenuStackQueue(StackQueue *queue)
             }
             default:
             {
-                std::cout << "Invalid input!" << std::endl;
                 break;
             }
         }
@@ -206,13 +219,13 @@ void Menu::MenuBuffer(RingBuffer *buffer)
         std::cout << "3. Print" << std::endl;
         std::cout << "4. Exit" << std::endl;
         std::cout << "Enter your choice: ";
-        int choice = Input();
+        int choice = InputInt();
         switch (choice)
         {
             case 1:
             {
                 std::cout << "Enter value: ";
-                int value = Input();
+                int value = InputInt();
                 buffer->Put(value);
                 PrintBuffer(buffer);
                 break;
@@ -220,7 +233,7 @@ void Menu::MenuBuffer(RingBuffer *buffer)
             case 2:
             {
                 std::cout << "Enter index: ";
-                int index = Input();
+                int index = InputInt();
                 RingBufferNode *node = buffer->Get(index);
                 if (node == nullptr)
                 {
@@ -262,13 +275,13 @@ void Menu::MenuStack(Stack *stack)
         std::cout << "5. Print" << std::endl;
         std::cout << "6. Back" << std::endl;
         std::cout << "Enter your choice: ";
-        int choice = Input();
+        int choice = InputInt();
         switch (choice)
         {
             case 1:
             {
                 std::cout << "Enter value: ";
-                int value = Input();
+                int value = InputInt();
                 stack->Push(value);
                 break;
             }
