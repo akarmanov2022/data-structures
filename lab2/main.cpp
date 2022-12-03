@@ -67,11 +67,10 @@ void PrintTestResult()
 int InputInt()
 {
     std::string value;
-    bool fail;
+    bool fail = false;
     while (true)
     {
         std::cin >> value;
-        fail = false;
         for (int i = 0; i < value.length(); ++i)
         {
             if (!isdigit(value[i]))
