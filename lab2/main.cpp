@@ -64,21 +64,34 @@ void PrintTestResult()
 //    }
 }
 
-int Input()
+int InputInt()
 {
-    int value = 0;
+    std::string value;
+    bool fail;
     while (true)
     {
         std::cin >> value;
-        if (std::cin.fail())
+        fail = false;
+        for (int i = 0; i < value.length(); ++i)
         {
-            std::cin.clear();
-            std::cin.ignore(32767, '\n');
-            std::cout << "Invalid input!" << std::endl;
-            std::cout << "Repeat entering:" << std::endl;
+            if (!isdigit(value[i]))
+            {
+                std::cout << "Invalid input!" << std::endl;
+                std::cout << "Try again: " << std::endl;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                fail = true;
+                break;
+            }
+        }
+        if (fail)
+        {
             continue;
         }
-        return value;
+        else
+        {
+            return std::stoi(value);
+        }
     }
 }
 
@@ -108,7 +121,7 @@ int main()
         std::cout << "0. Exit." << std::endl;
 
         std::cout << "Enter the task number or 0 for exit: " << std::endl;
-        int number = Input();
+        int number = InputInt();
 
         switch (number)
         {
@@ -119,21 +132,21 @@ int main()
             case 1:
             {
                 std::cout << "Enter the number of elements: ";
-                int value = Input();
+                int value = InputInt();
                 FillListRandomValues(list, value);
                 break;
             }
             case 2:
             {
                 std::cout << "Enter the value: ";
-                int value = Input();
+                int value = InputInt();
                 list->Add(value);
                 break;
             }
             case 3:
             {
                 std::cout << "Enter the index: ";
-                int index = Input();
+                int index = InputInt();
                 try
                 {
                     list->Remove(index);
@@ -147,23 +160,23 @@ int main()
             case 4:
             {
                 std::cout << "Enter the value: ";
-                int value = Input();
+                int value = InputInt();
                 list->AddToEnd(value);
                 break;
             }
             case 5:
             {
                 std::cout << "Enter the value: ";
-                int value = Input();
+                int value = InputInt();
                 list->AddToBegin(value);
                 break;
             }
             case 6:
             {
                 std::cout << "Enter the value: ";
-                int value = Input();
+                int value = InputInt();
                 std::cout << "Enter the index: ";
-                int index = Input();
+                int index = InputInt();
                 try
                 {
                     list->Insert(index + 1, value);
@@ -177,9 +190,9 @@ int main()
             case 7:
             {
                 std::cout << "Enter the value: ";
-                int value = Input();
+                int value = InputInt();
                 std::cout << "Enter the index: ";
-                int index = Input();
+                int index = InputInt();
                 try
                 {
                     list->Insert(index, value);
@@ -199,7 +212,7 @@ int main()
             case 9:
             {
                 std::cout << "Enter the index: ";
-                int index = Input();
+                int index = InputInt();
                 try
                 {
                     int value = list->GetItem(index)->GetData();
