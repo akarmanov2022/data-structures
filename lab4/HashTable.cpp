@@ -11,7 +11,7 @@ double MAX_LOAD_FACTOR = 0.75;
 HashTable::HashTable()
 {
     size = DEFAULT_SIZE;
-    items = new Item*[size];
+    items = new Item *[size];
     for (int i = 0; i < size; i++)
         items[i] = nullptr;
 }
@@ -35,12 +35,19 @@ void HashTable::Add(const char *key, const char *value)
         items[index]->value = new char[strlen(value) + 1];
         strcpy(items[index]->value, value);
         items[index]->next = nullptr;
-    }
-    else
+    } else
     {
         Item *item = items[index];
-        while (item->next != nullptr)
+        do
+        {
+            if (strcmp(item->key, key) == 0)
+            {
+                strcpy(item->value, value);
+                return;
+            }
             item = item->next;
+        }
+        while (item->next != nullptr);
         item->next = new Item;
         item->next->key = new char[strlen(key) + 1];
         strcpy(item->next->key, key);
@@ -63,8 +70,7 @@ void HashTable::Remove(const char *key)
         {
             items[index] = item->next;
             delete item;
-        }
-        else
+        } else
         {
             while (item->next != nullptr)
             {
@@ -91,7 +97,7 @@ const char *HashTable::Find(const char *key)
         while (item != nullptr)
         {
             if (strcmp(item->key, key) == 0)
-                while (item->next != nullptr)
+                return item->value;
             item = item->next;
         }
     }
@@ -129,7 +135,7 @@ void HashTable::Rehash()
     int oldSize = size;
     size *= 2;
     Item **oldItems = items;
-    items = new Item*[size];
+    items = new Item *[size];
     for (int i = 0; i < size; i++)
         items[i] = nullptr;
     for (int i = 0; i < oldSize; i++)
