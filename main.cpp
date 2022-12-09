@@ -92,24 +92,20 @@ int ReadInt(const char *string)
     while (true)
     {
         std::cin >> value;
-        if (std::cin.fail())
+        for (char i : value)
         {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Invalid input. Try again: ";
-            fail = true;
-        }
-        else
-        {
-            if (fail)
+            if (!isdigit(i))
             {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::cout << "Invalid input. Try again: ";
-                fail = false;
-            }
-            else
-            {
+                fail = true;
                 break;
             }
+        }
+        if (!fail)
+        {
+            break;
         }
     }
     return std::stoi(value);

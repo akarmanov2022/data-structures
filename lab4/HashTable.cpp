@@ -11,7 +11,7 @@ double MAX_LOAD_FACTOR = 0.75;
 HashTable::HashTable()
 {
     size = DEFAULT_SIZE;
-    items = new Item *[size];
+    items = new Item * [size];
     for (int i = 0; i < size; i++)
         items[i] = nullptr;
 }
@@ -35,19 +35,28 @@ void HashTable::Add(const char *key, const char *value)
         items[index]->value = new char[strlen(value) + 1];
         strcpy(items[index]->value, value);
         items[index]->next = nullptr;
+        count++;
     } else
     {
         Item *item = items[index];
-        do
+        while (item->next != nullptr)
         {
             if (strcmp(item->key, key) == 0)
             {
+                delete[] item->value;
+                item->value = new char[strlen(value) + 1];
                 strcpy(item->value, value);
                 return;
             }
             item = item->next;
         }
-        while (item->next != nullptr);
+        if (strcmp(item->key, key) == 0)
+        {
+            delete[] item->value;
+            item->value = new char[strlen(value) + 1];
+            strcpy(item->value, value);
+            return;
+        }
         item->next = new Item;
         item->next->key = new char[strlen(key) + 1];
         strcpy(item->next->key, key);
@@ -55,9 +64,11 @@ void HashTable::Add(const char *key, const char *value)
         strcpy(item->next->value, value);
         item->next->next = nullptr;
     }
-    count++;
-    if (count / (double) size > MAX_LOAD_FACTOR)
+    loadFactor = count / (double) size;
+    if (loadFactor > MAX_LOAD_FACTOR)
+    {
         Rehash();
+    }
 }
 
 void HashTable::Remove(const char *key)
@@ -70,7 +81,8 @@ void HashTable::Remove(const char *key)
         {
             items[index] = item->next;
             delete item;
-        } else
+        }
+        else
         {
             while (item->next != nullptr)
             {
@@ -107,6 +119,9 @@ const char *HashTable::Find(const char *key)
 void HashTable::Print()
 {
     std::cout << "=== Hash Table ===" << std::endl;
+    std::cout << "Size: " << size << std::endl;
+    std::cout << "Items: " << count << std::endl;
+    std::cout << "Load factor: " << loadFactor << std::endl;
     for (int i = 0; i < size; i++)
     {
         if (items[i] != nullptr)
@@ -120,9 +135,10 @@ void HashTable::Print()
             }
         }
     }
+    std::cout << "==================" << std::endl;
 }
 
-int HashTable::Hash(const char *key)
+int HashTable::Hash(const char *key) const
 {
     int hash = 0;
     for (int i = 0; i < strlen(key); i++)
@@ -132,6 +148,8 @@ int HashTable::Hash(const char *key)
 
 void HashTable::Rehash()
 {
+    std::cout << "Rehashing..." << std::endl;
+    count = 0;
     int oldSize = size;
     size *= 2;
     Item **oldItems = items;
@@ -154,12 +172,5 @@ void HashTable::Rehash()
         if (oldItems[i] != nullptr)
             delete oldItems[i];
     delete[] oldItems;
+    std::cout << "Rehashing complete." << std::endl;
 }
-
-void HashTable::ResolvedCollision(HashTable::Item *item, HashTable::Item *newItem)
-{
-    while (item->next != nullptr)
-        item = item->next;
-    item->next = newItem;
-}
-

@@ -95,19 +95,13 @@ private:
      * @param key ключ
      * @return индекс элемента
      */
-    int Hash(const char *key);
+    int Hash(const char *key) const;
 
     /**
      * Перехэширование таблицы. Вызывается при превышении коэффициента заполнения.
      */
     void Rehash();
 
-    /**
-     * Разрешение коллизий методом цепочек.
-     * @param item
-     * @param newItem
-     */
-    void ResolvedCollision(Item *item, Item *newItem);
 };
 
 
