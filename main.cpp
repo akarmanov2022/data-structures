@@ -28,33 +28,33 @@ int main()
             case 1:
             {
                 std::cout << "=== Add ===" << std::endl;
-                char key[256];
-                char value[256];
+                std::string key;
+                std::string value;
                 std::cout << "Enter key: ";
                 std::cin >> key;
                 std::cout << "Enter value: ";
                 std::cin >> value;
-                dictionary->Add(key, value);
+                dictionary->Add(key.data(), value.data());
                 std::cout << "=== Added ===" << std::endl;
                 break;
             }
             case 2:
             {
                 std::cout << "=== Remove ===" << std::endl;
-                char key[256];
+                std::string key;
                 std::cout << "Enter key: ";
                 std::cin >> key;
-                dictionary->Remove(key);
+                dictionary->Remove(key.data());
                 std::cout << "=== Removed ===" << std::endl;
                 break;
             }
             case 3:
             {
                 std::cout << "=== Get ===" << std::endl;
-                char key[256];
+                std::string key;
                 std::cout << "Enter key: ";
                 std::cin >> key;
-                const char *value = dictionary->Get(key);
+                const char *value = dictionary->Get(key.data());
                 if (value == nullptr)
                 {
                     std::cout << "Key not found" << std::endl;
