@@ -150,8 +150,8 @@ void HashTable::Rehash()
 {
     std::cout << "Rehashing..." << std::endl;
     count = 0;
-    int oldSize = size;
     size *= 2;
+    int oldSize = size;
     Item **oldItems = items;
     items = new Item *[size];
     for (int i = 0; i < size; i++)
