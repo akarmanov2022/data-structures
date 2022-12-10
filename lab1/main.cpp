@@ -141,28 +141,14 @@ int main()
             {
                 int value = InputInt("Enter the value to search: ");
                 int index = dynamicIntArray->LinearSearch(value);
-                if (index == -1)
-                {
-                    std::cout << "Element not found" << std::endl;
-                }
-                else
-                {
-                    std::cout << "Element found at index " << index << std::endl;
-                }
+                CheckIndex(index);
                 break;
             }
             case 9:
             {
                 int value = InputInt("Enter the value to search: ");
                 int index = dynamicIntArray->BinarySearch(value);
-                if (index == -1)
-                {
-                    std::cout << "Element not found" << std::endl;
-                }
-                else
-                {
-                    std::cout << "Element found at index " << index << std::endl;
-                }
+                CheckIndex(index);
                 break;
             }
             case 10:
