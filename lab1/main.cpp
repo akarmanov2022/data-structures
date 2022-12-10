@@ -1,7 +1,32 @@
 #include <iostream>
 #include "DynamicIntArray.h"
 
-void CheckIndex(int index);
+int InputInt(const char *string)
+{
+    std::string input;
+    bool valid;
+    while (true)
+    {
+        valid = true;
+        std::cout << string;
+        std::cin >> input;
+        for (char c : input)
+        {
+            if (c < '0' || c > '9')
+            {
+                valid = false;
+                break;
+            }
+        }
+        if (valid)
+        {
+            break;
+        }
+        std::cout << "Invalid input" << std::endl;
+    }
+    return std::stoi(input);
+}
+
 
 void PrintArrayInfo(DynamicIntArray *dynamicIntArray)
 {
@@ -12,6 +37,18 @@ void PrintArrayInfo(DynamicIntArray *dynamicIntArray)
         std::cout << dynamicIntArray->Get(i) << " ";
     }
     std::cout << std::endl << std::endl;
+}
+
+void CheckIndex(int index)
+{
+    if (index != -1)
+    {
+        std::cout << "Index: " << index << std::endl;
+    }
+    else
+    {
+        std::cout << "Index not found!" << std::endl;
+    }
 }
 
 void CreateRandomArray(DynamicIntArray *array, int length)
@@ -34,7 +71,7 @@ int main()
 
     while (true)
     {
-        std::cout << "Lab 1:" << std::endl;
+        std::cout << "Lab 1: Dynamic Array" << std::endl;
         std::cout << "1. Create an _array of random values." << std::endl;
         std::cout << "2. Adding an element to an _array." << std::endl;
         std::cout << "3. Removing an element from an _array." << std::endl;
@@ -44,96 +81,99 @@ int main()
         std::cout << "7. Array sort." << std::endl;
         std::cout << "8. Linear search for an element in an _array." << std::endl;
         std::cout << "9. Binary search for an element in an _array." << std::endl;
+        std::cout << "10. Exit." << std::endl;
 
-        int number = 0;
-        int length;
-        int value;
-        int index;
-        std::cout << "Enter the number: ";
-        std::cin >> number;
-        switch (number)
+        int choice = InputInt("Enter your choice: ");
+        switch (choice)
         {
-            case 0:
-                return number;
             case 1:
-                length = 0;
-                std::cout << "Enter the _length of the _array: ";
-                std::cin >> length;
+            {
+                int length = InputInt("Enter the length of the _array: ");
                 CreateRandomArray(dynamicIntArray, length);
                 PrintArrayInfo(dynamicIntArray);
                 break;
+            }
             case 2:
-                value = 0;
-                std::cout << "Enter the value: ";
-                std::cin >> value;
+            {
+                int value = InputInt("Enter the value to add: ");
                 dynamicIntArray->AddToEnd(value);
                 PrintArrayInfo(dynamicIntArray);
                 break;
+            }
             case 3:
-                index = 0;
-                std::cout << "Enter the index: ";
-                std::cin >> index;
+            {
+                int index = InputInt("Enter the index of the element to remove: ");
+                CheckIndex(index);
                 dynamicIntArray->Remove(index);
                 PrintArrayInfo(dynamicIntArray);
                 break;
+            }
             case 4:
-                value = 0;
-                std::cout << "Enter the value: ";
-                std::cin >> value;
+            {
+                int value = InputInt("Enter the value to add: ");
                 dynamicIntArray->AddToStart(value);
                 PrintArrayInfo(dynamicIntArray);
                 break;
+            }
             case 5:
-                std::cout << "Enter the value: ";
-                std::cin >> value;
+            {
+                int value = InputInt("Enter the value to add: ");
                 dynamicIntArray->AddToEnd(value);
                 PrintArrayInfo(dynamicIntArray);
                 break;
+            }
             case 6:
-                index = 0;
-                value = 0;
-                std::cout << "Enter the index: ";
-                std::cin >> index;
-                std::cout << "Enter the value: ";
-                std::cin >> value;
+            {
+                int index = InputInt("Enter the index of the element after which to insert: ");
+                CheckIndex(index);
+                int value = InputInt("Enter the value to add: ");
                 dynamicIntArray->AddAfter(index, value);
                 PrintArrayInfo(dynamicIntArray);
                 break;
+            }
             case 7:
+            {
                 dynamicIntArray->Sort();
                 PrintArrayInfo(dynamicIntArray);
                 break;
+            }
             case 8:
-                value = 0;
-                index = 0;
-                std::cout << "Enter the value: ";
-                std::cin >> value;
-                index = dynamicIntArray->FindLinear(value);
-                CheckIndex(index);
+            {
+                int value = InputInt("Enter the value to search: ");
+                int index = dynamicIntArray->LinearSearch(value);
+                if (index == -1)
+                {
+                    std::cout << "Element not found" << std::endl;
+                }
+                else
+                {
+                    std::cout << "Element found at index " << index << std::endl;
+                }
                 break;
+            }
             case 9:
-                value = 0;
-                index = 0;
-                std::cout << "Enter the value: ";
-                std::cin >> value;
-                index = dynamicIntArray->FindBinary(value, 0, dynamicIntArray->GetLength());
-                PrintArrayInfo(dynamicIntArray);
-                CheckIndex(index);
+            {
+                int value = InputInt("Enter the value to search: ");
+                int index = dynamicIntArray->BinarySearch(value);
+                if (index == -1)
+                {
+                    std::cout << "Element not found" << std::endl;
+                }
+                else
+                {
+                    std::cout << "Element found at index " << index << std::endl;
+                }
                 break;
+            }
+            case 10:
+            {
+                return 0;
+            }
             default:
-                throw std::invalid_argument("Incorrect number!");
+            {
+                std::cout << "Invalid input" << std::endl;
+                break;
+            }
         }
-    }
-}
-
-void CheckIndex(int index)
-{
-    if (index != -1)
-    {
-        std::cout << "Index: " << index << std::endl;
-    }
-    else
-    {
-        std::cout << "Index not found!" << std::endl;
     }
 }

@@ -145,7 +145,7 @@ void DynamicIntArray::Sort()
     }
 }
 
-int DynamicIntArray::FindLinear(int value)
+int DynamicIntArray::LinearSearch(int value)
 {
     for (int i = 0; i < _length; ++i)
     {
@@ -155,7 +155,7 @@ int DynamicIntArray::FindLinear(int value)
     return -1;
 }
 
-int DynamicIntArray::FindBinary(int value, int left, int right)
+int DynamicIntArray::BinarySearch(int value, int left, int right)
 {
     Sort();
     int middle;
@@ -187,5 +187,10 @@ void DynamicIntArray::Clear()
         _array[i] = 0;
         _length--;
     }
+}
+
+int DynamicIntArray::BinarySearch(int value)
+{
+    return BinarySearch(value, 0, _length - 1);
 }
 

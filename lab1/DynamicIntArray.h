@@ -58,10 +58,18 @@ public:
      * @param value - значение.
      * @return - позиция элемента в массиве.
      * */
-    int FindLinear(int value);
+    int LinearSearch(int value);
 
+    /**
+     * Вернет длину массива.
+     * @return длина массива.
+     */
     int GetLength() const;
 
+    /**
+     * Вернуть вместимость массива.
+     * @return вместимость массива.
+     */
     int GetCapacity() const;
 
     /**
@@ -72,12 +80,19 @@ public:
      *
      * @return позиция элемента в массиве.
      * */
-    int FindBinary(int value, int left, int right);
+    int BinarySearch(int value, int left, int right);
 
     /**
      * Очистка массива.
      * */
     void Clear();
+
+    /**
+     * Бинарный поиск позиции элемента в массиве. Массив должен быть отсортирован.
+     * @param value значение.
+     * @return позиция элемента в массиве.
+     */
+    int BinarySearch(int value);
 
 private:
 
@@ -94,20 +109,10 @@ private:
     static int *ArrayCopyOf(int *sourceArray, int length, int newCapacity);
 
     /**
-     * Копирует массив из указанного исходного массива, начиная с указанной позиции, в указанную позицию целевого массива.
-     * Подпоследовательность элементов массива копируется из исходного массива, на который ссылается "sourceArray", в целевой массив, на который ссылается "destinationArray".
-     * Количество скопированных компонентов равно аргументу длины - "_length".
-     * Компоненты в позициях от "sourcePosition" до "sourcePosition + _length - 1" в исходном массиве копируются в позиции от "destinationPosition" до destinationPosition + _length - 1", соответственно, массива назначения.
-     * Если аргументы "sourceArray" и "destinationArray" ссылаются на один и тот же объект-массив, то копирование выполняется так,
-     * как если бы компоненты в позициях от "sourcePosition" до "sourcePosition + _length - 1" были сначала скопированы во временный массив с компонентами длины
-     * и затем содержимое временного массива копировалось в позиции от "destinationPosition" до destinationPosition + _length - 1" целевого массива.
-     *
-     * @param sourceArray - исходный массив.
-     * @param sourcePosition - позиция в исходном массиве.
-     * @param destinationArray - целевой массив.
-     * @param destinationPosition - позиция в целевом массиве.
-     * @param length - количество копируемых элементов массива.
-     * */
+     * Смещает элементы массива относительно указанной позиции.
+     * @param position позиция, относительно которой смещаются элементы.
+     * @param directionShift флаг, определяющий направление смещения.
+     */
     void Shift(int position, bool directionShift) const;
 
     /**
