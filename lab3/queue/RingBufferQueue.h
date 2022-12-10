@@ -53,12 +53,6 @@ public:
     bool IsEmpty() const;
 
     /**
-     * Вернуть true, если очередь полна.
-     * @return true, если очередь полна.
-     */
-    bool IsFull() const;
-
-    /**
      * Вернуть буфер.
      * @return буфер.
      */

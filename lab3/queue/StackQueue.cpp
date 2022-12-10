@@ -29,11 +29,11 @@ int StackQueue::Dequeue()
     {
         while (_stackIn->GetSize() > 0)
         {
-            _stackOut->Push(_stackIn->Pop()->GetData());
+            _stackOut->Push(_stackIn->Pop());
         }
     }
     _size--;
-    return _stackOut->Pop()->GetData();
+    return _stackOut->Pop();
 }
 
 

@@ -66,7 +66,7 @@ private:
     /**
      * Указатель на последний элемент.
      */
-    RingBufferNode *_first;
+    RingBufferNode *_last;
     /**
      * Размер буфера.
      */

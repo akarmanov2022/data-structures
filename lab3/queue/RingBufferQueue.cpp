@@ -37,11 +37,6 @@ bool RingBufferQueue::IsEmpty() const
     return _size == 0;
 }
 
-bool RingBufferQueue::IsFull() const
-{
-    return _size == _buffer->GetSize();
-}
-
 RingBuffer *RingBufferQueue::GetBuffer() const
 {
     return _buffer;

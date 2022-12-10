@@ -38,83 +38,105 @@ int RingBuffer::GetSize() const
 
 RingBufferNode *RingBuffer::Put(int value)
 {
-    auto *node = new RingBufferNode(value, _size);
     if (_size == 0)
     {
-        _first = node;
-        node->SetNext(node);
+        _last = new RingBufferNode(value, 0);
+        _last->SetNext(_last);
+        _size++;
+        return _last;
     }
-    else
-    {
-        node->SetNext(_first->GetNext());
-        _first->SetNext(node);
-    }
+    auto *node = new RingBufferNode(value, _last->GetIndex() + 1);
+    node->SetNext(_last->GetNext());
+    _last->SetNext(node);
+    _last = node;
     _size++;
     return node;
 }
 
 int RingBuffer::Get(int index)
 {
-    if (index >= _size)
+    if (_size == 0)
     {
         return 0;
     }
-    RingBufferNode *current = _first;
-    for (int i = 0; i < index; i++)
+    auto *node = _last->GetNext();
+    while (node->GetIndex() != index)
     {
-        current = current->GetNext();
+        node = node->GetNext();
     }
-    return current->GetData();
+    return node->GetData();
 }
 
 RingBufferNode *RingBuffer::Remove(int index)
 {
-    if (index >= _size)
+    if (_size == 0)
     {
         return nullptr;
     }
-    RingBufferNode *current = _first;
-    for (int i = 0; i < index - 1; i++)
+    auto *node = _last->GetNext();
+    if (node->GetIndex() == index)
     {
-        current = current->GetNext();
+        _last->SetNext(node->GetNext());
+        _size--;
+        return node;
     }
-    RingBufferNode *next = current->GetNext()->GetNext();
-    RingBufferNode *removed = current->GetNext();
-    current->SetNext(next);
+    while (node->GetNext()->GetIndex() != index)
+    {
+        node = node->GetNext();
+    }
+    auto *removed = node->GetNext();
+    node->SetNext(removed->GetNext());
     _size--;
     return removed;
 }
 
 void RingBuffer::Clear()
 {
-    while (_size > 0)
+    if (_size == 0)
     {
-        delete Remove(0);
+        return;
     }
-
+    auto *node = _last->GetNext();
+    while (node != _last)
+    {
+        auto *next = node->GetNext();
+        delete node;
+        node = next;
+    }
+    delete _last;
+    _size = 0;
 }
 
 RingBufferNode *RingBuffer::GetFirst() const
 {
-    return _first;
+    return _last;
 }
 
 RingBuffer::RingBuffer(int size)
 {
-    _size = size;
-    _first = nullptr;
+    _size = 0;
+    _last = nullptr;
 }
 
 void RingBuffer::Print()
 {
+    std::cout << "RingBuffer: ";
     std::cout << "Size: " << _size << std::endl;
-    std::cout << "First: " << _first->GetIndex() << std::endl;
+    if (_size == 0)
+    {
+        std::cout << "Empty" << std::endl;
+        return;
+    }
+    std::cout << "First: " << _last->GetNext()->GetData() << std::endl;
+    std::cout << "Last: " << _last->GetData() << std::endl;
     std::cout << "Data: ";
-    RingBufferNode *current = _first;
+    std::cout << "[";
+    RingBufferNode *current = _last;
     for (int i = 0; i < _size; i++)
     {
-        std::cout << current->GetData() << " ";
+        std::cout << current->GetData() << ", ";
         current = current->GetNext();
     }
+    std::cout << "]" << std::endl;
     std::cout << std::endl;
 }

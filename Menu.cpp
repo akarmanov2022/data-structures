@@ -46,9 +46,8 @@ void Menu::MenuRingBufferQueue(RingBufferQueue *queue)
         std::cout << "2. Dequeue" << std::endl;
         std::cout << "3. Get size" << std::endl;
         std::cout << "4. Is empty" << std::endl;
-        std::cout << "5. Is full" << std::endl;
-        std::cout << "6. Print" << std::endl;
-        std::cout << "7. Exit" << std::endl;
+        std::cout << "5. Print" << std::endl;
+        std::cout << "6. Back" << std::endl;
 
         int choice = InputInt("Enter your choice: ");
         switch (choice)
@@ -84,15 +83,10 @@ void Menu::MenuRingBufferQueue(RingBufferQueue *queue)
             }
             case 5:
             {
-                std::cout << "Is full: " << (queue->IsFull() ? "true" : "false") << std::endl;
-                break;
-            }
-            case 6:
-            {
                 queue->Print();
                 break;
             }
-            case 7:
+            case 6:
             {
                 return;
             }
