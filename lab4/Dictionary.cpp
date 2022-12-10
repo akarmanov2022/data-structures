@@ -2,7 +2,7 @@
 // Created by aka on 12/8/22.
 //
 
-#include <cstring>
+#include <iostream>
 #include "Dictionary.h"
 
 Dictionary::Dictionary()

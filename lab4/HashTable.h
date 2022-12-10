@@ -83,12 +83,12 @@ private:
     /**
      * Количество элементов
      */
-    int count;
+    int count = 0;
 
     /**
      * Коэффициент заполнения таблицы.
      */
-    double loadFactor;
+    double loadFactor = 0;
 
     /**
      * Хэш-функция

@@ -6,7 +6,7 @@
 #include <iostream>
 #include <limits>
 
-int ReadInt(const char *string);
+int InputInt(const char *string);
 
 int main()
 {
@@ -21,7 +21,7 @@ int main()
         std::cout << "4. Print" << std::endl;
         std::cout << "5. Exit" << std::endl;
 
-        int choice = ReadInt("Enter your choice: ");
+        int choice = InputInt("Enter your choice: ");
 
         switch (choice)
         {
@@ -84,29 +84,28 @@ int main()
     }
 }
 
-int ReadInt(const char *string)
+int InputInt(const char *string)
 {
-    std::string value;
-    std::cout << string;
-    bool fail = false;
+    std::string input;
+    bool valid;
     while (true)
     {
-        std::cin >> value;
-        for (char i : value)
+        valid = true;
+        std::cout << string;
+        std::cin >> input;
+        for (char c : input)
         {
-            if (!isdigit(i))
+            if (c < '0' || c > '9')
             {
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                std::cout << "Invalid input. Try again: ";
-                fail = true;
+                valid = false;
                 break;
             }
         }
-        if (!fail)
+        if (valid)
         {
             break;
         }
+        std::cout << "Invalid input" << std::endl;
     }
-    return std::stoi(value);
+    return std::stoi(input);
 }
