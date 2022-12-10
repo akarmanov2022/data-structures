@@ -92,13 +92,8 @@ int InputInt(const char *string)
 
 int main()
 {
-//    srand(time(nullptr));
+    srand(time(nullptr));
     auto list = new List();
-
-//    FillListRandomValues(list, 100000);
-//    PrintList(list);
-//    list->Sort();
-//    PrintList(list);
 
     while (true)
     {
@@ -149,7 +144,7 @@ int main()
             case 5:
             {
                 int value = InputInt("Enter the value: ");
-                list->Add(value);
+                list->AddToEnd(value);
                 PrintList(list);
                 break;
             }
