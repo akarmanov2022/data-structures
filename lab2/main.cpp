@@ -64,34 +64,30 @@ void PrintTestResult()
 //    }
 }
 
-int InputInt()
+int InputInt(const char *string)
 {
-    std::string value;
-    bool fail = false;
+    std::string input;
+    bool valid;
     while (true)
     {
-        std::cin >> value;
-        for (int i = 0; i < value.length(); ++i)
+        valid = true;
+        std::cout << string;
+        std::cin >> input;
+        for (char c : input)
         {
-            if (!isdigit(value[i]))
+            if (c < '0' || c > '9')
             {
-                std::cout << "Invalid input!" << std::endl;
-                std::cout << "Try again: " << std::endl;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                fail = true;
+                valid = false;
                 break;
             }
         }
-        if (fail)
+        if (valid)
         {
-            continue;
+            break;
         }
-        else
-        {
-            return std::stoi(value);
-        }
+        std::cout << "Invalid input" << std::endl;
     }
+    return std::stoi(input);
 }
 
 int main()
@@ -119,107 +115,77 @@ int main()
         std::cout << "10. Output test result." << std::endl;
         std::cout << "0. Exit." << std::endl;
 
-        std::cout << "Enter the task number or 0 for exit: " << std::endl;
-        int number = InputInt();
-
-        switch (number)
+        int choice = InputInt("Enter your choice: ");
+        switch (choice)
         {
-            case 0:
-            {
-                return 0;
-            }
             case 1:
             {
-                std::cout << "Enter the number of elements: ";
-                int value = InputInt();
-                FillListRandomValues(list, value);
+                int count = InputInt("Enter the number of elements: ");
+                FillListRandomValues(list, count);
+                PrintList(list);
                 break;
             }
             case 2:
             {
-                std::cout << "Enter the value: ";
-                int value = InputInt();
+                int value = InputInt("Enter the value: ");
                 list->Add(value);
+                PrintList(list);
                 break;
             }
             case 3:
             {
-                std::cout << "Enter the index: ";
-                int index = InputInt();
-                try
-                {
-                    list->Remove(index);
-                } catch (const char *mes)
-                {
-                    std::cout << mes << std::endl;
-                    break;
-                }
+                int index = InputInt("Enter the index: ");
+                list->Remove(index);
+                PrintList(list);
                 break;
             }
             case 4:
             {
-                std::cout << "Enter the value: ";
-                int value = InputInt();
-                list->AddToEnd(value);
+                int value = InputInt("Enter the value: ");
+                list->AddToBegin(value);
+                PrintList(list);
                 break;
             }
             case 5:
             {
-                std::cout << "Enter the value: ";
-                int value = InputInt();
-                list->AddToBegin(value);
+                int value = InputInt("Enter the value: ");
+                list->Add(value);
+                PrintList(list);
                 break;
             }
             case 6:
             {
-                std::cout << "Enter the value: ";
-                int value = InputInt();
-                std::cout << "Enter the index: ";
-                int index = InputInt();
-                try
-                {
-                    list->Insert(index + 1, value);
-                } catch (const char *mes)
-                {
-                    std::cout << mes << std::endl;
-                    break;
-                }
+                int index = InputInt("Enter the index: ");
+                int value = InputInt("Enter the value: ");
+                list->Insert(index + 1, value);
+                PrintList(list);
                 break;
             }
             case 7:
             {
-                std::cout << "Enter the value: ";
-                int value = InputInt();
-                std::cout << "Enter the index: ";
-                int index = InputInt();
-                try
-                {
-                    list->Insert(index, value);
-                } catch (const char *mes)
-                {
-                    std::cout << mes << std::endl;
-                    break;
-                }
+                int index = InputInt("Enter the index: ");
+                int value = InputInt("Enter the value: ");
+                list->Insert(index + 1, value);
+                PrintList(list);
                 break;
             }
             case 8:
             {
-                std::cout << "Sorting list..." << std::endl;
                 list->Sort();
+                PrintList(list);
                 break;
             }
             case 9:
             {
-                std::cout << "Enter the index: ";
-                int index = InputInt();
-                try
+                int value = InputInt("Enter the value: ");
+                int index = list->LinearSearch(value);
+                if (index == -1)
                 {
-                    int value = list->GetItem(index)->GetData();
-                    std::cout << "Found by index: " << value << std::endl;
-                } catch (const char *mes)
+                    std::cout << "Value not found" << std::endl;
+                }
+                else
                 {
-                    std::cout << mes << std::endl;
-                    break;
+                    std::cout << "Value found at index " << index << std::endl;
                 }
                 break;
             }
@@ -228,12 +194,16 @@ int main()
                 PrintTestResult();
                 break;
             }
+            case 0:
+            {
+                return 0;
+            }
             default:
             {
-                std::cout << "Incorrect value!" << std::endl;
-                continue;
+                std::cout << "Invalid input" << std::endl;
+                break;
             }
         }
-        PrintList(list);
+
     }
 }

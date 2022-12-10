@@ -204,3 +204,17 @@ void List::Sort()
     }
     _last = node;
 }
+
+int List::LinearSearch(int value)
+{
+    auto node = _head;
+    for (int i = 0; i < _length; ++i)
+    {
+        if (node->GetData() == value)
+        {
+            return i;
+        }
+        node = node->GetNext();
+    }
+    return -1;
+}

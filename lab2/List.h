@@ -134,6 +134,8 @@ public:
      * @param index - позиция элемента.
      */
     Node *GetItem(int index) const;
+
+    int LinearSearch(int value);
 };
 
 #endif
