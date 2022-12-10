@@ -2,6 +2,7 @@
 // Created by akarmanov on 28-11-2022.
 //
 
+#include <iostream>
 #include "StackQueue.h"
 
 
@@ -56,4 +57,13 @@ Stack *StackQueue::GetStackIn() const
 Stack *StackQueue::GetStackOut() const
 {
     return _stackOut;
+}
+
+void StackQueue::Print()
+{
+    std::cout << "=== Queue ===" << std::endl;
+    std::cout << "Stack In: ";
+    _stackIn->Print();
+    std::cout << "Stack Out: ";
+    _stackOut->Print();
 }

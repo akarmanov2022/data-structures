@@ -90,7 +90,7 @@ public:
      * @param index индекс элемента.
      * @return указатель на элемент.
      */
-    RingBufferNode *Get(int index);
+    int Get(int index);
 
     /**
      * Удалить элемент из буфера.
@@ -116,6 +116,7 @@ public:
      */
     RingBuffer(int size);
 
+    void Print();
 };
 
 

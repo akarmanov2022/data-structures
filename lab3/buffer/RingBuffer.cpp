@@ -2,6 +2,7 @@
 // Created by akarmanov on 28-11-2022.
 //
 
+#include <iostream>
 #include "RingBuffer.h"
 
 int RingBufferNode::GetData() const
@@ -52,18 +53,18 @@ RingBufferNode *RingBuffer::Put(int value)
     return node;
 }
 
-RingBufferNode *RingBuffer::Get(int index)
+int RingBuffer::Get(int index)
 {
     if (index >= _size)
     {
-        return nullptr;
+        return 0;
     }
     RingBufferNode *current = _first;
     for (int i = 0; i < index; i++)
     {
         current = current->GetNext();
     }
-    return current;
+    return current->GetData();
 }
 
 RingBufferNode *RingBuffer::Remove(int index)
@@ -102,4 +103,18 @@ RingBuffer::RingBuffer(int size)
 {
     _size = size;
     _first = nullptr;
+}
+
+void RingBuffer::Print()
+{
+    std::cout << "Size: " << _size << std::endl;
+    std::cout << "First: " << _first->GetIndex() << std::endl;
+    std::cout << "Data: ";
+    RingBufferNode *current = _first;
+    for (int i = 0; i < _size; i++)
+    {
+        std::cout << current->GetData() << " ";
+        current = current->GetNext();
+    }
+    std::cout << std::endl;
 }

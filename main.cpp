@@ -24,7 +24,8 @@ int main()
         std::cout << "4. RingBufferQueue" << std::endl;
         std::cout << "5. Exit" << std::endl;
         std::cout << "Enter your choice: ";
-        int choice = Menu::InputInt();
+
+        int choice = Menu::InputInt("Enter your choice: ");
         switch (choice)
         {
             case 1:
@@ -53,8 +54,8 @@ int main()
             }
             default:
             {
-                std::cout << "Invalid input!" << std::endl;
-                continue;
+                std::cout << "Invalid choice" << std::endl;
+                break;
             }
         }
     }

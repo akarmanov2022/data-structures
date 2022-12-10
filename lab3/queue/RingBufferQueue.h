@@ -63,6 +63,8 @@ public:
      * @return буфер.
      */
     RingBuffer *GetBuffer() const;
+
+    void Print() const;
 };
 
 

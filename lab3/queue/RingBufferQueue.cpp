@@ -2,6 +2,7 @@
 // Created by akarmanov on 28-11-2022.
 //
 
+#include <iostream>
 #include "RingBufferQueue.h"
 
 RingBufferQueue::RingBufferQueue(int size)
@@ -44,4 +45,10 @@ bool RingBufferQueue::IsFull() const
 RingBuffer *RingBufferQueue::GetBuffer() const
 {
     return _buffer;
+}
+
+void RingBufferQueue::Print() const
+{
+    std::cout << "=== Queue ===" << std::endl;
+    _buffer->Print();
 }

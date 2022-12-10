@@ -2,6 +2,7 @@
 // Created by akarmanov on 27-11-2022.
 //
 
+#include <iostream>
 #include "Stack.h"
 
 
@@ -34,32 +35,52 @@ Node *Stack::Push(int value)
     return node;
 }
 
-Node *Stack::Pop()
+int Stack::Pop()
 {
     if (_size == 0)
     {
-        return nullptr;
+        return 0;
     }
-    Node *current = _last;
+    auto *node = _last;
     _last = _last->GetNext();
     _size--;
-    return current;
+    int data = node->GetData();
+    delete node;
+    return data;
 }
 
-Node *Stack::Peek()
+int Stack::Peek()
 {
-    return _last;
+    if (_size == 0)
+    {
+        return 0;
+    }
+    return _last->GetData();
 }
 
 void Stack::Clear()
 {
     while (_size > 0)
     {
-        delete Pop();
+        Pop();
     }
 }
 
 int Stack::GetSize() const
 {
     return _size;
+}
+
+void Stack::Print()
+{
+    Node *current = _last;
+    std::cout << "=== Stack ===" << std::endl;
+    std::cout << "Size: " << _size << std::endl;
+    std::cout << "[";
+    while (current != nullptr)
+    {
+        std::cout << current->GetData() << ", ";
+        current = current->GetNext();
+    }
+    std::cout << "]" << std::endl;
 }

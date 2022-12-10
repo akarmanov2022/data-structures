@@ -8,15 +8,6 @@
 class Menu
 {
 public:
-    static int InputInt();
-
-    static void PrintStack(Stack *stack);
-
-    static void PrintStackQueue(StackQueue *queue);
-
-    static void PrintBuffer(RingBuffer *buffer);
-
-    static void PrintRingBufferQueue(RingBufferQueue *queue);
 
     static void MenuRingBufferQueue(RingBufferQueue *queue);
 
@@ -25,6 +16,8 @@ public:
     static void MenuBuffer(RingBuffer *buffer);
 
     static void MenuStack(Stack *stack);
+
+    static int InputInt(const char *message);
 };
 
 #endif //DATA_STRUCTURES_MENU_H

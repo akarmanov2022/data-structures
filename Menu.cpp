@@ -7,83 +7,34 @@
 #include "lab3/queue/StackQueue.h"
 #include "lab3/buffer/RingBuffer.h"
 #include "lab3/queue/RingBufferQueue.h"
+
 #include "Menu.h"
 
-int Menu::InputInt()
+
+int Menu::InputInt(const char *message)
 {
-    std::string value;
-    bool fail;
+    std::string input;
+    bool valid;
     while (true)
     {
-        std::cin >> value;
-        fail = false;
-        for (int i = 0; i < value.length(); ++i)
+        valid = true;
+        std::cout << message;
+        std::cin >> input;
+        for (char c: input)
         {
-            if (!isdigit(value[i]))
+            if (c < '0' || c > '9')
             {
-                std::cout << "Invalid input!" << std::endl;
-                std::cout << "Try again: " << std::endl;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                fail = true;
+                valid = false;
                 break;
             }
         }
-        if (fail)
+        if (valid)
         {
-            continue;
+            break;
         }
-        else
-        {
-            return std::stoi(value);
-        }
+        std::cout << "Invalid input" << std::endl;
     }
-}
-
-void Menu::PrintStack(Stack *stack)
-{
-    std::cout << "Size: " << stack->GetSize() << std::endl;
-    Node *node = stack->Peek();
-    while (node != nullptr)
-    {
-        std::cout << node->GetData() << " ";
-        node = node->GetNext();
-    }
-    std::cout << std::endl;
-}
-
-void Menu::PrintStackQueue(StackQueue *queue)
-{
-    std::cout << "Stack queue: " << std::endl;
-    std::cout << "Size: " << queue->GetSize() << std::endl;
-    std::cout << "Stack In: " << std::endl;
-    PrintStack(queue->GetStackIn());
-    std::cout << "Stack Out: " << std::endl;
-    PrintStack(queue->GetStackOut());
-}
-
-void Menu::PrintBuffer(RingBuffer *buffer)
-{
-    RingBufferNode *node = buffer->GetFirst();
-
-    std::cout << "Index first node: " << node->GetIndex() << std::endl;
-    std::cout << "Size: " << buffer->GetSize() << std::endl;
-    do
-    {
-        std::cout << node->GetData() << " ";
-        node = node->GetNext();
-    }
-    while (node != buffer->GetFirst());
-    std::cout << std::endl << "Index last node: " << buffer->GetSize() - 1 << std::endl;
-    std::cout << std::endl;
-}
-
-void Menu::PrintRingBufferQueue(RingBufferQueue *queue)
-{
-    std::cout << "Ring buffer queue: " << std::endl;
-    std::cout << "Size: " << queue->GetSize() << std::endl;
-    std::cout << "Is empty: " << queue->IsEmpty() << std::endl;
-    PrintBuffer(queue->GetBuffer());
+    return std::stoi(input);
 }
 
 void Menu::MenuRingBufferQueue(RingBufferQueue *queue)
@@ -98,13 +49,13 @@ void Menu::MenuRingBufferQueue(RingBufferQueue *queue)
         std::cout << "5. Is full" << std::endl;
         std::cout << "6. Print" << std::endl;
         std::cout << "7. Exit" << std::endl;
-        int choice = InputInt();
+
+        int choice = InputInt("Enter your choice: ");
         switch (choice)
         {
             case 1:
             {
-                std::cout << "Enter value: " << std::endl;
-                int value = InputInt();
+                int value = InputInt("Enter value: ");
                 queue->Enqueue(value);
                 break;
             }
@@ -113,7 +64,7 @@ void Menu::MenuRingBufferQueue(RingBufferQueue *queue)
                 int value = queue->Dequeue();
                 if (value == -1)
                 {
-                    std::cout << "Queue is empty!" << std::endl;
+                    std::cout << "Queue is empty" << std::endl;
                 }
                 else
                 {
@@ -128,17 +79,17 @@ void Menu::MenuRingBufferQueue(RingBufferQueue *queue)
             }
             case 4:
             {
-                std::cout << "Is empty: " << queue->IsEmpty() << std::endl;
+                std::cout << "Is empty: " << (queue->IsEmpty() ? "true" : "false") << std::endl;
                 break;
             }
             case 5:
             {
-                std::cout << "Is full: " << queue->IsFull() << std::endl;
+                std::cout << "Is full: " << (queue->IsFull() ? "true" : "false") << std::endl;
                 break;
             }
             case 6:
             {
-                PrintRingBufferQueue(queue);
+                queue->Print();
                 break;
             }
             case 7:
@@ -147,7 +98,7 @@ void Menu::MenuRingBufferQueue(RingBufferQueue *queue)
             }
             default:
             {
-                std::cout << "Invalid input!" << std::endl;
+                std::cout << "Invalid choice" << std::endl;
                 break;
             }
         }
@@ -164,13 +115,13 @@ void Menu::MenuStackQueue(StackQueue *queue)
         std::cout << "3. Get size" << std::endl;
         std::cout << "4. Print" << std::endl;
         std::cout << "5. Exit" << std::endl;
-        int choice = InputInt();
+
+        int choice = InputInt("Enter your choice: ");
         switch (choice)
         {
             case 1:
             {
-                std::cout << "Enter value: " << std::endl;
-                int value = InputInt();
+                int value = InputInt("Enter value: ");
                 queue->Enqueue(value);
                 break;
             }
@@ -179,7 +130,7 @@ void Menu::MenuStackQueue(StackQueue *queue)
                 int value = queue->Dequeue();
                 if (value == -1)
                 {
-                    std::cout << "Queue is empty!" << std::endl;
+                    std::cout << "Queue is empty" << std::endl;
                 }
                 else
                 {
@@ -194,7 +145,7 @@ void Menu::MenuStackQueue(StackQueue *queue)
             }
             case 4:
             {
-                PrintStackQueue(queue);
+                queue->Print();
                 break;
             }
             case 5:
@@ -203,6 +154,7 @@ void Menu::MenuStackQueue(StackQueue *queue)
             }
             default:
             {
+                std::cout << "Invalid choice" << std::endl;
                 break;
             }
         }
@@ -219,35 +171,33 @@ void Menu::MenuBuffer(RingBuffer *buffer)
         std::cout << "3. Print" << std::endl;
         std::cout << "4. Exit" << std::endl;
         std::cout << "Enter your choice: ";
-        int choice = InputInt();
+
+        int choice = InputInt("Enter your choice: ");
         switch (choice)
         {
             case 1:
             {
-                std::cout << "Enter value: ";
-                int value = InputInt();
+                int value = InputInt("Enter value: ");
                 buffer->Put(value);
-                PrintBuffer(buffer);
                 break;
             }
             case 2:
             {
-                std::cout << "Enter index: ";
-                int index = InputInt();
-                RingBufferNode *node = buffer->Get(index);
-                if (node == nullptr)
+                int index = InputInt("Enter index: ");
+                int value = buffer->Get(index);
+                if (value == -1)
                 {
-                    std::cout << "Node not found!" << std::endl;
+                    std::cout << "Buffer is empty" << std::endl;
                 }
                 else
                 {
-                    std::cout << "Node: " << node->GetData() << std::endl;
+                    std::cout << "Got value: " << value << std::endl;
                 }
                 break;
             }
             case 3:
             {
-                PrintBuffer(buffer);
+                buffer->Print();
                 break;
             }
             case 4:
@@ -256,8 +206,8 @@ void Menu::MenuBuffer(RingBuffer *buffer)
             }
             default:
             {
-                std::cout << "Invalid input!" << std::endl;
-                continue;
+                std::cout << "Invalid choice" << std::endl;
+                break;
             }
         }
     }
@@ -274,41 +224,39 @@ void Menu::MenuStack(Stack *stack)
         std::cout << "4. Clear" << std::endl;
         std::cout << "5. Print" << std::endl;
         std::cout << "6. Back" << std::endl;
-        std::cout << "Enter your choice: ";
-        int choice = InputInt();
+
+        int choice = InputInt("Enter your choice: ");
         switch (choice)
         {
             case 1:
             {
-                std::cout << "Enter value: ";
-                int value = InputInt();
+                int value = InputInt("Enter value: ");
                 stack->Push(value);
                 break;
             }
             case 2:
             {
-                Node *node = stack->Pop();
-                if (node == nullptr)
+                int value = stack->Pop();
+                if (value == -1)
                 {
-                    std::cout << "Stack is empty!" << std::endl;
+                    std::cout << "Stack is empty" << std::endl;
                 }
                 else
                 {
-                    std::cout << "Popped value: " << node->GetData() << std::endl;
-                    delete node;
+                    std::cout << "Popped value: " << value << std::endl;
                 }
                 break;
             }
             case 3:
             {
-                Node *node = stack->Peek();
-                if (node == nullptr)
+                int value = stack->Peek();
+                if (value == -1)
                 {
-                    std::cout << "Stack is empty!" << std::endl;
+                    std::cout << "Stack is empty" << std::endl;
                 }
                 else
                 {
-                    std::cout << "Peeked value: " << node->GetData() << std::endl;
+                    std::cout << "Peeked value: " << value << std::endl;
                 }
                 break;
             }
@@ -319,7 +267,7 @@ void Menu::MenuStack(Stack *stack)
             }
             case 5:
             {
-                PrintStack(stack);
+                stack->Print();
                 break;
             }
             case 6:
@@ -328,7 +276,7 @@ void Menu::MenuStack(Stack *stack)
             }
             default:
             {
-                std::cout << "Invalid input!" << std::endl;
+                std::cout << "Invalid choice" << std::endl;
                 break;
             }
         }
