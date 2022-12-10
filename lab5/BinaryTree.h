@@ -75,6 +75,8 @@ public:
     Node *Find(int value);
 
     Node *RemoveNode(int value);
+
+    BinaryTree(int rootValue);
 };
 
 

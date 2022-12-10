@@ -254,57 +254,49 @@ DescartesTree::Node *DescartesTree::RemoveNode(int value, DescartesTree::Node *n
     {
         return nullptr;
     }
-    else
+
+    if (value == node->value)
     {
-        if (value == node->value)
+        if (node->left == nullptr && node->right == nullptr)
         {
-            if (node->left == nullptr && node->right == nullptr)
-            {
-                delete node;
-                return nullptr;
-            }
-            else
-            {
-                if (node->left == nullptr)
-                {
-                    Node *temp = node->right;
-                    delete node;
-                    return temp;
-                }
-                else
-                {
-                    if (node->right == nullptr)
-                    {
-                        Node *temp = node->left;
-                        delete node;
-                        return temp;
-                    }
-                    else
-                    {
-                        Node *temp = node->right;
-                        while (temp->left != nullptr)
-                        {
-                            temp = temp->left;
-                        }
-                        node->value = temp->value;
-                        node->right = RemoveNode(temp->value, node->right);
-                        return node;
-                    }
-                }
-            }
+            delete node;
+            return nullptr;
+        }
+        if (node->left == nullptr)
+        {
+            Node *temp = node->right;
+            delete node;
+            return temp;
+        }
+        if (node->right == nullptr)
+        {
+            Node *temp = node->left;
+            delete node;
+            return temp;
         }
         else
         {
-            if (value < node->value)
+            Node *temp = node->right;
+            while (temp->left != nullptr)
             {
-                node->left = RemoveNode(value, node->left);
-                return node;
+                temp = temp->left;
             }
-            else
-            {
-                node->right = RemoveNode(value, node->right);
-                return node;
-            }
+            node->value = temp->value;
+            node->right = RemoveNode(temp->value, node->right);
+            return node;
+        }
+    }
+    else
+    {
+        if (value < node->value)
+        {
+            node->left = RemoveNode(value, node->left);
+            return node;
+        }
+        else
+        {
+            node->right = RemoveNode(value, node->right);
+            return node;
         }
     }
 }
@@ -315,22 +307,20 @@ DescartesTree::Node *DescartesTree::Split(DescartesTree::Node *node, int value)
     {
         return nullptr;
     }
+
+    if (value < node->value)
+    {
+        Node *temp = Split(node->left, value);
+        node->left = temp->right;
+        temp->right = node;
+        return temp;
+    }
     else
     {
-        if (value < node->value)
-        {
-            Node *temp = Split(node->left, value);
-            node->left = temp->right;
-            temp->right = node;
-            return temp;
-        }
-        else
-        {
-            Node *temp = Split(node->right, value);
-            node->right = temp->left;
-            temp->left = node;
-            return temp;
-        }
+        Node *temp = Split(node->right, value);
+        node->right = temp->left;
+        temp->left = node;
+        return temp;
     }
 }
 
@@ -340,25 +330,19 @@ DescartesTree::Node *DescartesTree::Merge(DescartesTree::Node *left, DescartesTr
     {
         return right;
     }
+    if (right == nullptr)
+    {
+        return left;
+    }
+    if (left->priority > right->priority)
+    {
+        left->right = Merge(left->right, right);
+        return left;
+    }
     else
     {
-        if (right == nullptr)
-        {
-            return left;
-        }
-        else
-        {
-            if (left->priority > right->priority)
-            {
-                left->right = Merge(left->right, right);
-                return left;
-            }
-            else
-            {
-                right->left = Merge(left, right->left);
-                return right;
-            }
-        }
+        right->left = Merge(left, right->left);
+        return right;
     }
 }
 
@@ -372,7 +356,7 @@ DescartesTree::~DescartesTree()
     Clear();
 }
 
-void DescartesTree::AddNode(int value, int priority)
+void DescartesTree::AddNodeNonOptimized(int value, int priority)
 {
     Node *node = new Node(value, priority);
     if (root == nullptr)
@@ -382,7 +366,8 @@ void DescartesTree::AddNode(int value, int priority)
     else
     {
         Node *temp = Split(root, value);
-        root = Merge(Merge(temp->left, node), temp->right);
+        Node *left = Merge(temp->left, node);
+        root = Merge(left, temp->right);
         delete temp;
     }
 }
@@ -459,6 +444,16 @@ void DescartesTree::Clear(DescartesTree::Node *node)
         Clear(node->right);
         delete node;
     }
+}
+
+DescartesTree::DescartesTree(int value, int priority)
+{
+    root = new Node(value, priority);
+}
+
+void DescartesTree::AddNodeOptimized(int value, int priority)
+{
+
 }
 
 DescartesTree::Node::Node(int value, int priority)

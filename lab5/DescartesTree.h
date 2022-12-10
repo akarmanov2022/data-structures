@@ -54,12 +54,16 @@ private:
 
     Node *Merge(Node *left, Node *right);
 
+    void Clear(Node *node);
 public:
+
     DescartesTree();
 
     ~DescartesTree();
 
-    void AddNode(int value, int priority);
+    void AddNodeNonOptimized(int value, int priority);
+
+    void AddNodeOptimized(int value, int priority);
 
     void PrintInOrder();
 
@@ -85,7 +89,7 @@ public:
 
     void Clear();
 
-    void Clear(Node *node);
+    DescartesTree(int value, int priority);
 };
 
 

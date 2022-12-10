@@ -4,6 +4,8 @@
 
 #include <string>
 #include <iostream>
+#include "lab5/BinaryTree.h"
+#include "lab5/DescartesTree.h"
 
 int InputInt(const char *string)
 {
@@ -14,7 +16,7 @@ int InputInt(const char *string)
         valid = true;
         std::cout << string;
         std::cin >> input;
-        for (char c : input)
+        for (char c: input)
         {
             if (c < '0' || c > '9')
             {
@@ -33,5 +35,19 @@ int InputInt(const char *string)
 
 int main()
 {
+    std::cout << "Binary tree configuration:" << std::endl;
+    auto binaryTree = new BinaryTree(InputInt("Enter root value for binary tree: "));
+    std::cout << "Descartes tree configuration:" << std::endl;
+    auto descartesTree = new DescartesTree(InputInt("Enter root value for descartes tree: "),
+                                           InputInt("Enter root priority for descartes tree: "));
 
+    while (true)
+    {
+        std::cout << "1. Binary tree" << std::endl;
+        std::cout << "2. Descartes tree" << std::endl;
+
+        int choice = InputInt("Enter your choice: ");
+
+
+    }
 }

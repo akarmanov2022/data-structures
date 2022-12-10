@@ -335,3 +335,8 @@ BinaryTree::Node *BinaryTree::RemoveNode(int value)
 {
     return RemoveNode(value, root);
 }
+
+BinaryTree::BinaryTree(int rootValue)
+{
+    root = new Node{rootValue, nullptr, nullptr};
+}
