@@ -170,14 +170,13 @@ void Menu::MenuBuffer(RingBuffer *buffer)
             }
             case 2:
             {
-                int value = buffer->Remove();
-                if (value == -1)
+                if (buffer->IsEmpty())
                 {
                     std::cout << "Buffer is empty" << std::endl;
                 }
                 else
                 {
-                    std::cout << "Removed value: " << value << std::endl;
+                    std::cout << "Removed value: " << buffer->Remove() << std::endl;
                 }
                 break;
             }
