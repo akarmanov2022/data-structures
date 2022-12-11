@@ -154,7 +154,7 @@ void Menu::MenuBuffer(RingBuffer *buffer)
     {
         std::cout << " --- Buffer menu --- " << std::endl;
         std::cout << "1. Put" << std::endl;
-        std::cout << "2. Get" << std::endl;
+        std::cout << "2. Remove" << std::endl;
         std::cout << "3. Print" << std::endl;
         std::cout << "4. Exit" << std::endl;
         std::cout << "Enter your choice: ";
@@ -170,15 +170,14 @@ void Menu::MenuBuffer(RingBuffer *buffer)
             }
             case 2:
             {
-                int index = InputInt("Enter index: ");
-                int value = buffer->Get(index);
+                int value = buffer->Remove();
                 if (value == -1)
                 {
                     std::cout << "Buffer is empty" << std::endl;
                 }
                 else
                 {
-                    std::cout << "Got value: " << value << std::endl;
+                    std::cout << "Removed value: " << value << std::endl;
                 }
                 break;
             }

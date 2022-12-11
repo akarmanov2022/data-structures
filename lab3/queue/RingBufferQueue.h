@@ -26,7 +26,12 @@ public:
      * Конструктор.
      * @param size размер очереди.
      */
-    RingBufferQueue(int size);
+    RingBufferQueue();
+
+    /**
+     * Деструктор.
+     */
+    ~RingBufferQueue();
 
     /**
      * Добавить элемент в очередь.

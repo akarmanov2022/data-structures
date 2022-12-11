@@ -5,9 +5,9 @@
 #include <iostream>
 #include "RingBufferQueue.h"
 
-RingBufferQueue::RingBufferQueue(int size)
+RingBufferQueue::RingBufferQueue()
 {
-    _buffer = new RingBuffer(size);
+    _buffer = new RingBuffer();
     _size = 0;
 }
 
@@ -21,10 +21,10 @@ int RingBufferQueue::Dequeue()
 {
     if (_size == 0)
     {
-        return -1;
+        return 0;
     }
     _size--;
-    return _buffer->Remove(0)->GetData();
+    return _buffer->Remove()->_data;
 }
 
 int RingBufferQueue::GetSize() const
@@ -46,4 +46,9 @@ void RingBufferQueue::Print() const
 {
     std::cout << "=== Queue ===" << std::endl;
     _buffer->Print();
+}
+
+RingBufferQueue::~RingBufferQueue()
+{
+    delete _buffer;
 }

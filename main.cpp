@@ -12,9 +12,9 @@
 int main()
 {
     auto *stack = new Stack();
-    auto *buffer = new RingBuffer(0);
+    auto *buffer = new RingBuffer();
     auto *stackQueue = new StackQueue();
-    auto *ringBufferQueue = new RingBufferQueue(0);
+    auto *ringBufferQueue = new RingBufferQueue();
 
     while (true)
     {
