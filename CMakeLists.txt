@@ -3,4 +3,4 @@ project(data_structures)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(data_structures main.cpp)
+add_executable(data_structures main.cpp lab5/BinaryTree.cpp lab5/BinaryTree.h lab5/Treap.cpp lab5/Treap.h Menu.cpp Menu.h)
