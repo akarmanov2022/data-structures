@@ -34,36 +34,6 @@ void BinaryTree::AddNode(int value, BinaryTree::Node *node)
     }
 }
 
-void BinaryTree::PrintInOrder(BinaryTree::Node *node)
-{
-    if (node != nullptr)
-    {
-        PrintInOrder(node->left);
-        std::cout << node->value << std::endl;
-        PrintInOrder(node->right);
-    }
-}
-
-void BinaryTree::PrintPreOrder(BinaryTree::Node *node)
-{
-    if (node != nullptr)
-    {
-        std::cout << node->value << std::endl;
-        PrintPreOrder(node->left);
-        PrintPreOrder(node->right);
-    }
-}
-
-void BinaryTree::PrintPostOrder(BinaryTree::Node *node)
-{
-    if (node != nullptr)
-    {
-        PrintPostOrder(node->left);
-        PrintPostOrder(node->right);
-        std::cout << node->value << std::endl;
-    }
-}
-
 void BinaryTree::DeleteTree(BinaryTree::Node *node)
 {
     if (node != nullptr)
@@ -112,32 +82,6 @@ int BinaryTree::GetMax(BinaryTree::Node *node)
     }
 }
 
-bool BinaryTree::Contains(int value, BinaryTree::Node *node)
-{
-    if (node == nullptr)
-    {
-        return false;
-    }
-    else
-    {
-        if (value < node->value)
-        {
-            return Contains(value, node->left);
-        }
-        else
-        {
-            if (value > node->value)
-            {
-                return Contains(value, node->right);
-            }
-            else
-            {
-                return true;
-            }
-        }
-    }
-}
-
 void BinaryTree::Remove(int value, BinaryTree::Node *node)
 {
     if (node != nullptr)
@@ -157,30 +101,6 @@ void BinaryTree::Remove(int value, BinaryTree::Node *node)
                 RemoveNode(value, node);
             }
         }
-    }
-}
-
-BinaryTree::Node *BinaryTree::FindMin(BinaryTree::Node *node)
-{
-    if (node->left == nullptr)
-    {
-        return node;
-    }
-    else
-    {
-        return FindMin(node->left);
-    }
-}
-
-BinaryTree::Node *BinaryTree::FindMax(BinaryTree::Node *node)
-{
-    if (node->right == nullptr)
-    {
-        return node;
-    }
-    else
-    {
-        return FindMax(node->right);
     }
 }
 
@@ -232,7 +152,7 @@ BinaryTree::Node *BinaryTree::RemoveNode(int value, BinaryTree::Node *node)
             {
                 if (node->left != nullptr && node->right != nullptr)
                 {
-                    node->value = FindMin(node->right)->value;
+                    node->value = GetMin(node->right);
                     node->right = RemoveNode(node->value, node->right);
                 }
                 else
@@ -276,21 +196,6 @@ void BinaryTree::AddNode(int value)
     }
 }
 
-void BinaryTree::PrintInOrder()
-{
-    PrintInOrder(root);
-}
-
-void BinaryTree::PrintPreOrder()
-{
-    PrintPreOrder(root);
-}
-
-void BinaryTree::PrintPostOrder()
-{
-    PrintPostOrder(root);
-}
-
 int BinaryTree::GetHeight()
 {
     return GetHeight(root);
@@ -306,24 +211,9 @@ int BinaryTree::GetMax()
     return GetMax(root);
 }
 
-bool BinaryTree::Contains(int value)
-{
-    return Contains(value, root);
-}
-
 void BinaryTree::Remove(int value)
 {
     Remove(value, root);
-}
-
-BinaryTree::Node *BinaryTree::FindMin()
-{
-    return FindMin(root);
-}
-
-BinaryTree::Node *BinaryTree::FindMax()
-{
-    return FindMax(root);
 }
 
 BinaryTree::Node *BinaryTree::Find(int value)
