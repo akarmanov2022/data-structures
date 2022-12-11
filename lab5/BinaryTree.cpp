@@ -7,28 +7,28 @@
 
 void BinaryTree::AddNode(int value, BinaryTree::Node *node)
 {
-    if (value < node->value)
+    if (value < node->_value)
     {
-        if (node->left != nullptr)
+        if (node->_left != nullptr)
         {
-            AddNode(value, node->left);
+            AddNode(value, node->_left);
         }
         else
         {
-            node->left = new Node{value, nullptr, nullptr};
+            node->_left = new Node{value, nullptr, nullptr};
         }
     }
     else
     {
-        if (value > node->value)
+        if (value > node->_value)
         {
-            if (node->right != nullptr)
+            if (node->_right != nullptr)
             {
-                AddNode(value, node->right);
+                AddNode(value, node->_right);
             }
             else
             {
-                node->right = new Node{value, nullptr, nullptr};
+                node->_right = new Node{value, nullptr, nullptr};
             }
         }
     }
@@ -38,8 +38,8 @@ void BinaryTree::DeleteTree(BinaryTree::Node *node)
 {
     if (node != nullptr)
     {
-        DeleteTree(node->left);
-        DeleteTree(node->right);
+        DeleteTree(node->_left);
+        DeleteTree(node->_right);
         delete node;
     }
 }
@@ -52,33 +52,33 @@ int BinaryTree::GetHeight(BinaryTree::Node *node)
     }
     else
     {
-        int leftHeight = GetHeight(node->left);
-        int rightHeight = GetHeight(node->right);
+        int leftHeight = GetHeight(node->_left);
+        int rightHeight = GetHeight(node->_right);
         return std::max(leftHeight, rightHeight) + 1;
     }
 }
 
 int BinaryTree::GetMin(BinaryTree::Node *node)
 {
-    if (node->left == nullptr)
+    if (node->_left == nullptr)
     {
-        return node->value;
+        return node->_value;
     }
     else
     {
-        return GetMin(node->left);
+        return GetMin(node->_left);
     }
 }
 
 int BinaryTree::GetMax(BinaryTree::Node *node)
 {
-    if (node->right == nullptr)
+    if (node->_right == nullptr)
     {
-        return node->value;
+        return node->_value;
     }
     else
     {
-        return GetMax(node->right);
+        return GetMax(node->_right);
     }
 }
 
@@ -90,15 +90,15 @@ BinaryTree::Node *BinaryTree::Find(int value, BinaryTree::Node *node)
     }
     else
     {
-        if (value < node->value)
+        if (value < node->_value)
         {
-            return Find(value, node->left);
+            return Find(value, node->_left);
         }
         else
         {
-            if (value > node->value)
+            if (value > node->_value)
             {
-                return Find(value, node->right);
+                return Find(value, node->_right);
             }
             else
             {
@@ -116,33 +116,33 @@ BinaryTree::Node *BinaryTree::Remove(int value, BinaryTree::Node *node)
     }
     else
     {
-        if (value < node->value)
+        if (value < node->_value)
         {
-            node->left = Remove(value, node->left);
+            node->_left = Remove(value, node->_left);
         }
         else
         {
-            if (value > node->value)
+            if (value > node->_value)
             {
-                node->right = Remove(value, node->right);
+                node->_right = Remove(value, node->_right);
             }
             else
             {
-                if (node->left != nullptr && node->right != nullptr)
+                if (node->_left != nullptr && node->_right != nullptr)
                 {
-                    node->value = GetMin(node->right);
-                    node->right = Remove(node->value, node->right);
+                    node->_value = GetMin(node->_right);
+                    node->_right = Remove(node->_value, node->_right);
                 }
                 else
                 {
                     Node *temp = node;
-                    if (node->left != nullptr)
+                    if (node->_left != nullptr)
                     {
-                        node = node->left;
+                        node = node->_left;
                     }
                     else
                     {
-                        node = node->right;
+                        node = node->_right;
                     }
                     delete temp;
                 }
@@ -154,58 +154,58 @@ BinaryTree::Node *BinaryTree::Remove(int value, BinaryTree::Node *node)
 
 BinaryTree::~BinaryTree()
 {
-    DeleteTree(root);
+    DeleteTree(_root);
 }
 
 void BinaryTree::AddNode(int value)
 {
-    if (root != nullptr)
+    if (_root != nullptr)
     {
-        AddNode(value, root);
+        AddNode(value, _root);
     }
     else
     {
-        root = new Node{value, nullptr, nullptr};
+        _root = new Node{value, nullptr, nullptr};
     }
 }
 
 int BinaryTree::GetHeight()
 {
-    return GetHeight(root);
+    return GetHeight(_root);
 }
 
 int BinaryTree::GetMin()
 {
-    return GetMin(root);
+    return GetMin(_root);
 }
 
 int BinaryTree::GetMax()
 {
-    return GetMax(root);
+    return GetMax(_root);
 }
 
 BinaryTree::Node *BinaryTree::Remove(int value)
 {
-    return Remove(value, root);
+    return Remove(value, _root);
 }
 
 BinaryTree::Node *BinaryTree::Find(int value)
 {
-    return Find(value, root);
+    return Find(value, _root);
 }
 
 BinaryTree::BinaryTree(int rootValue)
 {
-    root = new Node{rootValue, nullptr, nullptr};
+    _root = new Node{rootValue, nullptr, nullptr};
 }
 
 void BinaryTree::PrintInOrder(BinaryTree::Node *node)
 {
     if (node != nullptr)
     {
-        PrintInOrder(node->left);
-        std::cout << node->value << " ";
-        PrintInOrder(node->right);
+        PrintInOrder(node->_left);
+        std::cout << node->_value << " ";
+        PrintInOrder(node->_right);
     }
 }
 
@@ -213,9 +213,9 @@ void BinaryTree::PrintPreOrder(BinaryTree::Node *node)
 {
     if (node != nullptr)
     {
-        std::cout << node->value << " ";
-        PrintPreOrder(node->left);
-        PrintPreOrder(node->right);
+        std::cout << node->_value << " ";
+        PrintPreOrder(node->_left);
+        PrintPreOrder(node->_right);
     }
 }
 
@@ -223,9 +223,9 @@ void BinaryTree::PrintPostOrder(BinaryTree::Node *node)
 {
     if (node != nullptr)
     {
-        PrintPostOrder(node->left);
-        PrintPostOrder(node->right);
-        std::cout << node->value << " ";
+        PrintPostOrder(node->_left);
+        PrintPostOrder(node->_right);
+        std::cout << node->_value << " ";
     }
 }
 
@@ -237,39 +237,39 @@ void BinaryTree::PrintTreeLevel(BinaryTree::Node *node, int level)
     }
     if (level == 1)
     {
-        std::cout << node->value << " ";
+        std::cout << node->_value << " ";
     }
     else
     {
-        PrintTreeLevel(node->left, level - 1);
-        PrintTreeLevel(node->right, level - 1);
+        PrintTreeLevel(node->_left, level - 1);
+        PrintTreeLevel(node->_right, level - 1);
     }
 }
 
 void BinaryTree::PrintInOrder()
 {
     std::cout << "In order: ";
-    PrintInOrder(root);
+    PrintInOrder(_root);
     std::cout << std::endl;
 }
 
 void BinaryTree::PrintPreOrder()
 {
     std::cout << "Pre order: ";
-    PrintPreOrder(root);
+    PrintPreOrder(_root);
     std::cout << std::endl;
 }
 
 void BinaryTree::PrintPostOrder()
 {
     std::cout << "Post order: ";
-    PrintPostOrder(root);
+    PrintPostOrder(_root);
     std::cout << std::endl;
 }
 
 void BinaryTree::PrintTreeLevel(int level)
 {
     std::cout << "Level " << level << ": ";
-    PrintTreeLevel(root, level);
+    PrintTreeLevel(_root, level);
     std::cout << std::endl;
 }

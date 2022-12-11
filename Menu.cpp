@@ -186,7 +186,7 @@ void Menu::TreapMenu(Treap *treap)
             }
             case 7:
             {
-                treap->PrintTree(InputInt("Enter depth: "));
+                treap->PrintByLevel(InputInt("Enter level to print: "));
                 break;
             }
             case 8:

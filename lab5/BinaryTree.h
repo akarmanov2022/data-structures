@@ -23,20 +23,20 @@ private:
         /**
          * Значение узла.
          */
-        int value;
+        int _value;
         /**
          * Указатель на левое поддерево.
          */
-        Node *left;
+        Node *_left;
         /**
          * Указатель на правое поддерево.
          */
-        Node *right;
+        Node *_right;
     };
     /**
      * Корень дерева.
      */
-    Node *root;
+    Node *_root;
 
     /**
      * Рекурсивная функция, реализующая вставку в дерево.
@@ -159,10 +159,19 @@ public:
      */
     Node *Find(int value);
 
+    /**
+     * Вывод дерева в консоль. Обход в глубину.
+     */
     void PrintInOrder();
 
+    /**
+     * Вывод дерева в консоль. Обход в ширину.
+     */
     void PrintPreOrder();
 
+    /**
+     * Вывод дерева в консоль. Обход в ширину.
+     */
     void PrintPostOrder();
 
     void PrintTreeLevel(int level);

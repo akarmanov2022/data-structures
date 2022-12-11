@@ -22,24 +22,24 @@ private:
         /**
          * Значение узла.
          */
-        int value;
+        int _value;
         /**
          * Приоритет узла.
          */
-        int priority;
+        int _priority;
         /**
          * Указатель на левое поддерево.
          */
-        Node *left;
+        Node *_left;
         /**
          * Указатель на правое поддерево.
          */
-        Node *right;
+        Node *_right;
     };
     /**
      * Корень дерева.
      */
-    Node *root;
+    Node *_root;
 
     /**
      * Рекурсивная функция, реализующая вставку в дерево.
@@ -122,7 +122,7 @@ private:
      */
     void DeleteTree(Node *node);
 
-    void PrintTree(Node *node, int level);
+    void PrintByLevel(Node *node, int level);
 
     void PrintInOrder(Node *node);
 
@@ -189,7 +189,7 @@ public:
      */
     Node *Find(int value);
 
-    void PrintTree(int level);
+    void PrintByLevel(int level);
 
     void PrintInOrder();
 
