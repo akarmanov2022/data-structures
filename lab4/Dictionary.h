@@ -57,7 +57,7 @@ private:
     /**
      * Таблица
      */
-    HashTable *table;
+    HashTable *_table;
 };
 
 

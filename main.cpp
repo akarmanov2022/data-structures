@@ -4,7 +4,6 @@
 
 #include "lab4/Dictionary.h"
 #include <iostream>
-#include <limits>
 #include <regex>
 
 int InputInt(const char *message)

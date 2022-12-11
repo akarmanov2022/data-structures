@@ -7,30 +7,30 @@
 
 Dictionary::Dictionary()
 {
-    table = new HashTable;
+    _table = new HashTable;
 }
 
 Dictionary::~Dictionary()
 {
-    delete table;
+    delete _table;
 }
 
 void Dictionary::Add(const char *key, const char *value)
 {
-    table->Add(key, value);
+    _table->Add(key, value);
 }
 
 void Dictionary::Remove(const char *key)
 {
-    table->Remove(key);
+    _table->Remove(key);
 }
 
 const char *Dictionary::Get(const char *key)
 {
-    return table->Find(key);
+    return _table->Find(key);
 }
 
 void Dictionary::Print()
 {
-    table->Print();
+    _table->Print();
 }
