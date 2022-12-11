@@ -7,13 +7,16 @@
 
 
 #include "lab5/BinaryTree.h"
-#include "lab5/DescartesTree.h"
+#include "lab5/Treap.h"
 
 class Menu
 {
+public:
     static void BinaryTreeMenu(BinaryTree *tree);
 
-    static void DescartesTreeMenu(DescartesTree *tree);
+    static void TreapMenu(Treap *treap);
+
+    static int InputInt(const char *message);
 };
 
 
