@@ -1,6 +1,7 @@
 #include <iostream>
 #include <chrono>
 #include <cstdlib>
+#include <regex>
 #include "List.h"
 
 void FillListRandomValues(List *list, int count)
@@ -64,30 +65,22 @@ void PrintTestResult()
 //    }
 }
 
-int InputInt(const char *string)
+int InputInt(const char *message)
 {
     std::string input;
-    bool valid;
     while (true)
     {
-        valid = true;
-        std::cout << string;
+        std::cout << message;
         std::cin >> input;
-        for (char c : input)
+        if (regex_match(input, std::regex("(-|)[0-9]+")))
         {
-            if (c < '0' || c > '9')
-            {
-                valid = false;
-                break;
-            }
+            return std::stoi(input);
         }
-        if (valid)
+        else
         {
-            break;
+            std::cout << "Invalid input" << std::endl;
         }
-        std::cout << "Invalid input" << std::endl;
     }
-    return std::stoi(input);
 }
 
 int main()
