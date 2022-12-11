@@ -13,7 +13,7 @@ int Menu::InputInt(const char *message)
     {
         std::cout << message;
         std::cin >> input;
-        if (regex_match(input, std::regex("[0-9]+")))
+        if (regex_match(input, std::regex("(-|)[0-9]+")))
         {
             return std::stoi(input);
         }
