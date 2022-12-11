@@ -96,6 +96,14 @@ private:
      */
     Node *Remove(int value, Node *node);
 
+    void PrintInOrder(Node *node);
+
+    void PrintPreOrder(Node *node);
+
+    void PrintPostOrder(Node *node);
+
+    void PrintTreeLevel(Node *node, int level);
+
 public:
     /**
      * Конструктор.
@@ -150,6 +158,14 @@ public:
      * @return Узел, если он найден, иначе nullptr.
      */
     Node *Find(int value);
+
+    void PrintInOrder();
+
+    void PrintPreOrder();
+
+    void PrintPostOrder();
+
+    void PrintTreeLevel(int level);
 };
 
 

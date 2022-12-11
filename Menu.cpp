@@ -35,7 +35,11 @@ void Menu::BinaryTreeMenu(BinaryTree *tree)
         std::cout << "4. Get max value" << std::endl;
         std::cout << "5. Remove node" << std::endl;
         std::cout << "6. Find node" << std::endl;
-        std::cout << "7. Back" << std::endl;
+        std::cout << "7. Print tree by level" << std::endl;
+        std::cout << "8. Print tree (In Order)" << std::endl;
+        std::cout << "9. Print tree (Pre Order)" << std::endl;
+        std::cout << "10. Print tree (Post Order)" << std::endl;
+        std::cout << "11. Exit" << std::endl;
 
         int choice = InputInt("Enter your choice: ");
         switch (choice)
@@ -70,16 +74,35 @@ void Menu::BinaryTreeMenu(BinaryTree *tree)
                 {
                     std::cout << "Node not found" << std::endl;
                 }
-                break;
             }
             case 6:
             {
-                std::cout << "Node found: "
-                          << (tree->Find(InputInt("Enter value to find: ")) ? "true" : "false")
+                int value = InputInt("Enter value to find: ");
+                std::cout << "Node found: " << (tree->Find(value) ? "true" : "false")
                           << std::endl;
                 break;
             }
             case 7:
+            {
+                tree->PrintTreeLevel(InputInt("Enter level to print: "));
+                break;
+            }
+            case 8:
+            {
+                tree->PrintInOrder();
+                break;
+            }
+            case 9:
+            {
+                tree->PrintPreOrder();
+                break;
+            }
+            case 10:
+            {
+                tree->PrintPostOrder();
+                break;
+            }
+            case 11:
             {
                 return;
             }
@@ -103,7 +126,11 @@ void Menu::TreapMenu(Treap *treap)
         std::cout << "4. Remove node (Non-optimized)" << std::endl;
         std::cout << "5. Find node" << std::endl;
         std::cout << "6. Get Height" << std::endl;
-        std::cout << "9. Back" << std::endl;
+        std::cout << "7. Print tree by level" << std::endl;
+        std::cout << "8. Print tree (In-order)" << std::endl;
+        std::cout << "9. Print tree (Pre-order)" << std::endl;
+        std::cout << "10. Print tree (Post-order)" << std::endl;
+        std::cout << "11. Back" << std::endl;
 
         int choice = InputInt("Enter your choice: ");
         switch (choice)
@@ -122,18 +149,33 @@ void Menu::TreapMenu(Treap *treap)
             }
             case 3:
             {
-                treap->RemoveOptimized(InputInt("Enter value to remove: "));
+                if (treap->RemoveOptimized(InputInt("Enter value to remove: ")))
+                {
+                    std::cout << "Node removed" << std::endl;
+                }
+                else
+                {
+                    std::cout << "Node not found" << std::endl;
+                }
                 break;
             }
             case 4:
             {
-                treap->RemoveNonOptimized(InputInt("Enter value to remove: "));
+                if (treap->RemoveNonOptimized(InputInt("Enter value to remove: ")))
+                {
+                    std::cout << "Node removed" << std::endl;
+                }
+                else
+                {
+                    std::cout << "Node not found" << std::endl;
+                }
                 break;
             }
             case 5:
             {
+                int value = InputInt("Enter value to find: ");
                 std::cout << "Node found: "
-                          << (treap->Find(InputInt("Enter value to find: ")) ? "true" : "false")
+                          << (treap->Find(value) ? "true" : "false")
                           << std::endl;
                 break;
             }
@@ -142,7 +184,27 @@ void Menu::TreapMenu(Treap *treap)
                 std::cout << "Height: " << treap->GetHeight() << std::endl;
                 break;
             }
+            case 7:
+            {
+                treap->PrintTree(InputInt("Enter depth: "));
+                break;
+            }
+            case 8:
+            {
+                treap->PrintInOrder();
+                break;
+            }
             case 9:
+            {
+                treap->PrintPreOrder();
+                break;
+            }
+            case 10:
+            {
+                treap->PrintPostOrder();
+                break;
+            }
+            case 11:
             {
                 return;
             }

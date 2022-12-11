@@ -68,7 +68,7 @@ private:
      * @param value Значение узла, который необходимо удалить.
      * @param node Вершина поддерева, из которого необходимо удалить узел.
      */
-    void RemoveNonOptimized(int value, Node *&node);
+    Treap::Node *RemoveNonOptimized(int value, Node *&node);
 
     /**
      * Рекурсивная функция, реализующая удаление из дерева.
@@ -77,7 +77,7 @@ private:
      * @param value Значение узла, который необходимо удалить.
      * @param node Вершина поддерева, из которого необходимо удалить узел.
      */
-    void RemoveOptimized(int value, Node *&node);
+    Treap::Node *RemoveOptimized(int value, Node *&node);
 
     /**
      * Рекурсивная функция, реализующая разбиение дерева на левое и правое поддеревья.
@@ -122,6 +122,14 @@ private:
      */
     void DeleteTree(Node *node);
 
+    void PrintTree(Node *node, int level);
+
+    void PrintInOrder(Node *node);
+
+    void PrintPreOrder(Node *node);
+
+    void PrintPostOrder(Node *node);
+
 public:
     /**
      * Конструктор.
@@ -157,7 +165,7 @@ public:
      *
      * @param value Значение узла, который необходимо удалить.
      */
-    void RemoveNonOptimized(int value);
+    Node *RemoveNonOptimized(int value);
 
     /**
      * Функция, реализующая удаление узла из дерева.
@@ -165,7 +173,7 @@ public:
      *
      * @param value Значение узла, который необходимо удалить.
      */
-    void RemoveOptimized(int value);
+    Node *RemoveOptimized(int value);
 
     /**
      * Возвращает высоту дерева.
@@ -181,6 +189,13 @@ public:
      */
     Node *Find(int value);
 
+    void PrintTree(int level);
+
+    void PrintInOrder();
+
+    void PrintPreOrder();
+
+    void PrintPostOrder();
 };
 
 

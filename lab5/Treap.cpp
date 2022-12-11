@@ -3,6 +3,7 @@
 //
 
 #include <cstdlib>
+#include <iostream>
 #include "Treap.h"
 
 void Treap::InsertNonOptimized(int value, int priority)
@@ -87,9 +88,9 @@ int Treap::GetHeight()
     return GetHeight(root);
 }
 
-void Treap::RemoveNonOptimized(int value)
+Treap::Node *Treap::RemoveNonOptimized(int value)
 {
-    RemoveNonOptimized(value, root);
+    return RemoveNonOptimized(value, root);
 }
 
 Treap::Node *Treap::Find(int value)
@@ -168,7 +169,7 @@ void Treap::InsertOptimized(int value, int priority, Treap::Node *&node)
     }
 }
 
-void Treap::RemoveNonOptimized(int value, Treap::Node *&node)
+Treap::Node * Treap::RemoveNonOptimized(int value, Treap::Node *&node)
 {
     Node *left = nullptr;
     Node *right = nullptr;
@@ -177,21 +178,94 @@ void Treap::RemoveNonOptimized(int value, Treap::Node *&node)
     Split(right, value + 1, temp, right);
     delete temp;
     node = Merge(left, right);
+    return node;
 }
 
-void Treap::RemoveOptimized(int value, Treap::Node *&node)
+Treap::Node *Treap::RemoveOptimized(int value, Treap::Node *&node)
 {
     Node *find = Find(value, node);
     if (find == nullptr)
     {
-        return;
+        return nullptr;
     }
     node = Merge(find->left, find->right);
     delete find;
+    return node;
 }
 
-void Treap::RemoveOptimized(int value)
+Treap::Node *Treap::RemoveOptimized(int value)
 {
-    RemoveOptimized(value, root);
+    return RemoveOptimized(value, root);
+}
+
+void Treap::PrintTree(Treap::Node *node, int level)
+{
+if (node != nullptr)
+    {
+        PrintTree(node->right, level + 1);
+        for (int i = 0; i < level; i++)
+        {
+            std::cout << "    ";
+        }
+        std::cout << node->value << std::endl;
+        PrintTree(node->left, level + 1);
+    }
+}
+
+void Treap::PrintInOrder(Treap::Node *node)
+{
+    if (node != nullptr)
+    {
+        PrintInOrder(node->left);
+        std::cout << node->value << " ";
+        PrintInOrder(node->right);
+    }
+}
+
+void Treap::PrintPreOrder(Treap::Node *node)
+{
+    if (node != nullptr)
+    {
+        std::cout << node->value << " ";
+        PrintPreOrder(node->left);
+        PrintPreOrder(node->right);
+    }
+}
+
+void Treap::PrintPostOrder(Treap::Node *node)
+{
+    if (node != nullptr)
+    {
+        PrintPostOrder(node->left);
+        PrintPostOrder(node->right);
+        std::cout << node->value << " ";
+    }
+}
+
+void Treap::PrintTree(int level)
+{
+    std::cout << "Tree:" << std::endl;
+    PrintTree(root, level);
+}
+
+void Treap::PrintInOrder()
+{
+    std::cout << "In order:" << std::endl;
+    PrintInOrder(root);
+    std::cout << std::endl;
+}
+
+void Treap::PrintPreOrder()
+{
+    std::cout << "Pre order:" << std::endl;
+    PrintPreOrder(root);
+    std::cout << std::endl;
+}
+
+void Treap::PrintPostOrder()
+{
+    std::cout << "Post order:" << std::endl;
+    PrintPostOrder(root);
+    std::cout << std::endl;
 }
 

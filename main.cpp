@@ -10,9 +10,9 @@
 
 int main()
 {
-    std::cout << "Binary tree configuration:" << std::endl;
+    std::cout << "=== Binary tree root ===" << std::endl;
     auto binaryTree = new BinaryTree(Menu::InputInt("Enter root value for binary tree: "));
-    std::cout << "Descartes tree configuration:" << std::endl;
+    std::cout << "=== Treap root ===" << std::endl;
     auto treap = new Treap(Menu::InputInt("Enter root value for treap: "),
                            Menu::InputInt("Enter root priority for treap: "));
 

@@ -198,3 +198,78 @@ BinaryTree::BinaryTree(int rootValue)
 {
     root = new Node{rootValue, nullptr, nullptr};
 }
+
+void BinaryTree::PrintInOrder(BinaryTree::Node *node)
+{
+    if (node != nullptr)
+    {
+        PrintInOrder(node->left);
+        std::cout << node->value << " ";
+        PrintInOrder(node->right);
+    }
+}
+
+void BinaryTree::PrintPreOrder(BinaryTree::Node *node)
+{
+    if (node != nullptr)
+    {
+        std::cout << node->value << " ";
+        PrintPreOrder(node->left);
+        PrintPreOrder(node->right);
+    }
+}
+
+void BinaryTree::PrintPostOrder(BinaryTree::Node *node)
+{
+    if (node != nullptr)
+    {
+        PrintPostOrder(node->left);
+        PrintPostOrder(node->right);
+        std::cout << node->value << " ";
+    }
+}
+
+void BinaryTree::PrintTreeLevel(BinaryTree::Node *node, int level)
+{
+    if (node == nullptr)
+    {
+        return;
+    }
+    if (level == 1)
+    {
+        std::cout << node->value << " ";
+    }
+    else
+    {
+        PrintTreeLevel(node->left, level - 1);
+        PrintTreeLevel(node->right, level - 1);
+    }
+}
+
+void BinaryTree::PrintInOrder()
+{
+    std::cout << "In order: ";
+    PrintInOrder(root);
+    std::cout << std::endl;
+}
+
+void BinaryTree::PrintPreOrder()
+{
+    std::cout << "Pre order: ";
+    PrintPreOrder(root);
+    std::cout << std::endl;
+}
+
+void BinaryTree::PrintPostOrder()
+{
+    std::cout << "Post order: ";
+    PrintPostOrder(root);
+    std::cout << std::endl;
+}
+
+void BinaryTree::PrintTreeLevel(int level)
+{
+    std::cout << "Level " << level << ": ";
+    PrintTreeLevel(root, level);
+    std::cout << std::endl;
+}
