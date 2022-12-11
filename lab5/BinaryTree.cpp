@@ -152,11 +152,6 @@ BinaryTree::Node *BinaryTree::Remove(int value, BinaryTree::Node *node)
     }
 }
 
-BinaryTree::BinaryTree()
-{
-    root = nullptr;
-}
-
 BinaryTree::~BinaryTree()
 {
     DeleteTree(root);
@@ -189,9 +184,9 @@ int BinaryTree::GetMax()
     return GetMax(root);
 }
 
-void BinaryTree::Remove(int value)
+BinaryTree::Node *BinaryTree::Remove(int value)
 {
-    Remove(value, root);
+    return Remove(value, root);
 }
 
 BinaryTree::Node *BinaryTree::Find(int value)

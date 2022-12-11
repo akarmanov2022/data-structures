@@ -140,7 +140,7 @@ public:
      *
      * @param value Значение узла, который необходимо удалить.
      */
-    void Remove(int value);
+    BinaryTree::Node *Remove(int value);
 
 
     /**
