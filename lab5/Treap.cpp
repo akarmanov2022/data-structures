@@ -250,7 +250,7 @@ void Treap::InsertOptimized(int value, int priority, Treap::Node *&node)
     if (priority > node->priority)
     {
         Split(node, value, newNode->left, newNode->right);
-        root = newNode;
+        node = newNode;
     }
     else
     {
