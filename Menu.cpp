@@ -35,40 +35,51 @@ void Menu::BinaryTreeMenu(BinaryTree *tree)
 {
     while (true)
     {
+        std::cout << "=== Binary tree menu ===" << std::endl;
         std::cout << "1. Add node" << std::endl;
-        std::cout << "2. Print in order" << std::endl;
-        std::cout << "3. Print pre order" << std::endl;
-        std::cout << "4. Print post order" << std::endl;
-        std::cout << "5. Exit" << std::endl;
-        std::cout << "Enter your choice: ";
-        int choice;
-        std::cin >> choice;
+        std::cout << "2. Get height" << std::endl;
+        std::cout << "3. Get min value" << std::endl;
+        std::cout << "4. Get max value" << std::endl;
+        std::cout << "5. Remove node" << std::endl;
+        std::cout << "6. Find node" << std::endl;
+        std::cout << "7. Back" << std::endl;
+
+        int choice = InputInt("Enter your choice: ");
         switch (choice)
         {
             case 1:
             {
-                std::cout << "Enter value: ";
-                int value;
-                std::cin >> value;
-                tree->AddNode(value);
+                tree->AddNode(InputInt("Enter value to add: "));
                 break;
             }
             case 2:
             {
-                tree->PrintInOrder();
+                std::cout << "Height: " << tree->GetHeight() << std::endl;
                 break;
             }
             case 3:
             {
-                tree->PrintPreOrder();
+                std::cout << "Min value: " << tree->GetMin() << std::endl;
                 break;
             }
             case 4:
             {
-                tree->PrintPostOrder();
+                std::cout << "Max value: " << tree->GetMax() << std::endl;
                 break;
             }
             case 5:
+            {
+                tree->Remove(InputInt("Enter value to remove: "));
+                break;
+            }
+            case 6:
+            {
+                std::cout << "Node found: "
+                          << (tree->Find(InputInt("Enter value to find: ")) ? "true" : "false")
+                          << std::endl;
+                break;
+            }
+            case 7:
             {
                 return;
             }
@@ -92,42 +103,38 @@ void Menu::TreapMenu(Treap *treap)
         std::cout << "4. Remove node (Non-optimized)" << std::endl;
         std::cout << "5. Find node" << std::endl;
         std::cout << "6. Get Height" << std::endl;
-        std::cout << "7. Get Min" << std::endl;
-        std::cout << "8. Get Max" << std::endl;
+        std::cout << "9. Back" << std::endl;
 
         int choice = InputInt("Enter your choice: ");
         switch (choice)
         {
             case 1:
             {
-                int value = InputInt("Enter value: ");
-                int priority = InputInt("Enter priority: ");
-                treap->InsertOptimized(value, priority);
+                treap->InsertOptimized(InputInt("Enter value to add: "),
+                                        InputInt("Enter priority to add: "));
                 break;
             }
             case 2:
             {
-                int value = InputInt("Enter value: ");
-                int priority = InputInt("Enter priority: ");
-                treap->InsertNonOptimized(value, priority);
+                treap->InsertNonOptimized(InputInt("Enter value to add: "),
+                               InputInt("Enter priority to add: "));
                 break;
             }
             case 3:
             {
-                int value = InputInt("Enter value: ");
-                treap->RemoveOptimized(value);
+                treap->RemoveOptimized(InputInt("Enter value to remove: "));
                 break;
             }
             case 4:
             {
-                int value = InputInt("Enter value: ");
-                treap->RemoveNonOptimized(value);
+                treap->RemoveNonOptimized(InputInt("Enter value to remove: "));
                 break;
             }
             case 5:
             {
-                int value = InputInt("Enter value: ");
-                std::cout << "Node " << (treap->Find(value) ? "found" : "not found") << std::endl;
+                std::cout << "Node found: "
+                          << (treap->Find(InputInt("Enter value to find: ")) ? "true" : "false")
+                          << std::endl;
                 break;
             }
             case 6:
@@ -135,15 +142,9 @@ void Menu::TreapMenu(Treap *treap)
                 std::cout << "Height: " << treap->GetHeight() << std::endl;
                 break;
             }
-            case 7:
+            case 9:
             {
-                std::cout << "Min: " << treap->GetMin() << std::endl;
-                break;
-            }
-            case 8:
-            {
-                std::cout << "Max: " << treap->GetMax() << std::endl;
-                break;
+                return;
             }
             default:
             {
