@@ -87,34 +87,9 @@ int Treap::GetHeight()
     return GetHeight(root);
 }
 
-int Treap::GetMin()
-{
-    return FindMin()->value;
-}
-
-int Treap::GetMax()
-{
-    return FindMax()->value;
-}
-
-bool Treap::Contains(int value)
-{
-    return Contains(value, root);
-}
-
 void Treap::RemoveNonOptimized(int value)
 {
     RemoveNonOptimized(value, root);
-}
-
-Treap::Node *Treap::FindMin()
-{
-    return FindMin(root);
-}
-
-Treap::Node *Treap::FindMax()
-{
-    return FindMax(root);
 }
 
 Treap::Node *Treap::Find(int value)
@@ -150,78 +125,6 @@ Treap::Node *Treap::Find(int value, Treap::Node *node)
     {
         return Find(value, node->right);
     }
-}
-
-Treap::Node *Treap::FindMin(Treap::Node *node)
-{
-    if (node == nullptr)
-    {
-        return nullptr;
-    }
-    if (node->left == nullptr)
-    {
-        return node;
-    }
-    return FindMin(node->left);
-}
-
-Treap::Node *Treap::FindMax(Treap::Node *node)
-{
-    if (node == nullptr)
-    {
-        return nullptr;
-    }
-    if (node->right == nullptr)
-    {
-        return node;
-    }
-    return FindMax(node->right);
-}
-
-bool Treap::Contains(int value, Treap::Node *node)
-{
-    if (node == nullptr)
-    {
-        return false;
-    }
-    if (value == node->value)
-    {
-        return true;
-    }
-    if (value < node->value)
-    {
-        return Contains(value, node->left);
-    }
-    else
-    {
-        return Contains(value, node->right);
-    }
-}
-
-int Treap::GetMin(Treap::Node *node)
-{
-    if (node == nullptr)
-    {
-        return NULL;
-    }
-    if (node->left == nullptr)
-    {
-        return node->value;
-    }
-    return GetMin(node->left);
-}
-
-int Treap::GetMax(Treap::Node *node)
-{
-    if (node == nullptr)
-    {
-        return NULL;
-    }
-    if (node->right == nullptr)
-    {
-        return node->value;
-    }
-    return GetMax(node->right);
 }
 
 int Treap::GetHeight(Treap::Node *node)

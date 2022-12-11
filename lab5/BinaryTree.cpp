@@ -82,28 +82,6 @@ int BinaryTree::GetMax(BinaryTree::Node *node)
     }
 }
 
-void BinaryTree::Remove(int value, BinaryTree::Node *node)
-{
-    if (node != nullptr)
-    {
-        if (value < node->value)
-        {
-            Remove(value, node->left);
-        }
-        else
-        {
-            if (value > node->value)
-            {
-                Remove(value, node->right);
-            }
-            else
-            {
-                RemoveNode(value, node);
-            }
-        }
-    }
-}
-
 BinaryTree::Node *BinaryTree::Find(int value, BinaryTree::Node *node)
 {
     if (node == nullptr)
@@ -130,7 +108,7 @@ BinaryTree::Node *BinaryTree::Find(int value, BinaryTree::Node *node)
     }
 }
 
-BinaryTree::Node *BinaryTree::RemoveNode(int value, BinaryTree::Node *node)
+BinaryTree::Node *BinaryTree::Remove(int value, BinaryTree::Node *node)
 {
     if (node == nullptr)
     {
@@ -140,20 +118,20 @@ BinaryTree::Node *BinaryTree::RemoveNode(int value, BinaryTree::Node *node)
     {
         if (value < node->value)
         {
-            node->left = RemoveNode(value, node->left);
+            node->left = Remove(value, node->left);
         }
         else
         {
             if (value > node->value)
             {
-                node->right = RemoveNode(value, node->right);
+                node->right = Remove(value, node->right);
             }
             else
             {
                 if (node->left != nullptr && node->right != nullptr)
                 {
                     node->value = GetMin(node->right);
-                    node->right = RemoveNode(node->value, node->right);
+                    node->right = Remove(node->value, node->right);
                 }
                 else
                 {
@@ -219,11 +197,6 @@ void BinaryTree::Remove(int value)
 BinaryTree::Node *BinaryTree::Find(int value)
 {
     return Find(value, root);
-}
-
-BinaryTree::Node *BinaryTree::RemoveNode(int value)
-{
-    return RemoveNode(value, root);
 }
 
 BinaryTree::BinaryTree(int rootValue)
