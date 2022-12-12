@@ -67,7 +67,7 @@ void RingBuffer::Print()
     std::cout << "Count: " << _count << std::endl;
     std::cout << "Free size: " << GetFreeSize() << std::endl;
     std::cout << "First index: " << _firstIndex << std::endl;
-    std::cout << "Last index: " << _lastIndex - 1 << std::endl;
+    std::cout << "Last index: " << _lastIndex << std::endl;
     std::cout << "Buffer: " << std::endl;
     std::cout << "[";
     for (int i = 0; i < _size; i++)
