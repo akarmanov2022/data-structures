@@ -12,7 +12,6 @@
 int main()
 {
     auto *stack = new Stack();
-    auto *buffer = new RingBuffer();
     auto *stackQueue = new StackQueue();
     auto *ringBufferQueue = new RingBufferQueue();
 
@@ -35,6 +34,8 @@ int main()
             }
             case 2:
             {
+                int size = Menu::InputInt("Enter buffer size: ");
+                auto *buffer = new RingBuffer(size);
                 Menu::MenuBuffer(buffer);
                 break;
             }

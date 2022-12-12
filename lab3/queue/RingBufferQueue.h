@@ -14,13 +14,29 @@ class RingBufferQueue
 {
 private:
     /**
-     * Кольцевой буфер.
+     * Структура, описывающая элемент очереди.
      */
-    RingBuffer *_buffer;
+    struct Node
+    {
+        /**
+         * Данные, хранимые в элементе.
+         */
+        int _value;
+        /**
+         * Указатель на следующий элемент.
+         */
+        Node *_next;
+    };
+    /**
+     * Указатель на последний элемент очереди.
+     */
+    Node *_last;
+
     /**
      * Размер очереди.
      */
     int _size;
+
 public:
     /**
      * Конструктор.
@@ -57,13 +73,12 @@ public:
      */
     bool IsEmpty() const;
 
-    /**
-     * Вернуть буфер.
-     * @return буфер.
-     */
-    RingBuffer *GetBuffer() const;
-
     void Print() const;
+
+    /**
+     * Очистить очередь.
+     */
+    void Clear();
 };
 
 

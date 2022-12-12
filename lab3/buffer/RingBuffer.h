@@ -12,65 +12,50 @@ class RingBuffer
 {
 private:
     /**
-     * Строка, хранящая элементы буфера.
+     * Массив, хранящий элементы буфера.
      */
-    struct Node
-    {
-        /**
-         * Данные, хранимые в элементе.
-         */
-        int _data;
-        /**
-         * Указатель на следующий элемент.
-         */
-        Node *_next;
-    };
-    /**
-     * Указатель на последний элемент.
-     */
-    Node *_last;
-
+    char **_buffer;
     /**
      * Размер буфера.
      */
     int _size;
-
+    /**
+     * Количество элементов в буфере.
+     */
+    int _count;
+    /**
+     * Индекс первого элемента в буфере.
+     */
+    int _firstIndex;
+    /**
+     * Индекс последнего элемента в буфере.
+     */
+    int _lastIndex;
 public:
     /**
-     * Вернуть размер буфера.
-     * @return размер буфера.
-     */
-    int GetSize() const;
-
-    /**
-     * Проверить, пуст ли буфер.
-     * @return true, если буфер пуст, иначе false.
-     */
-    bool IsEmpty() const;
-
-    /**
-     * Добавить элемент в буфер.
-     * @param value значение элемента.
-     */
-    void Put(int value);
-
-    /**
-     * Удалить элемент из буфера.
-     * @return значение элемента.
-     */
-    Node *Remove();
-
-    /**
      * Конструктор.
+     * @param size размер буфера.
      */
-    RingBuffer();
+    RingBuffer(int size);
 
     /**
      * Деструктор.
      */
     ~RingBuffer();
 
+    void Add(char *value);
+
+    char *Get();
+
+    int GetSize() const;
+
+    int GetFreeSize() const;
+
+    int GetCount() const;
+
     void Print();
+
+    void Resize(int size);
 };
 
 

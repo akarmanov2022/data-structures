@@ -5,84 +5,116 @@
 #include <iostream>
 #include "RingBuffer.h"
 
+RingBuffer::RingBuffer(int size)
+{
+    _firstIndex = 0;
+    _lastIndex = 0;
+    _count = 0;
+    _size = size;
+    _buffer = new char *[_size];
+    for (int i = 0; i < _size; i++)
+    {
+        _buffer[i] = nullptr;
+    }
+}
+
+void RingBuffer::Add(char *value)
+{
+    if (_count == _size)
+    {
+        _buffer[_firstIndex] = value;
+        _firstIndex = (_firstIndex + 1) % _size;
+        _lastIndex = (_lastIndex + 1) % _size;
+        return;
+    }
+    _buffer[_lastIndex] = value;
+    _lastIndex = (_lastIndex + 1) % _size;
+    _count++;
+}
+
+char *RingBuffer::Get()
+{
+    if (_count == 0)
+    {
+        return nullptr;
+    }
+    char *value = _buffer[_firstIndex];
+    _buffer[_firstIndex] = nullptr;
+    _firstIndex = (_firstIndex + 1) % _size;
+    _count--;
+    return value;
+}
+
 int RingBuffer::GetSize() const
 {
     return _size;
 }
 
-bool RingBuffer::IsEmpty() const
+int RingBuffer::GetFreeSize() const
 {
-    return _size == 0;
+    return _size - _count;
 }
 
-void RingBuffer::Put(int value)
+int RingBuffer::GetCount() const
 {
-    Node *node = new Node{value, nullptr};
-    if (_last == nullptr)
-    {
-        node->_next = node;
-        _last = node;
-    }
-    else
-    {
-        node->_next = _last->_next;
-        _last->_next = node;
-        _last = node;
-    }
-    _size++;
-}
-
-RingBuffer::Node *RingBuffer::Remove()
-{
-    if (_last == nullptr)
-    {
-        return nullptr;
-    }
-    Node *node = _last->_next;
-    if (node == _last)
-    {
-        _last = nullptr;
-    }
-    else
-    {
-        _last->_next = node->_next;
-    }
-    _size--;
-    return node;
+    return _count;
 }
 
 void RingBuffer::Print()
 {
-    std::cout << "=== RingBuffer ===" << std::endl;
-    if (_last == nullptr)
-    {
-        std::cout << "Empty buffer" << std::endl;
-        return;
-    }
-    Node *node = _last->_next;
+    std::cout << "RingBuffer: " << std::endl;
     std::cout << "Size: " << _size << std::endl;
-    std::cout << "First: " << node->_data << std::endl;
-    std::cout << "Last: " << _last->_data << std::endl;
-    std::cout << "Elements: ";
+    std::cout << "Count: " << _count << std::endl;
+    std::cout << "Free size: " << GetFreeSize() << std::endl;
+    std::cout << "First index: " << _firstIndex << std::endl;
+    std::cout << "Last index: " << _lastIndex - 1 << std::endl;
+    std::cout << "Buffer: " << std::endl;
     std::cout << "[";
-    do
+    for (int i = 0; i < _size; i++)
     {
-        std::cout << node->_data << ", ";
-        node = node->_next;
-    } while (node != _last->_next);
+        if (_buffer[i] == nullptr)
+        {
+            std::cout << "null";
+        }
+        else
+        {
+            std::cout << _buffer[i];
+        }
+        if (i != _size - 1)
+        {
+            std::cout << ", ";
+        }
+    }
     std::cout << "]" << std::endl;
+    std::cout << std::endl;
 }
 
-RingBuffer::RingBuffer()
+void RingBuffer::Resize(int size)
 {
-    _last = nullptr;
-    _size = 0;
+    char **newBuffer = new char *[size];
+    int newFirstIndex = 0;
+    int newLastIndex = 0;
+    int newCount = 0;
+    for (int i = 0; i < _count; i++)
+    {
+        newBuffer[newLastIndex] = _buffer[_firstIndex];
+        newLastIndex = (newLastIndex + 1) % size;
+        _firstIndex = (_firstIndex + 1) % _size;
+        newCount++;
+    }
+    for (int i = _count; i < size; i++)
+    {
+        newBuffer[i] = nullptr;
+    }
+    delete[] _buffer;
+    _buffer = newBuffer;
+    _firstIndex = newFirstIndex;
+    _lastIndex = newLastIndex;
+    _count = newCount;
+    _size = size;
 }
 
 RingBuffer::~RingBuffer()
 {
-    while (_last != nullptr)
-    {
-        Remove();
-    }
+    delete[] _buffer;
 }

@@ -47,7 +47,7 @@ void Menu::MenuRingBufferQueue(RingBufferQueue *queue)
         {
             case 1:
             {
-                int value = InputInt("Enter value: ");
+                int value = InputInt("Enter _value: ");
                 queue->Enqueue(value);
                 break;
             }
@@ -60,7 +60,7 @@ void Menu::MenuRingBufferQueue(RingBufferQueue *queue)
                 }
                 else
                 {
-                    std::cout << "Dequeued value: " << value << std::endl;
+                    std::cout << "Dequeued _value: " << value << std::endl;
                 }
                 break;
             }
@@ -108,7 +108,7 @@ void Menu::MenuStackQueue(StackQueue *queue)
         {
             case 1:
             {
-                int value = InputInt("Enter value: ");
+                int value = InputInt("Enter _value: ");
                 queue->Enqueue(value);
                 break;
             }
@@ -121,7 +121,7 @@ void Menu::MenuStackQueue(StackQueue *queue)
                 }
                 else
                 {
-                    std::cout << "Dequeued value: " << value << std::endl;
+                    std::cout << "Dequeued _value: " << value << std::endl;
                 }
                 break;
             }
@@ -153,39 +153,54 @@ void Menu::MenuBuffer(RingBuffer *buffer)
     while (true)
     {
         std::cout << " --- Buffer menu --- " << std::endl;
-        std::cout << "1. Put" << std::endl;
-        std::cout << "2. Remove" << std::endl;
-        std::cout << "3. Print" << std::endl;
-        std::cout << "4. Exit" << std::endl;
-        std::cout << "Enter your choice: ";
-
+        std::cout << "1. Resize buffer" << std::endl;
+        std::cout << "2. Add element" << std::endl;
+        std::cout << "3. Get element" << std::endl;
+        std::cout << "4. Get size" << std::endl;
+        std::cout << "5. Print" << std::endl;
+        std::cout << "6. Exit" << std::endl;
+        
         int choice = InputInt("Enter your choice: ");
         switch (choice)
         {
             case 1:
             {
-                int value = InputInt("Enter value: ");
-                buffer->Put(value);
+                int size = InputInt("Enter new size: ");
+                buffer->Resize(size);
                 break;
             }
             case 2:
             {
-                if (buffer->IsEmpty())
+                char *value = new char[100];
+                std::cout << "Enter _value: ";
+                std::cin >> value;
+                buffer->Add(value);
+                break;
+            }
+            case 3:
+            {
+                char *get = buffer->Get();
+                if (get == nullptr)
                 {
                     std::cout << "Buffer is empty" << std::endl;
                 }
                 else
                 {
-                    std::cout << "Removed value: " << buffer->Remove() << std::endl;
+                    std::cout << "Get _value: " << get << std::endl;
                 }
                 break;
             }
-            case 3:
+            case 4:
+            {
+                std::cout << "Size: " << buffer->GetSize() << std::endl;
+                break;
+            }
+            case 5:
             {
                 buffer->Print();
                 break;
             }
-            case 4:
+            case 6:
             {
                 return;
             }
@@ -215,7 +230,7 @@ void Menu::MenuStack(Stack *stack)
         {
             case 1:
             {
-                int value = InputInt("Enter value: ");
+                int value = InputInt("Enter _value: ");
                 stack->Push(value);
                 break;
             }
@@ -228,7 +243,7 @@ void Menu::MenuStack(Stack *stack)
                 }
                 else
                 {
-                    std::cout << "Popped value: " << value << std::endl;
+                    std::cout << "Popped _value: " << value << std::endl;
                 }
                 break;
             }
@@ -241,7 +256,7 @@ void Menu::MenuStack(Stack *stack)
                 }
                 else
                 {
-                    std::cout << "Peeked value: " << value << std::endl;
+                    std::cout << "Peeked _value: " << value << std::endl;
                 }
                 break;
             }
