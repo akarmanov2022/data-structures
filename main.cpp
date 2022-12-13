@@ -6,14 +6,14 @@
 #include <iostream>
 #include <regex>
 
-int InputInt(const char *message)
+int InputInt(const char *message, const char *regex)
 {
     std::string input;
     while (true)
     {
         std::cout << message;
         std::cin >> input;
-        if (regex_match(input, std::regex("(-|)[0-9]+")))
+        if (regex_match(input, std::regex(regex)))
         {
             return std::stoi(input);
         }
@@ -22,6 +22,16 @@ int InputInt(const char *message)
             std::cout << "Invalid input" << std::endl;
         }
     }
+}
+
+int InputInt(const char *message)
+{
+    return InputInt(message, "-?[0-9]+");
+}
+
+int InputPositiveInt(const char *message)
+{
+    return InputInt(message, "[0-9]+");
 }
 
 int main()
@@ -37,7 +47,7 @@ int main()
         std::cout << "4. Print" << std::endl;
         std::cout << "5. Exit" << std::endl;
 
-        int choice = InputInt("Enter your choice: ");
+        int choice = InputPositiveInt("Enter your choice: ");
 
         switch (choice)
         {
