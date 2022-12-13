@@ -10,17 +10,18 @@
 
 int main()
 {
+    srand(time(nullptr));
     std::cout << "=== Binary tree root ===" << std::endl;
     auto binaryTree = new BinaryTree(Menu::InputInt("Enter root value for binary tree: "));
     std::cout << "=== Treap root ===" << std::endl;
     auto treap = new Treap(Menu::InputInt("Enter root value for treap: "),
-                           Menu::InputInt("Enter root priority for treap: "));
+                           std::rand() % 100);
 
     while (true)
     {
         std::cout << "=== Tree menu ===" << std::endl;
         std::cout << "1. Binary tree" << std::endl;
-        std::cout << "2. Descartes tree" << std::endl;
+        std::cout << "2. Treap" << std::endl;
         std::cout << "3. Exit" << std::endl;
 
         int choice = Menu::InputInt("Enter your choice: ");

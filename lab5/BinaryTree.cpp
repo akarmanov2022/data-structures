@@ -204,7 +204,7 @@ void BinaryTree::PrintInOrder(BinaryTree::Node *node)
     if (node != nullptr)
     {
         PrintInOrder(node->_left);
-        std::cout << node->_value << " ";
+        std::cout << node->_value << " -> ";
         PrintInOrder(node->_right);
     }
 }
@@ -213,7 +213,7 @@ void BinaryTree::PrintPreOrder(BinaryTree::Node *node)
 {
     if (node != nullptr)
     {
-        std::cout << node->_value << " ";
+        std::cout << node->_value << " -> ";
         PrintPreOrder(node->_left);
         PrintPreOrder(node->_right);
     }
@@ -225,7 +225,7 @@ void BinaryTree::PrintPostOrder(BinaryTree::Node *node)
     {
         PrintPostOrder(node->_left);
         PrintPostOrder(node->_right);
-        std::cout << node->_value << " ";
+        std::cout << node->_value << " -> ";
     }
 }
 

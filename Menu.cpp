@@ -138,7 +138,7 @@ void Menu::TreapMenu(Treap *treap)
             case 1:
             {
                 treap->InsertOptimized(InputInt("Enter value to add: "),
-                                        InputInt("Enter priority to add: "));
+                                       std::rand() % 100);
                 break;
             }
             case 2:

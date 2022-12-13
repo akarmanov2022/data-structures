@@ -191,10 +191,19 @@ public:
 
     void PrintByLevel(int level);
 
+    /**
+     * Вывод дерева в консоль. Поперечный обход.
+     */
     void PrintInOrder();
 
+    /**
+     * Вывод дерева в консоль. Прямым обход.
+     */
     void PrintPreOrder();
 
+    /**
+     * Вывод дерева в консоль. Обратный обход.
+     */
     void PrintPostOrder();
 };
 
