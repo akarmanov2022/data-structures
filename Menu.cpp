@@ -148,17 +148,20 @@ void Menu::TreapMenu(Treap *treap)
             case 1:
             {
                 treap->InsertOptimized(InputInt("Enter value to add: "),
+                                       //TODO: duplication
                                        std::rand() % 100);
                 break;
             }
             case 2:
             {
                 treap->InsertNonOptimized(InputInt("Enter value to add: "),
+                        //TODO: duplication
                                           std::rand() % 100);
                 break;
             }
             case 3:
             {
+                //TODO: duplication
                 if (treap->RemoveOptimized(InputInt("Enter value to remove: ")))
                 {
                     std::cout << "Node removed" << std::endl;
@@ -171,6 +174,7 @@ void Menu::TreapMenu(Treap *treap)
             }
             case 4:
             {
+                //TODO: duplication
                 if (treap->RemoveNonOptimized(InputInt("Enter value to remove: ")))
                 {
                     std::cout << "Node removed" << std::endl;
