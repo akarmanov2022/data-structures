@@ -227,7 +227,7 @@ void Treap::PrintInOrder(Treap::Node *node)
     if (node != nullptr)
     {
         PrintInOrder(node->_left);
-        std::cout << "(v=" << node->_value << ", p=" << node->_priority << ") ";
+        std::cout << "(v=" << node->_value << ", p=" << node->_priority << ") -> ";
         PrintInOrder(node->_right);
     }
 }
@@ -236,7 +236,7 @@ void Treap::PrintPreOrder(Treap::Node *node)
 {
     if (node != nullptr)
     {
-        std::cout << "(v=" << node->_value << ", p=" << node->_priority << ") ";
+        std::cout << "(v=" << node->_value << ", p=" << node->_priority << ") -> ";
         PrintPreOrder(node->_left);
         PrintPreOrder(node->_right);
     }
@@ -248,7 +248,7 @@ void Treap::PrintPostOrder(Treap::Node *node)
     {
         PrintPostOrder(node->_left);
         PrintPostOrder(node->_right);
-        std::cout << "(v=" << node->_value << ", p=" << node->_priority << ") ";
+        std::cout << "(v=" << node->_value << ", p=" << node->_priority << ") -> ";
     }
 }
 
