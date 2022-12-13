@@ -22,7 +22,6 @@ int main()
         std::cout << "3. StackQueue" << std::endl;
         std::cout << "4. RingBufferQueue" << std::endl;
         std::cout << "5. Exit" << std::endl;
-        std::cout << "Enter your choice: ";
 
         int choice = Menu::InputInt("Enter your choice: ");
         switch (choice)

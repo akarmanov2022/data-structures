@@ -95,7 +95,7 @@ void RingBuffer::Resize(int size)
     int newFirstIndex = 0;
     int newLastIndex = 0;
     int newCount = 0;
-    for (int i = 0; i < _count; i++)
+    for (int i = 0; i < size; i++)
     {
         newBuffer[newLastIndex] = _buffer[_firstIndex];
         newLastIndex = (newLastIndex + 1) % size;
