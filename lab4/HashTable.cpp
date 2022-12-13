@@ -149,11 +149,11 @@ int HashTable::Hash(const char *key) const
 void HashTable::Rehash()
 {
     std::cout << "Rehashing..." << std::endl;
-    _count = 0;
-    _size *= 2;
     int oldSize = _size;
+    _size *= 2;
+    _count = 0;
     Item **oldItems = _items;
-    _items = new Item *[_size];
+    _items = new Item * [_size];
     for (int i = 0; i < _size; i++)
         _items[i] = nullptr;
     for (int i = 0; i < oldSize; i++)
