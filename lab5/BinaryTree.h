@@ -96,12 +96,33 @@ private:
      */
     Node *Remove(int value, Node *node);
 
+    /**
+     * Вывод элементов поддерева в консоль. Поперечный обход.
+     *
+     * @param node вершина поддерева.
+     */
     void PrintInOrder(Node *node);
 
+    /**
+     * Вывод элементов поддерева в консоль. Прямой обход.
+     *
+     * @param node вершина поддерева.
+     */
     void PrintPreOrder(Node *node);
 
+    /**
+     * Вывод элементов поддерева в консоль. Обратный обход.
+     *
+     * @param node вершина поддерева.
+     */
     void PrintPostOrder(Node *node);
 
+    /**
+     * Вывод элементов дерева в консоль по уровню. Уровень начинается с 1 - вершина дерева.
+     *
+     * @param node вершина дерева.
+     * @param level значение уровня дерева.
+     */
     void PrintTreeLevel(Node *node, int level);
 
 public:
