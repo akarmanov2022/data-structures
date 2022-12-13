@@ -28,6 +28,7 @@ void RingBufferQueue::Enqueue(int value)
         node->_next = _last->_next;
         _last->_next = node;
     }
+    _size++;
     _last = node;
 }
 
@@ -46,6 +47,7 @@ int RingBufferQueue::Dequeue()
     {
         _last->_next = node->_next;
     }
+    _size--;
     int data = node->_value;
     delete node;
     return data;
