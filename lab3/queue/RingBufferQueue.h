@@ -73,12 +73,16 @@ public:
      */
     bool IsEmpty() const;
 
-    void Print() const;
-
     /**
      * Очистить очередь.
      */
     void Clear();
+
+
+    /**
+     * Вернуть элемент из очереди.
+     */
+    Node *GetLast() const;
 };
 
 

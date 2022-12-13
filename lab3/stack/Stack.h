@@ -90,7 +90,12 @@ public:
      */
     int GetSize() const;
 
-    void Print();
+    /**
+     * Вернуть указатель на последний элемент.
+     *
+     * @return указатель на последний элемент.
+     */
+    Node *GetLast() const;
 };
 
 

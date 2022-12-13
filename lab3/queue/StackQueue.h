@@ -66,8 +66,6 @@ public:
      * @return
      */
     Stack *GetStackOut() const;
-
-    void Print();
 };
 
 

@@ -85,7 +85,7 @@ void Menu::MenuRingBufferQueue(RingBufferQueue *queue)
             }
             case 5:
             {
-                queue->Print();
+                Print(queue);
                 break;
             }
             case 6:
@@ -141,7 +141,7 @@ void Menu::MenuStackQueue(StackQueue *queue)
             }
             case 4:
             {
-                queue->Print();
+                Print(queue);
                 break;
             }
             case 5:
@@ -211,7 +211,7 @@ void Menu::MenuBuffer(RingBuffer *buffer)
             }
             case 5:
             {
-                buffer->Print();
+                Print(buffer);
                 break;
             }
             case 6:
@@ -281,7 +281,7 @@ void Menu::MenuStack(Stack *stack)
             }
             case 5:
             {
-                stack->Print();
+                Print(stack);
                 break;
             }
             case 6:
@@ -295,4 +295,75 @@ void Menu::MenuStack(Stack *stack)
             }
         }
     }
+}
+
+void Menu::Print(Stack *stack)
+{
+    std::cout << " --- Stack --- " << std::endl;
+    std::cout << "Size: " << stack->GetSize() << std::endl;
+    std::cout << "Elements: ";
+    std::cout << "[";
+    Node *last = stack->GetLast();
+    while (last != nullptr)
+    {
+        std::cout << last->GetData();
+        if (last->GetNext() != nullptr)
+        {
+            std::cout << ", ";
+        }
+        last = last->GetNext();
+    }
+    std::cout << "]" << std::endl;
+}
+
+void Menu::Print(RingBuffer *buffer)
+{
+    std::cout << " --- Ring buffer --- " << std::endl;
+    std::cout << "Size: " << buffer->GetSize() << std::endl;
+    std::cout << "Free space: " << buffer->GetFreeSize() << std::endl;
+    std::cout << "First element: " << buffer->GetFirstIndex() << std::endl;
+    std::cout << "Last element: " << buffer->GetLastIndex() << std::endl;
+    std::cout << "Elements: ";
+    std::cout << "[";
+    auto data = buffer->GetBuffer();
+    for (int i = 0; i < buffer->GetSize(); i++)
+    {
+        std::cout << data[i];
+        if (i != buffer->GetSize() - 1)
+        {
+            std::cout << ", ";
+        }
+    }
+    std::cout << "]" << std::endl;
+}
+
+void Menu::Print(RingBufferQueue *queue)
+{
+    std::cout << " --- Ring buffer queue --- " << std::endl;
+    std::cout << "Size: " << queue->GetSize() << std::endl;
+    std::cout << "First element: " << queue->GetLast()->_next << std::endl;
+    std::cout << "Last element: " << queue->GetLast() << std::endl;
+    std::cout << "Elements: ";
+    std::cout << "[";
+    auto last = queue->GetLast();
+    while (last != nullptr)
+    {
+        std::cout << last->_value;
+        if (last->_next != nullptr)
+        {
+            std::cout << ", ";
+        }
+        last = last->_next;
+    }
+    std::cout << "]" << std::endl;
+}
+
+void Menu::Print(StackQueue *queue)
+{
+    std::cout << " --- Stack queue --- " << std::endl;
+    std::cout << "Size: " << queue->GetSize() << std::endl;
+    std::cout << "Stack In: ";
+    Print(queue->GetStackIn());
+    std::cout << "Stack Out: ";
+    Print(queue->GetStackOut());
 }

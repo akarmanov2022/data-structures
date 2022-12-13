@@ -74,16 +74,17 @@ public:
     int GetCount() const;
 
     /**
-     * Вывести информацию о буфере в консоль.
-     */
-    void Print();
-
-    /**
      * Изменить размер буфера.
      *
      * @param size новый размер буфера.
      */
     void Resize(int size);
+
+    char **GetBuffer() const;
+
+    int GetFirstIndex() const;
+
+    int GetLastIndex() const;
 };
 
 

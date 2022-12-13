@@ -60,11 +60,11 @@ Stack *StackQueue::GetStackOut() const
 }
 
 //TODO: remove from model
-void StackQueue::Print()
-{
-    std::cout << "=== Queue ===" << std::endl;
-    std::cout << "Stack In: ";
-    _stackIn->Print();
-    std::cout << "Stack Out: ";
-    _stackOut->Print();
-}
+//void StackQueue::Print()
+//{
+//    std::cout << "=== Queue ===" << std::endl;
+//    std::cout << "Stack In: ";
+//    _stackIn->Print();
+//    std::cout << "Stack Out: ";
+//    _stackOut->Print();
+//}

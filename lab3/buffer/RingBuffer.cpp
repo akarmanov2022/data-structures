@@ -61,34 +61,34 @@ int RingBuffer::GetCount() const
 }
 
 //TODO: remove from model
-void RingBuffer::Print()
-{
-    std::cout << "RingBuffer: " << std::endl;
-    std::cout << "Size: " << _size << std::endl;
-    std::cout << "Count: " << _count << std::endl;
-    std::cout << "Free size: " << GetFreeSize() << std::endl;
-    std::cout << "First index: " << _firstIndex << std::endl;
-    std::cout << "Last index: " << _lastIndex << std::endl;
-    std::cout << "Buffer: " << std::endl;
-    std::cout << "[";
-    for (int i = 0; i < _size; i++)
-    {
-        if (_buffer[i] == nullptr)
-        {
-            std::cout << "null";
-        }
-        else
-        {
-            std::cout << _buffer[i];
-        }
-        if (i != _size - 1)
-        {
-            std::cout << ", ";
-        }
-    }
-    std::cout << "]" << std::endl;
-    std::cout << std::endl;
-}
+//void RingBuffer::Print()
+//{
+//    std::cout << "RingBuffer: " << std::endl;
+//    std::cout << "Size: " << _size << std::endl;
+//    std::cout << "Count: " << _count << std::endl;
+//    std::cout << "Free size: " << GetFreeSize() << std::endl;
+//    std::cout << "First index: " << _firstIndex << std::endl;
+//    std::cout << "Last index: " << _lastIndex << std::endl;
+//    std::cout << "Buffer: " << std::endl;
+//    std::cout << "[";
+//    for (int i = 0; i < _size; i++)
+//    {
+//        if (_buffer[i] == nullptr)
+//        {
+//            std::cout << "null";
+//        }
+//        else
+//        {
+//            std::cout << _buffer[i];
+//        }
+//        if (i != _size - 1)
+//        {
+//            std::cout << ", ";
+//        }
+//    }
+//    std::cout << "]" << std::endl;
+//    std::cout << std::endl;
+//}
 
 void RingBuffer::Resize(int size)
 {
@@ -115,4 +115,19 @@ void RingBuffer::Resize(int size)
 RingBuffer::~RingBuffer()
 {
     delete[] _buffer;
+}
+
+char **RingBuffer::GetBuffer() const
+{
+    return _buffer;
+}
+
+int RingBuffer::GetFirstIndex() const
+{
+    return _firstIndex;
+}
+
+int RingBuffer::GetLastIndex() const
+{
+    return _lastIndex;
 }

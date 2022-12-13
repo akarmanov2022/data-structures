@@ -71,17 +71,22 @@ int Stack::GetSize() const
     return _size;
 }
 
-//TODO: remove from model
-void Stack::Print()
+Node *Stack::GetLast() const
 {
-    Node *current = _last;
-    std::cout << "=== Stack ===" << std::endl;
-    std::cout << "Size: " << _size << std::endl;
-    std::cout << "[";
-    while (current != nullptr)
-    {
-        std::cout << current->GetData() << ", ";
-        current = current->GetNext();
-    }
-    std::cout << "]" << std::endl;
+    return _last;
 }
+
+//TODO: remove from model
+//void Stack::Print()
+//{
+//    Node *current = _last;
+//    std::cout << "=== Stack ===" << std::endl;
+//    std::cout << "Size: " << _size << std::endl;
+//    std::cout << "[";
+//    while (current != nullptr)
+//    {
+//        std::cout << current->GetData() << ", ";
+//        current = current->GetNext();
+//    }
+//    std::cout << "]" << std::endl;
+//}

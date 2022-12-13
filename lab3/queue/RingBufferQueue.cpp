@@ -64,32 +64,32 @@ bool RingBufferQueue::IsEmpty() const
 }
 
 //TODO: remove from model
-void RingBufferQueue::Print() const
-{
-    std::cout << "=== Queue ===" << std::endl;
-    if (_last == nullptr)
-    {
-        std::cout << "Queue is empty" << std::endl;
-        return;
-    }
-    auto *node = _last->_next;
-    std::cout << "Size: " << _size << std::endl;
-    std::cout << "First: " << node->_value << std::endl;
-    std::cout << "Last: " << _last->_value << std::endl;
-    std::cout << "Elements: ";
-    std::cout << "[";
-    do
-    {
-        std::cout << node->_value;
-        node = node->_next;
-        if (node != _last->_next)
-        {
-            std::cout << ", ";
-        }
-    }
-    while (node != _last->_next);
-    std::cout << "]" << std::endl;
-}
+//void RingBufferQueue::Print() const
+//{
+//    std::cout << "=== Queue ===" << std::endl;
+//    if (_last == nullptr)
+//    {
+//        std::cout << "Queue is empty" << std::endl;
+//        return;
+//    }
+//    auto *node = _last->_next;
+//    std::cout << "Size: " << _size << std::endl;
+//    std::cout << "First: " << node->_value << std::endl;
+//    std::cout << "Last: " << _last->_value << std::endl;
+//    std::cout << "Elements: ";
+//    std::cout << "[";
+//    do
+//    {
+//        std::cout << node->_value;
+//        node = node->_next;
+//        if (node != _last->_next)
+//        {
+//            std::cout << ", ";
+//        }
+//    }
+//    while (node != _last->_next);
+//    std::cout << "]" << std::endl;
+//}
 
 void RingBufferQueue::Clear()
 {
@@ -106,4 +106,9 @@ void RingBufferQueue::Clear()
     }
     delete node;
     _last = nullptr;
+}
+
+RingBufferQueue::Node *RingBufferQueue::GetLast() const
+{
+    return _last;
 }
