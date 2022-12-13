@@ -23,7 +23,7 @@ int StackQueue::Dequeue()
 {
     if (_size == 0)
     {
-        return -1;
+        return 0;
     }
     if (_stackOut->GetSize() == 0)
     {

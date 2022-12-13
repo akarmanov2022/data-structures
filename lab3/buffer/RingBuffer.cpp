@@ -91,27 +91,24 @@ void RingBuffer::Print()
 
 void RingBuffer::Resize(int size)
 {
-    char **newBuffer = new char *[size];
-    int newFirstIndex = 0;
-    int newLastIndex = 0;
-    int newCount = 0;
-    for (int i = 0; i < size; i++)
+    if (size < _count)
     {
-        newBuffer[newLastIndex] = _buffer[_firstIndex];
-        newLastIndex = (newLastIndex + 1) % size;
-        _firstIndex = (_firstIndex + 1) % _size;
-        newCount++;
+        return;
     }
-    for (int i = _count; i < size; i++)
+    char **newBuffer = new char *[size];
+    for (int i = 0; i < size; i++)
     {
         newBuffer[i] = nullptr;
     }
+    for (int i = 0; i < _count; i++)
+    {
+        newBuffer[i] = _buffer[(_firstIndex + i) % _size];
+    }
     delete[] _buffer;
     _buffer = newBuffer;
-    _firstIndex = newFirstIndex;
-    _lastIndex = newLastIndex;
-    _count = newCount;
     _size = size;
+    _firstIndex = 0;
+    _lastIndex = _count;
 }
 
 RingBuffer::~RingBuffer()

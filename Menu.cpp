@@ -54,7 +54,7 @@ void Menu::MenuRingBufferQueue(RingBufferQueue *queue)
             case 2:
             {
                 int value = queue->Dequeue();
-                if (value == -1)
+                if (value == 0)
                 {
                     std::cout << "Queue is empty" << std::endl;
                 }
@@ -115,7 +115,7 @@ void Menu::MenuStackQueue(StackQueue *queue)
             case 2:
             {
                 int value = queue->Dequeue();
-                if (value == -1)
+                if (value == 0)
                 {
                     std::cout << "Queue is empty" << std::endl;
                 }
@@ -166,12 +166,22 @@ void Menu::MenuBuffer(RingBuffer *buffer)
             case 1:
             {
                 int size = InputInt("Enter new size: ");
+                if (size < 0)
+                {
+                    std::cout << "Invalid size" << std::endl;
+                    break;
+                }
+                if (size < buffer->GetSize())
+                {
+                    std::cout << "New size is less than current size" << std::endl;
+                    break;
+                }
                 buffer->Resize(size);
                 break;
             }
             case 2:
             {
-                char *value = new char[100];
+                char *value = new char[256];
                 std::cout << "Enter _value: ";
                 std::cin >> value;
                 buffer->Add(value);
@@ -237,7 +247,7 @@ void Menu::MenuStack(Stack *stack)
             case 2:
             {
                 int value = stack->Pop();
-                if (value == -1)
+                if (value == 0)
                 {
                     std::cout << "Stack is empty" << std::endl;
                 }
@@ -250,7 +260,7 @@ void Menu::MenuStack(Stack *stack)
             case 3:
             {
                 int value = stack->Peek();
-                if (value == -1)
+                if (value == 0)
                 {
                     std::cout << "Stack is empty" << std::endl;
                 }
