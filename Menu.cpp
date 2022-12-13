@@ -328,7 +328,14 @@ void Menu::Print(RingBuffer *buffer)
     auto data = buffer->GetBuffer();
     for (int i = 0; i < buffer->GetSize(); i++)
     {
-        std::cout << data[i];
+        if (data[i] == nullptr)
+        {
+            std::cout << "null";
+        }
+        else
+        {
+            std::cout << data[i];
+        }
         if (i != buffer->GetSize() - 1)
         {
             std::cout << ", ";
