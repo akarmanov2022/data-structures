@@ -23,7 +23,7 @@ int main()
         std::cout << "4. RingBufferQueue" << std::endl;
         std::cout << "5. Exit" << std::endl;
 
-        int choice = Menu::InputInt("Enter your choice: ");
+        int choice = Menu::InputPositiveInt("Enter your choice: ");
         switch (choice)
         {
             case 1:
@@ -33,7 +33,7 @@ int main()
             }
             case 2:
             {
-                int size = Menu::InputInt("Enter buffer size: ");
+                int size = Menu::InputPositiveInt("Enter buffer size: ");
                 auto *buffer = new RingBuffer(size);
                 Menu::MenuBuffer(buffer);
                 break;

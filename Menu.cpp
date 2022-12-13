@@ -14,12 +14,22 @@
 
 int Menu::InputInt(const char *message)
 {
+    return InputInt(message, "-?[0-9]+");
+}
+
+int Menu::InputPositiveInt(const char *message)
+{
+    return InputInt(message, "[0-9]+");
+}
+
+int Menu::InputInt(const char *message, const char *regex)
+{
     std::string input;
     while (true)
     {
         std::cout << message;
         std::cin >> input;
-        if (regex_match(input, std::regex("(-|)[0-9]+")))
+        if (regex_match(input, std::regex(regex)))
         {
             return std::stoi(input);
         }
@@ -42,7 +52,7 @@ void Menu::MenuRingBufferQueue(RingBufferQueue *queue)
         std::cout << "5. Print" << std::endl;
         std::cout << "6. Back" << std::endl;
 
-        int choice = InputInt("Enter your choice: ");
+        int choice = InputPositiveInt("Enter your choice: ");
         switch (choice)
         {
             case 1:
@@ -103,7 +113,7 @@ void Menu::MenuStackQueue(StackQueue *queue)
         std::cout << "4. Print" << std::endl;
         std::cout << "5. Exit" << std::endl;
 
-        int choice = InputInt("Enter your choice: ");
+        int choice = InputPositiveInt("Enter your choice: ");
         switch (choice)
         {
             case 1:
@@ -159,18 +169,13 @@ void Menu::MenuBuffer(RingBuffer *buffer)
         std::cout << "4. Get size" << std::endl;
         std::cout << "5. Print" << std::endl;
         std::cout << "6. Exit" << std::endl;
-        
-        int choice = InputInt("Enter your choice: ");
+
+        int choice = InputPositiveInt("Enter your choice: ");
         switch (choice)
         {
             case 1:
             {
-                int size = InputInt("Enter new size: ");
-                if (size < 0)
-                {
-                    std::cout << "Invalid size" << std::endl;
-                    break;
-                }
+                int size = InputPositiveInt("Enter new size: ");
                 if (size < buffer->GetSize())
                 {
                     std::cout << "New size is less than current size" << std::endl;

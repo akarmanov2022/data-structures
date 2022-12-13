@@ -17,6 +17,10 @@ public:
 
     static void MenuStack(Stack *stack);
 
+    static int InputInt(const char *message, const char *regex);
+
+    static int InputPositiveInt(const char *message);
+
     static int InputInt(const char *message);
 };
 
