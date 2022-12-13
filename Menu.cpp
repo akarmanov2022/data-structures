@@ -8,12 +8,22 @@
 
 int Menu::InputInt(const char *message)
 {
+    return InputInt(message, "-?[0-9]+");
+}
+
+int Menu::InputPositiveInt(const char *message)
+{
+    return InputInt(message, "[0-9]+");
+}
+
+int Menu::InputInt(const char *message, const char *regex)
+{
     std::string input;
     while (true)
     {
         std::cout << message;
         std::cin >> input;
-        if (regex_match(input, std::regex("(-|)[0-9]+")))
+        if (regex_match(input, std::regex(regex)))
         {
             return std::stoi(input);
         }
@@ -41,7 +51,7 @@ void Menu::BinaryTreeMenu(BinaryTree *tree)
         std::cout << "10. Print tree (Post Order)" << std::endl;
         std::cout << "11. Exit" << std::endl;
 
-        int choice = InputInt("Enter your choice: ");
+        int choice = InputPositiveInt("Enter your choice: ");
         switch (choice)
         {
             case 1:
@@ -84,7 +94,7 @@ void Menu::BinaryTreeMenu(BinaryTree *tree)
             }
             case 7:
             {
-                tree->PrintTreeLevel(InputInt("Enter level to print: "));
+                tree->PrintTreeLevel(InputPositiveInt("Enter level to print: "));
                 break;
             }
             case 8:
@@ -132,7 +142,7 @@ void Menu::TreapMenu(Treap *treap)
         std::cout << "10. Print tree (Post-order)" << std::endl;
         std::cout << "11. Back" << std::endl;
 
-        int choice = InputInt("Enter your choice: ");
+        int choice = InputPositiveInt("Enter your choice: ");
         switch (choice)
         {
             case 1:
@@ -144,7 +154,7 @@ void Menu::TreapMenu(Treap *treap)
             case 2:
             {
                 treap->InsertNonOptimized(InputInt("Enter value to add: "),
-                               InputInt("Enter priority to add: "));
+                                          std::rand() % 100);
                 break;
             }
             case 3:
@@ -186,7 +196,7 @@ void Menu::TreapMenu(Treap *treap)
             }
             case 7:
             {
-                treap->PrintByLevel(InputInt("Enter level to print: "));
+                treap->PrintByLevel(InputPositiveInt("Enter level to print: "));
                 break;
             }
             case 8:

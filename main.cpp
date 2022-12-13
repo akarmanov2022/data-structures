@@ -24,7 +24,7 @@ int main()
         std::cout << "2. Treap" << std::endl;
         std::cout << "3. Exit" << std::endl;
 
-        int choice = Menu::InputInt("Enter your choice: ");
+        int choice = Menu::InputPositiveInt("Enter your choice: ");
         switch (choice)
         {
             case 1:

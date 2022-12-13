@@ -17,6 +17,10 @@ public:
     static void TreapMenu(Treap *treap);
 
     static int InputInt(const char *message);
+
+    static int InputPositiveInt(const char *message);
+
+    static int InputInt(const char *message, const char *regex);
 };
 
 
