@@ -60,6 +60,7 @@ int RingBuffer::GetCount() const
     return _count;
 }
 
+//TODO: remove from model
 void RingBuffer::Print()
 {
     std::cout << "RingBuffer: " << std::endl;

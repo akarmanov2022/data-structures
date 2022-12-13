@@ -63,6 +63,7 @@ bool RingBufferQueue::IsEmpty() const
     return _last == nullptr;
 }
 
+//TODO: remove from model
 void RingBufferQueue::Print() const
 {
     std::cout << "=== Queue ===" << std::endl;

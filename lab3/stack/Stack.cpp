@@ -71,6 +71,7 @@ int Stack::GetSize() const
     return _size;
 }
 
+//TODO: remove from model
 void Stack::Print()
 {
     Node *current = _last;
