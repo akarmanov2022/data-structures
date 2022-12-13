@@ -17,6 +17,11 @@ Dictionary::~Dictionary()
 
 void Dictionary::Add(const char *key, const char *value)
 {
+    //TODO:
+//    if (_table->Find(key))
+//    {
+//
+//    }
     _table->Add(key, value);
 }
 

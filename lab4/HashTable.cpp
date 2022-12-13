@@ -12,12 +12,14 @@ HashTable::HashTable()
 {
     _size = DEFAULT_SIZE;
     _items = new Item * [_size];
+    //TODO:
     for (int i = 0; i < _size; i++)
         _items[i] = nullptr;
 }
 
 HashTable::~HashTable()
 {
+    //TODO:
     for (int i = 0; i < _size; i++)
         if (_items[i] != nullptr)
             delete _items[i];
@@ -108,6 +110,7 @@ const char *HashTable::Find(const char *key)
         Item *item = _items[index];
         while (item != nullptr)
         {
+            //TODO:
             if (strcmp(item->_key, key) == 0)
                 return item->_value;
             item = item->_next;
@@ -116,6 +119,7 @@ const char *HashTable::Find(const char *key)
     return nullptr;
 }
 
+//TODO:
 void HashTable::Print()
 {
     std::cout << "=== Hash Table ===" << std::endl;
@@ -141,6 +145,7 @@ void HashTable::Print()
 int HashTable::Hash(const char *key) const
 {
     int hash = 0;
+    //TODO:
     for (int i = 0; i < strlen(key); i++)
         hash += key[i];
     return hash % _size;
@@ -148,12 +153,14 @@ int HashTable::Hash(const char *key) const
 
 void HashTable::Rehash()
 {
+    //TODO:
     std::cout << "Rehashing..." << std::endl;
     int oldSize = _size;
     _size *= 2;
     _count = 0;
     Item **oldItems = _items;
     _items = new Item * [_size];
+    //TODO:
     for (int i = 0; i < _size; i++)
         _items[i] = nullptr;
     for (int i = 0; i < oldSize; i++)
@@ -168,6 +175,7 @@ void HashTable::Rehash()
             }
         }
     }
+    //TODO:
     for (int i = 0; i < oldSize; i++)
         if (oldItems[i] != nullptr)
             delete oldItems[i];
