@@ -18,7 +18,7 @@ int main()
     while (true)
     {
         std::cout << "1. Stack" << std::endl;
-        std::cout << "2. Buffer" << std::endl;
+        std::cout << "2. RingBuffer" << std::endl;
         std::cout << "3. StackQueue" << std::endl;
         std::cout << "4. RingBufferQueue" << std::endl;
         std::cout << "5. Exit" << std::endl;
