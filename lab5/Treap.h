@@ -5,6 +5,8 @@
 #ifndef DATA_STRUCTURES_TREAP_H
 #define DATA_STRUCTURES_TREAP_H
 
+#include <ostream>
+
 /**
  * Класс, реализующий декартово дерево.
  *
@@ -14,6 +16,17 @@
 class Treap
 {
 private:
+
+    const std::string ch_hor = "\u2500" /*─*/;
+    const std::string ch_ver = "\u2502" /*│*/;
+    const std::string ch_ddia = "\u250C" /*┌*/;
+    const std::string ch_rddia = "\u2510" /*┐*/;
+    const std::string ch_udia = "\u2514" /*└*/;
+    const std::string ch_ver_hor = "\u251C\u2500" /*├─*/;
+    const std::string ch_udia_hor = "\u2514\u2500" /*└─*/;
+    const std::string ch_ddia_hor = "\u250C\u2500" /*┌─*/;
+    const std::string ch_ver_spa = "\u2502 " /*│ */;
+
     /**
      * Структура, описывающая узел дерева.
      */
@@ -96,7 +109,7 @@ private:
      * @param right Вершина правого поддерева.
      * @return Вершина нового дерева.
      */
-    Node *Merge(Node *left, Node *right);
+    Node *&Merge(Node *&left, Node *&right);
 
     /**
      * Рекурсивная функция, реализующая поиск узла по значению.
@@ -123,35 +136,17 @@ private:
     void DeleteTree(Node *node);
 
     /**
-     * Вывод элементов дерево в консоль по уровню. Уровень начинается с 1 - вершина дерева.
-     *
-     * @param node вершина дерева.
-     * @param level значение уровня дерева.
-     */
-    void PrintByLevel(Node *node, int level);
-
-    /**
-     * Вывод элементов поддерева в консоль. Поперечный обход.
-     *
-     * @param node вершина поддерева.
-     */
-    void PrintInOrder(Node *node);
-
-    /**
-     * Вывод элементов поддерева в консоль. Прямой обход.
-     *
-     * @param node вершина поддерева.
-     */
-    void PrintPreOrder(Node *node);
-
-    /**
-     * Вывод элементов поддерева в консоль. Обратный обход.
-     *
-     * @param node вершина поддерева.
-     */
-    void PrintPostOrder(Node *node);
+ * Рекурсивная функция, реализующая вывод дерева.
+ * @param ostream поток вывода.
+ * @param node корень поддерева, которое необходимо вывести.
+ * @param prefix первая часть строки, которая выводится перед каждой строкой.
+ * @param root условие, которое определяет, является ли текущий узел корнем дерева.
+ * @param last условие, которое определяет, является ли текущий узел последним в поддереве.
+ */
+    void Dump(std::ostream &ostream, Node *node, std::string prefix, bool root, bool last);
 
 public:
+
     /**
      * Конструктор.
      */
@@ -210,27 +205,7 @@ public:
      */
     Node *Find(int value);
 
-    /**
-     * Вывод элементов дерева заданного уровня, уровни считается с родительского.
-     *
-     * @package уровень дерева
-     */
-    void PrintByLevel(int level);
-
-    /**
-     * Вывод дерева в консоль. Поперечный обход.
-     */
-    void PrintInOrder();
-
-    /**
-     * Вывод дерева в консоль. Прямой обход.
-     */
-    void PrintPreOrder();
-
-    /**
-     * Вывод дерева в консоль. Обратный обход.
-     */
-    void PrintPostOrder();
+    friend std::ostream &operator<<(std::ostream &os, Treap &treap);
 };
 
 

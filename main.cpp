@@ -15,7 +15,7 @@ int main()
     auto binaryTree = new BinaryTree(Menu::InputInt("Enter root value for binary tree: "));
     std::cout << "=== Treap root ===" << std::endl;
     auto treap = new Treap(Menu::InputInt("Enter root value for treap: "),
-                           std::rand() % 100);
+                           Menu::GetRandomInt());
 
     while (true)
     {

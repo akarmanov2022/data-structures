@@ -5,6 +5,8 @@
 #ifndef DATA_STRUCTURES_BINARYTREE_H
 #define DATA_STRUCTURES_BINARYTREE_H
 
+#include <ostream>
+
 /**
  * Клаас, реализующий бинарное дерево поиска.
  * Дерево хранит в себе узлы, которые в свою очередь хранят в себе значение и указатели на левое и правое поддеревья.
@@ -97,35 +99,17 @@ private:
     Node *Remove(int value, Node *node);
 
     /**
-     * Вывод элементов поддерева в консоль. Поперечный обход.
-     *
-     * @param node вершина поддерева.
+     * Рекурсивная функция, реализующая вывод дерева.
+     * @param ostream поток вывода.
+     * @param node корень поддерева, которое необходимо вывести.
+     * @param prefix первая часть строки, которая выводится перед каждой строкой.
+     * @param root условие, которое определяет, является ли текущий узел корнем дерева.
+     * @param last условие, которое определяет, является ли текущий узел последним в поддереве.
      */
-    void PrintInOrder(Node *node);
-
-    /**
-     * Вывод элементов поддерева в консоль. Прямой обход.
-     *
-     * @param node вершина поддерева.
-     */
-    void PrintPreOrder(Node *node);
-
-    /**
-     * Вывод элементов поддерева в консоль. Обратный обход.
-     *
-     * @param node вершина поддерева.
-     */
-    void PrintPostOrder(Node *node);
-
-    /**
-     * Вывод элементов дерева в консоль по уровню. Уровень начинается с 1 - вершина дерева.
-     *
-     * @param node вершина дерева.
-     * @param level значение уровня дерева.
-     */
-    void PrintTreeLevel(Node *node, int level);
+    void Dump(std::ostream &ostream, Node *node, std::string prefix, bool root, bool last);
 
 public:
+
     /**
      * Конструктор.
      */
@@ -164,13 +148,13 @@ public:
      */
     int GetMax();
 
+
     /**
      * Удаляет узел с указанным значением.
      *
      * @param value Значение узла, который необходимо удалить.
      */
     BinaryTree::Node *Remove(int value);
-
 
     /**
      * Поиск узла с указанным значением.
@@ -181,21 +165,12 @@ public:
     Node *Find(int value);
 
     /**
-     * Вывод дерева в консоль. Обход поперечным ходом.
+     * Вернуть корень дерева.
+     * @return корень дерева.
      */
-    void PrintInOrder();
+    Node *GetRoot() const;
 
-    /**
-     * Вывод дерева в консоль. Обход прямым ходом.
-     */
-    void PrintPreOrder();
-
-    /**
-     * Вывод дерева в консоль. Обход обратным ходом.
-     */
-    void PrintPostOrder();
-
-    void PrintTreeLevel(int level);
+    friend std::ostream &operator<<(std::ostream &os, BinaryTree &tree);
 };
 
 
