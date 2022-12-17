@@ -49,11 +49,19 @@ public:
      */
     const char *Get(const char *key);
 
+    /**
+     * Получить размер словаря.
+     * @return размер словаря.
+     */
     long GetSize();
 
+    /**
+     * Получить таблицу.
+     * @return таблица.
+     */
     HashTable *GetTable() const;
 
-    friend std::ostream &operator<<(std::ostream &os, const Dictionary &dictionary);
+    friend std::ostream &operator<<(std::ostream &os, Dictionary &dictionary);
 
 private:
     /**

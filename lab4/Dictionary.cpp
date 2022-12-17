@@ -45,7 +45,7 @@ HashTable *Dictionary::GetTable() const
     return _table;
 }
 
-std::ostream &operator<<(std::ostream &os, Dictionary dictionary)
+std::ostream &operator<<(std::ostream &os, Dictionary &dictionary)
 {
     os << "=== Dictionary ===" << std::endl;
     os << "Size: " << dictionary.GetSize() << std::endl;

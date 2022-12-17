@@ -6,6 +6,12 @@
 #include <iostream>
 #include <regex>
 
+/**
+ * @brief Функция для проверки ввода целого числа по регулярному выражению.
+ * @param message Выводимое сообщение.
+ * @param regex регулярное выражение.
+ * @return целое число, введенное пользователем.
+ */
 int InputInt(const char *message, const char *regex)
 {
     std::string input;
@@ -24,11 +30,11 @@ int InputInt(const char *message, const char *regex)
     }
 }
 
-int InputInt(const char *message)
-{
-    return InputInt(message, "-?[0-9]+");
-}
-
+/**
+ * Функция для проверки ввода строки по регулярному выражению.
+ * @param message Выводимое сообщение.
+ * @return целое число, введенное пользователем.
+ */
 int InputPositiveInt(const char *message)
 {
     return InputInt(message, "[0-9]+");
@@ -95,7 +101,8 @@ int main()
             }
             case 4:
             {
-                std::cout << dictionary << std::endl;
+                std::cout << "=== Print ===" << std::endl;
+                std::cout << *dictionary;
                 break;
             }
             case 5:

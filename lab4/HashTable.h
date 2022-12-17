@@ -52,6 +52,10 @@ public:
  */
     int _size;
 
+    /**
+     * Вернуть значение коэффициента заполнения таблицы.
+     * @return Значение коэффициента заполнения таблицы.
+     */
     double GetLoadFactor();
 
     friend std::ostream &operator<<(std::ostream &os, const HashTable &table);
