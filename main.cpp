@@ -95,7 +95,7 @@ int main()
             }
             case 4:
             {
-                dictionary->Print();
+                std::cout << dictionary << std::endl;
                 break;
             }
             case 5:

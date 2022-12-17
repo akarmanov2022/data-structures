@@ -6,6 +6,7 @@
 #define DATA_STRUCTURES_DICTIONARY_H
 
 
+#include <ostream>
 #include "HashTable.h"
 
 static const int DEFAULT_SIZE = 10;
@@ -33,7 +34,7 @@ public:
      * @param key ключ
      * @param value значение
      */
-    void Add(const char *key, const char *value);
+    bool Add(const char *key, const char *value);
 
     /**
      * Удаление элемента из словаря
@@ -48,10 +49,11 @@ public:
      */
     const char *Get(const char *key);
 
-    /**
-     * Вывод словаря на экран
-     */
-    void Print();
+    long GetSize();
+
+    HashTable *GetTable() const;
+
+    friend std::ostream &operator<<(std::ostream &os, const Dictionary &dictionary);
 
 private:
     /**

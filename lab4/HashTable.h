@@ -5,6 +5,8 @@
 #ifndef DATA_STRUCTURES_HASHTABLE_H
 #define DATA_STRUCTURES_HASHTABLE_H
 
+#include <ostream>
+
 /**
  * Класс хэш-таблицы
  * @author aka
@@ -28,7 +30,7 @@ public:
      * @param key ключ
      * @param value значение
      */
-    void Add(const char *key, const char *value);
+    bool Add(const char *key, const char *value);
 
     /**
      * Удаление элемента из таблицы
@@ -43,10 +45,16 @@ public:
      */
     const char *Find(const char *key);
 
-    /**
-     * Вывод таблицы на экран
-     */
-    void Print();
+    int GetCount();
+
+/**
+ * Размер таблицы
+ */
+    int _size;
+
+    double GetLoadFactor();
+
+    friend std::ostream &operator<<(std::ostream &os, const HashTable &table);
 
 private:
     /**
@@ -74,11 +82,6 @@ private:
      * Таблица. Массив указателей на элементы таблицы.
      */
     Item **_items;
-
-    /**
-     * Размер таблицы
-     */
-    int _size;
 
     /**
      * Количество элементов
