@@ -5,6 +5,8 @@
 #ifndef DATA_STRUCTURES_STACK_H
 #define DATA_STRUCTURES_STACK_H
 
+#include <ostream>
+
 /**
  * Элемент стека.
  */
@@ -96,6 +98,8 @@ public:
      * @return указатель на последний элемент.
      */
     Node *GetLast() const;
+
+    friend std::ostream &operator<<(std::ostream &os, const Stack &stack);
 };
 
 

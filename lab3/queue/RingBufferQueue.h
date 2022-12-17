@@ -5,6 +5,7 @@
 #ifndef DATA_STRUCTURES_RINGBUFFERQUEUE_H
 #define DATA_STRUCTURES_RINGBUFFERQUEUE_H
 
+#include <ostream>
 #include "../buffer/RingBuffer.h"
 
 /**
@@ -83,6 +84,8 @@ public:
      * Вернуть элемент из очереди.
      */
     Node *GetLast() const;
+
+    friend std::ostream &operator<<(std::ostream &os, const RingBufferQueue &queue);
 };
 
 

@@ -5,6 +5,8 @@
 #ifndef DATA_STRUCTURES_RINGBUFFER_H
 #define DATA_STRUCTURES_RINGBUFFER_H
 
+#include <ostream>
+
 /**
  * Кольцевой буфер.
  */
@@ -80,11 +82,25 @@ public:
      */
     void Resize(int size);
 
+    /**
+     * Вернуть указатель на буфер.
+     * @return указатель на буфер.
+     */
     char **GetBuffer() const;
 
+    /**
+     * Вернуть индекс первого элемента в буфере.
+     * @return индекс первого элемента в буфере.
+     */
     int GetFirstIndex() const;
 
+    /**
+     * Вернуть индекс последнего элемента в буфере.
+     * @return индекс последнего элемента в буфере.
+     */
     int GetLastIndex() const;
+
+    friend std::ostream &operator<<(std::ostream &os, const RingBuffer &buffer);
 };
 
 

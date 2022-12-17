@@ -131,3 +131,33 @@ int RingBuffer::GetLastIndex() const
 {
     return _lastIndex;
 }
+
+std::ostream &operator<<(std::ostream &os, const RingBuffer &buffer)
+{
+    os << "=== RingBuffer ===" << std::endl;
+    os << "Size: " << buffer.GetSize() << std::endl;
+    os << "Count: " << buffer.GetCount() << std::endl;
+    os << "Free size: " << buffer.GetFreeSize() << std::endl;
+    os << "First index: " << buffer.GetFirstIndex() << std::endl;
+    os << "Last index: " << buffer.GetLastIndex() << std::endl;
+    os << "Buffer: " << std::endl;
+    os << "[";
+    for (int i = 0; i < buffer.GetSize(); i++)
+    {
+        if (buffer.GetBuffer()[i] == nullptr)
+        {
+            os << "null";
+        }
+        else
+        {
+            os << buffer.GetBuffer()[i];
+        }
+        if (i != buffer.GetSize() - 1)
+        {
+            os << ", ";
+        }
+    }
+    os << "]" << std::endl;
+    os << std::endl;
+    return os;
+}

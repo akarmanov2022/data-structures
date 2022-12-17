@@ -59,6 +59,13 @@ Stack *StackQueue::GetStackOut() const
     return _stackOut;
 }
 
+std::ostream &operator<<(std::ostream &os, const StackQueue &queue)
+{
+    os << "StackIn: " << *queue.GetStackIn() << std::endl;
+    os << "StackOut: " << *queue.GetStackOut() << std::endl;
+    return os;
+}
+
 //TODO: remove from model
 //void StackQueue::Print()
 //{

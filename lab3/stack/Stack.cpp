@@ -2,7 +2,6 @@
 // Created by akarmanov on 27-11-2022.
 //
 
-#include <iostream>
 #include "Stack.h"
 
 
@@ -74,6 +73,27 @@ int Stack::GetSize() const
 Node *Stack::GetLast() const
 {
     return _last;
+}
+
+std::ostream &operator<<(std::ostream &os, const Stack &stack)
+{
+    os << "=== Stack ===" << std::endl;
+    os << "Size: " << stack.GetSize() << std::endl;
+    os << "Last: " << stack.GetLast()->GetData() << std::endl;
+    os << "Elements: " << std::endl;
+    os << "[";
+    auto *node = stack._last;
+    while (node != nullptr)
+    {
+        os << node->GetData();
+        node = node->GetNext();
+        if (node != nullptr)
+        {
+            os << ", ";
+        }
+    }
+    os << "]" << std::endl;
+    return os;
 }
 
 //TODO: remove from model

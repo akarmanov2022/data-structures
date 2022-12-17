@@ -63,34 +63,6 @@ public:
      * @return значение, введенное пользователем.
      */
     static int InputInt(const char *message);
-
-    /**
-     * Вывести информацию о стеке в консоль.
-     *
-     * @param stack стек.
-     */
-    static void Print(Stack *stack);
-
-    /**
-     * Вывести информацию о кольцевом буфере в консоль.
-     *
-     * @param buffer кольцевой буфер.
-     */
-    static void Print(RingBuffer *buffer);
-
-    /**
-     * Вывести информацию о очереди на кольцевом буфере в консоль.
-     *
-     * @param queue очередь на двух стеках.
-     */
-    static void Print(RingBufferQueue *queue);
-
-    /**
-     * Вывести информацию о очереди на двух стеках в консоль.
-     *
-     * @param queue очередь на кольцевом буфере.
-     */
-    static void Print(StackQueue *queue);
 };
 
 #endif //DATA_STRUCTURES_MENU_H

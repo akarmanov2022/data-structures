@@ -6,6 +6,7 @@
 #define DATA_STRUCTURES_STACKQUEUE_H
 
 
+#include <ostream>
 #include "../stack/Stack.h"
 
 /**
@@ -66,6 +67,8 @@ public:
      * @return
      */
     Stack *GetStackOut() const;
+
+    friend std::ostream &operator<<(std::ostream &os, const StackQueue &queue);
 };
 
 

@@ -112,3 +112,31 @@ RingBufferQueue::Node *RingBufferQueue::GetLast() const
 {
     return _last;
 }
+
+std::ostream &operator<<(std::ostream &os, const RingBufferQueue &queue)
+{
+    os << "=== RingBufferQueue ===" << std::endl;
+    if (queue.GetLast() == nullptr)
+    {
+        os << "Queue is empty" << std::endl;
+        return os;
+    }
+    auto *node = queue.GetLast()->_next;
+    os << "Size: " << queue.GetSize() << std::endl;
+    os << "First: " << node->_value << std::endl;
+    os << "Last: " << queue.GetLast()->_value << std::endl;
+    os << "Elements: ";
+    os << "[";
+    do
+    {
+        os << node->_value;
+        node = node->_next;
+        if (node != queue.GetLast()->_next)
+        {
+            os << ", ";
+        }
+    }
+    while (node != queue.GetLast()->_next);
+    os << "]" << std::endl;
+    return os;
+}
