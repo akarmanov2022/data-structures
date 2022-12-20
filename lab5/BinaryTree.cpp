@@ -201,35 +201,36 @@ BinaryTree::BinaryTree(int rootValue)
 
 std::ostream &operator<<(std::ostream &os, BinaryTree &tree)
 {
-    tree.Dump(os, tree.GetRoot(), "", false, false);
+
+    tree.Dump(os, tree.GetRoot(), "", false);
     return os;
 }
 
-void BinaryTree::Dump(std::ostream &ostream, BinaryTree::Node *node, std::string prefix, bool root, bool last)
+void BinaryTree::Dump(std::ostream &ostream, BinaryTree::Node *node, std::string prefix = "", bool last = true)
 {
     if (node != nullptr)
     {
         ostream << prefix;
-        if (root)
-        {
-            ostream << "\\-";
-        }
-        else
+        if (node != _root)
         {
             if (last)
             {
-                ostream << "\\-";
-                prefix += "  ";
+                ostream << "\\--";
+                prefix += "   ";
             }
             else
             {
-                ostream << "|-";
+                ostream << "|--";
                 prefix += "|  ";
             }
         }
+        else
+        {
+            prefix  += "   ";
+        }
         ostream << node->_value << std::endl;
-        Dump(ostream, node->_left, prefix, false, false);
-        Dump(ostream, node->_right, prefix, false, true);
+        Dump(ostream, node->_left, prefix, false);
+        Dump(ostream, node->_right, prefix, true);
     }
 }
 

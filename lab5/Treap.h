@@ -17,16 +17,6 @@ class Treap
 {
 private:
 
-    const std::string ch_hor = "\u2500" /*─*/;
-    const std::string ch_ver = "\u2502" /*│*/;
-    const std::string ch_ddia = "\u250C" /*┌*/;
-    const std::string ch_rddia = "\u2510" /*┐*/;
-    const std::string ch_udia = "\u2514" /*└*/;
-    const std::string ch_ver_hor = "\u251C\u2500" /*├─*/;
-    const std::string ch_udia_hor = "\u2514\u2500" /*└─*/;
-    const std::string ch_ddia_hor = "\u250C\u2500" /*┌─*/;
-    const std::string ch_ver_spa = "\u2502 " /*│ */;
-
     /**
      * Структура, описывающая узел дерева.
      */
@@ -136,14 +126,13 @@ private:
     void DeleteTree(Node *node);
 
     /**
- * Рекурсивная функция, реализующая вывод дерева.
- * @param ostream поток вывода.
- * @param node корень поддерева, которое необходимо вывести.
- * @param prefix первая часть строки, которая выводится перед каждой строкой.
- * @param root условие, которое определяет, является ли текущий узел корнем дерева.
- * @param last условие, которое определяет, является ли текущий узел последним в поддереве.
- */
-    void Dump(std::ostream &ostream, Node *node, std::string prefix, bool root, bool last);
+    * Рекурсивная функция, обходящая поддерево в глубину и формирующая поток вывода.
+    * @param ostream поток вывода.
+    * @param node корень поддерева, с которого начинается обход.
+    * @param prefix первая часть строки, которая выводится перед каждой строкой.
+    * @param last условие, которое определяет, является ли текущий узел последним в поддереве.
+    */
+    void Dump(std::ostream &ostream, Node *node, std::string prefix, bool last);
 
 public:
 

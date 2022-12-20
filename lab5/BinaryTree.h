@@ -103,10 +103,9 @@ private:
      * @param ostream поток вывода.
      * @param node корень поддерева, которое необходимо вывести.
      * @param prefix первая часть строки, которая выводится перед каждой строкой.
-     * @param root условие, которое определяет, является ли текущий узел корнем дерева.
      * @param last условие, которое определяет, является ли текущий узел последним в поддереве.
      */
-    void Dump(std::ostream &ostream, Node *node, std::string prefix, bool root, bool last);
+    void Dump(std::ostream &ostream, Node *node, std::string prefix, bool last);
 
 public:
 
@@ -170,6 +169,13 @@ public:
      */
     Node *GetRoot() const;
 
+    /**
+     * Перегрузка оператора вывода.
+     *
+     * @param os поток вывода.
+     * @param tree ссылка на объект дерева.
+     * @return поток вывода.
+     */
     friend std::ostream &operator<<(std::ostream &os, BinaryTree &tree);
 };
 
