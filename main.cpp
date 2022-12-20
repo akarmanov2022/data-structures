@@ -66,7 +66,18 @@ int main()
                 std::cin >> key;
                 std::cout << "Enter value: ";
                 std::cin >> value;
-                dictionary->Add(key.data(), value.data());
+                if (!dictionary->Add(key.c_str(), value.c_str()))
+                {
+                    std::cout << "Key already exists" << std::endl;
+                    std::cout << "Replace? (y/n): ";
+                    std::string replace;
+                    std::cin >> replace;
+                    if (replace == "y")
+                    {
+                        dictionary->Remove(key.c_str());
+                        dictionary->Add(key.c_str(), value.c_str());
+                    }
+                }
 
                 std::cout << "=== Added ===" << std::endl;
                 break;
