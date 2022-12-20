@@ -2,7 +2,6 @@
 // Created by akarmanov on 11-12-2022.
 //
 
-#include <iostream>
 #include "RingBuffer.h"
 
 RingBuffer::RingBuffer(int size)

@@ -85,6 +85,13 @@ public:
      */
     Node *GetLast() const;
 
+    /**
+     * Перегрузка оператора вывода в поток.
+     *
+     * @param os поток вывода.
+     * @param queue объект очереди.
+     * @return поток вывода.
+     */
     friend std::ostream &operator<<(std::ostream &os, const RingBufferQueue &queue);
 };
 

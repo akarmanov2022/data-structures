@@ -100,6 +100,13 @@ public:
      */
     int GetLastIndex() const;
 
+    /**
+     * Перегрузка оператора вывода.
+     *
+     * @param os поток вывода.
+     * @param buffer объект буфера.
+     * @return поток вывода.
+     */
     friend std::ostream &operator<<(std::ostream &os, const RingBuffer &buffer);
 };
 

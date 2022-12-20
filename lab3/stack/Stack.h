@@ -99,6 +99,13 @@ public:
      */
     Node *GetLast() const;
 
+    /**
+     * Перегрузка оператора вывода.
+     *
+     * @param os поток вывода.
+     * @param stack ссылка на стек.
+     * @return поток вывода.
+     */
     friend std::ostream &operator<<(std::ostream &os, const Stack &stack);
 };
 

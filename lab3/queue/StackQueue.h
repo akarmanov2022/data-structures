@@ -68,6 +68,13 @@ public:
      */
     Stack *GetStackOut() const;
 
+    /**
+     * Перегрузка оператора вывода.
+     *
+     * @param os поток вывода.
+     * @param queue объект очереди.
+     * @return поток вывода.
+     */
     friend std::ostream &operator<<(std::ostream &os, const StackQueue &queue);
 };
 
