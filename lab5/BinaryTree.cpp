@@ -1,8 +1,7 @@
-//
+ //
 // Created by akarmanov on 10-12-2022.
 //
 
-#include <iostream>
 #include "BinaryTree.h"
 
 void BinaryTree::AddNode(int value, BinaryTree::Node *node)
