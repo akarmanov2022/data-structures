@@ -6,26 +6,13 @@
 
 void Treap::InsertNonOptimized(int value, int priority)
 {
-    if (_root == nullptr)
-    {
-        _root = new Node{value, priority, nullptr, nullptr};
-    }
-    else
-    {
-        InsertNonOptimized(value, priority, _root);
-    }
+    InsertNonOptimized(value, priority, _root);
+
 }
 
 void Treap::InsertOptimized(int value, int priority)
 {
-    if (_root == nullptr)
-    {
-        _root = new Node{value, priority, nullptr, nullptr};
-    }
-    else
-    {
-        InsertOptimized(value, priority, _root);
-    }
+    InsertOptimized(value, priority, _root);
 }
 
 void Treap::Split(Treap::Node *node, int key, Treap::Node *&left, Treap::Node *&right)
@@ -93,7 +80,7 @@ int Treap::GetHeight()
     return GetHeight(_root);
 }
 
-Treap::Node *Treap::RemoveNonOptimized(int value)
+bool Treap::RemoveNonOptimized(int value)
 {
     return RemoveNonOptimized(value, _root);
 }
@@ -203,11 +190,11 @@ void Treap::InsertOptimized(int value, int priority, Treap::Node *&node)
     }
 }
 
-Treap::Node *Treap::RemoveNonOptimized(int value, Treap::Node *&node)
+bool Treap::RemoveNonOptimized(int value, Treap::Node *&node)
 {
     if (node == nullptr)
     {
-        return nullptr;
+        return false;
     }
     if (value == node->_value)
     {
@@ -215,9 +202,10 @@ Treap::Node *Treap::RemoveNonOptimized(int value, Treap::Node *&node)
         Node *right = nullptr;
         Split(node, value, left, right);
         Node *temp = nullptr;
-        Split(right, value + 1, temp, right);
+        Split(right, value - 1, temp, left);
         delete temp;
         node = Merge(left, right);
+        return true;
     }
     if (value < node->_value)
     {
@@ -227,14 +215,13 @@ Treap::Node *Treap::RemoveNonOptimized(int value, Treap::Node *&node)
     {
         return RemoveNonOptimized(value, node->_right);
     }
-    return node;
 }
 
-Treap::Node *Treap::RemoveOptimized(int value, Treap::Node *&node)
+bool Treap::RemoveOptimized(int value, Treap::Node *&node)
 {
     if (node == nullptr)
     {
-        return nullptr;
+        return false;
     }
     if (value == node->_value)
     {
@@ -253,10 +240,10 @@ Treap::Node *Treap::RemoveOptimized(int value, Treap::Node *&node)
             RemoveOptimized(value, node->_right);
         }
     }
-    return node;
+    return true;
 }
 
-Treap::Node *Treap::RemoveOptimized(int value)
+bool Treap::RemoveOptimized(int value)
 {
     return RemoveOptimized(value, _root);
 }
@@ -288,7 +275,7 @@ void Treap::Dump(std::ostream &ostream, Treap::Node *node, std::string prefix = 
         }
         else
         {
-            prefix  += "   ";
+            prefix += "   ";
         }
         ostream << "(v=" << node->_value << ", p=" << node->_priority << ")" << std::endl;
         Dump(ostream, node->_left, prefix, false);

@@ -71,7 +71,7 @@ private:
      * @param value Значение узла, который необходимо удалить.
      * @param node Вершина поддерева, из которого необходимо удалить узел.
      */
-    Treap::Node *RemoveNonOptimized(int value, Node *&node);
+    bool RemoveNonOptimized(int value, Node *&node);
 
     /**
      * Рекурсивная функция, реализующая удаление из дерева.
@@ -80,7 +80,7 @@ private:
      * @param value Значение узла, который необходимо удалить.
      * @param node Вершина поддерева, из которого необходимо удалить узел.
      */
-    Treap::Node *RemoveOptimized(int value, Node *&node);
+    bool RemoveOptimized(int value, Node *&node);
 
     /**
      * Рекурсивная функция, реализующая разбиение дерева на левое и правое поддеревья.
@@ -170,7 +170,7 @@ public:
      *
      * @param value Значение узла, который необходимо удалить.
      */
-    Node *RemoveNonOptimized(int value);
+    bool RemoveNonOptimized(int value);
 
     /**
      * Функция, реализующая удаление узла из дерева.
@@ -178,7 +178,7 @@ public:
      *
      * @param value Значение узла, который необходимо удалить.
      */
-    Node *RemoveOptimized(int value);
+    bool RemoveOptimized(int value);
 
     /**
      * Возвращает высоту дерева.
