@@ -81,6 +81,7 @@ void Menu::BinaryTreeMenu(BinaryTree *tree)
                 {
                     std::cout << "Node not found" << std::endl;
                 }
+                break;
             }
             case 6:
             {

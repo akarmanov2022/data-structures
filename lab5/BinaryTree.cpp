@@ -111,7 +111,7 @@ BinaryTree::Node *BinaryTree::Remove(int value, BinaryTree::Node *node)
 {
     if (node == nullptr)
     {
-        return nullptr;
+        return node;
     }
     else
     {
@@ -135,6 +135,10 @@ BinaryTree::Node *BinaryTree::Remove(int value, BinaryTree::Node *node)
                 else
                 {
                     Node *temp = node;
+                    if (node == _root)
+                    {
+                        _root = nullptr;
+                    }
                     if (node->_left != nullptr)
                     {
                         node = node->_left;
